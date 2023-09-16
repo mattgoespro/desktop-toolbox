@@ -1,37 +1,68 @@
+/** @type {import('eslint').Linter.BaseConfig} */
 module.exports = {
-  extends: 'erb',
-  plugins: ['@typescript-eslint'],
-  rules: {
-    // A temporary hack related to IDE not resolving correct package.json
-    'import/no-extraneous-dependencies': 'off',
-    'react/react-in-jsx-scope': 'off',
-    'react/jsx-filename-extension': 'off',
-    'import/extensions': 'off',
-    'import/no-unresolved': 'off',
-    'import/no-import-module-exports': 'off',
-    'no-shadow': 'off',
-    '@typescript-eslint/no-shadow': 'error',
-    'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': 'error',
-  },
+  parser: "@typescript-eslint/parser",
   parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: 'module',
-    project: './tsconfig.json',
-    tsconfigRootDir: __dirname,
-    createDefaultProgram: true,
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: "latest",
+    sourceType: "module",
   },
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+  ],
+  plugins: ["@typescript-eslint"],
   settings: {
-    'import/resolver': {
-      // See https://github.com/benmosher/eslint-plugin-import/issues/1396#issuecomment-575727774 for line below
-      node: {},
+    "import/resolver": {
+      typescript: true,
+      node: true,
       webpack: {
-        config: require.resolve('./.erb/configs/webpack.config.eslint.ts'),
+        config: "./webpack.dev.ts",
       },
-      typescript: {},
     },
-    'import/parsers': {
-      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    react: {
+      version: "detect",
     },
+  },
+  ignorePatterns: ["src/**/*.[s]css.d.ts", "**/*.html"],
+  rules: {
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_",
+        ignoreRestSiblings: true,
+      },
+    ],
+    "import/order": [
+      "error",
+      {
+        groups: [
+          "builtin",
+          "external",
+          "internal",
+          "type",
+          "parent",
+          "sibling",
+        ],
+        warnOnUnassignedImports: true,
+        "newlines-between": "never",
+        alphabetize: {
+          order: "asc",
+          orderImportKind: "asc",
+        },
+      },
+    ],
+  },
+  env: {
+    browser: true,
+    es2021: true,
+    commonjs: true,
   },
 };
