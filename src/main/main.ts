@@ -1,5 +1,3 @@
-/* eslint global-require: off, no-console: off, promise/always-return: off */
-
 /**
  * This module executes inside of electron's main process. You can start
  * electron renderer process from here and communicate with the other processes
@@ -8,108 +6,100 @@
  * When running `npm run build` or `npm run build:main`, this file is compiled to
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
-import path from 'path';
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
-import { autoUpdater } from 'electron-updater';
-import log from 'electron-log';
-import MenuBuilder from './menu';
-import { resolveHtmlPath } from './util';
+import path from "path";
+import { app, BrowserWindow, shell, ipcMain } from "electron";
+import debug from "electron-debug";
+import installDebugTools, {
+  REACT_DEVELOPER_TOOLS,
+  BACKBONE_DEBUGGER,
+} from "electron-devtools-installer";
+import log from "electron-log";
+import { autoUpdater } from "electron-updater";
+import { install as installSourceMapSupport } from "source-map-support";
+import MenuBuilder from "./menu";
+import { resolveHtmlPath } from "./util";
 
-class AppUpdater {
-  constructor() {
-    log.transports.file.level = 'info';
-    autoUpdater.logger = log;
-    autoUpdater.checkForUpdates();
-  }
-}
-
-let mainWindow: BrowserWindow | null = null;
-
-ipcMain.on('ipc-example', async (event, arg) => {
-  const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
-  console.log(msgTemplate(arg));
-  event.reply('ipc-example', msgTemplate('pong'));
-});
-
-if (process.env.NODE_ENV === 'production') {
-  const sourceMapSupport = require('source-map-support');
-  sourceMapSupport.install();
+if (process.env.NODE_ENV === "production") {
+  installSourceMapSupport();
 }
 
 const isDebug =
-  process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true';
+  process.env.NODE_ENV === "development" || process.env.DEBUG_PROD === "true";
 
-if (isDebug) {
-  require('electron-debug')();
+async function startDebugger() {
+  await installDebugTools([REACT_DEVELOPER_TOOLS, BACKBONE_DEBUGGER], {
+    forceDownload: !!process.env.UPGRADE_EXTENSIONS,
+  });
+  debug();
 }
 
-const installExtensions = async () => {
-  const installer = require('electron-devtools-installer');
-  const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
-  const extensions = ['REACT_DEVELOPER_TOOLS'];
-
-  return installer
-    .default(
-      extensions.map((name) => installer[name]),
-      forceDownload
-    )
-    .catch(console.log);
-};
-
-const createWindow = async () => {
+async function createWindow() {
   if (isDebug) {
-    await installExtensions();
+    await startDebugger();
   }
 
   const RESOURCES_PATH = app.isPackaged
-    ? path.join(process.resourcesPath, 'assets')
-    : path.join(__dirname, '../../assets');
+    ? path.join(process.resourcesPath, "assets")
+    : path.join(__dirname, "../../assets");
 
-  const getAssetPath = (...paths: string[]): string => {
-    return path.join(RESOURCES_PATH, ...paths);
-  };
-
-  mainWindow = new BrowserWindow({
+  let mainWindow = new BrowserWindow({
     show: false,
     width: 1024,
     height: 728,
-    icon: getAssetPath('icon.png'),
+    icon: path.join(RESOURCES_PATH, "icon.png"),
     webPreferences: {
       preload: app.isPackaged
-        ? path.join(__dirname, 'preload.js')
-        : path.join(__dirname, '../../.erb/dll/preload.js'),
+        ? path.join(__dirname, "preload.js")
+        : path.join(__dirname, "../../.erb/dll/preload.js"),
     },
   });
 
-  mainWindow.loadURL(resolveHtmlPath('index.html'));
+  mainWindow.loadURL(resolveHtmlPath("index.html"));
 
-  mainWindow.on('ready-to-show', () => {
+  mainWindow.on("ready-to-show", () => {
     if (!mainWindow) {
       throw new Error('"mainWindow" is not defined');
     }
 
-      mainWindow.show();
+    mainWindow.show();
   });
 
-  mainWindow.on('closed', () => {
+  mainWindow.on("closed", () => {
     mainWindow = null;
+  });
+
+  // Open urls in the user's browser
+  mainWindow.webContents.setWindowOpenHandler((edata) => {
+    shell.openExternal(edata.url);
+    return { action: "deny" };
   });
 
   const menuBuilder = new MenuBuilder(mainWindow);
   menuBuilder.buildMenu();
 
-  // Open urls in the user's browser
-  mainWindow.webContents.setWindowOpenHandler((edata) => {
-    shell.openExternal(edata.url);
-    return { action: 'deny' };
-  });
+  log.transports.file.level = "info";
+  autoUpdater.logger = log;
+  autoUpdater.checkForUpdates();
+}
 
-  new AppUpdater();
-};
+/**
+ * Configures the IP (Inter-process) communication events between the main and renderer processes.
+ */
+function configureIpc(): void {
+  ipcMain.on("ipc-example", async (event, arg) => {
+    const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
+    console.log(msgTemplate(arg));
+    event.reply("ipc-example", msgTemplate("pong"));
+  });
+}
+
+configureIpc();
 
 app
   .whenReady()
   .then(() => {
-    createWindow()
+    createWindow();
   })
-  .catch(console.error);
+  .catch((err) => {
+    console.error("Error creating window: ", err);
+  });

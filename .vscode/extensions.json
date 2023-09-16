@@ -1,3 +1,31 @@
 {
-  "recommendations": ["dbaeumer.vscode-eslint", "EditorConfig.EditorConfig"]
+  "recommendations": [
+    "formulahendry.auto-close-tag",
+    "naumovs.color-highlight",
+    "equinusocio.vsc-community-material-theme",
+    "usernamehw.errorlens",
+    "dsznajder.es7-react-js-snippets",
+    "dbaeumer.vscode-eslint",
+    "felipecaputo.git-project-manager",
+    "github.copilot",
+    "github.copilot-chat",
+    "yzhang.markdown-all-in-one",
+    "bierner.markdown-preview-github-styles",
+    "davidanson.vscode-markdownlint",
+    "pkief.material-icon-theme",
+    "equinusocio.vsc-material-theme",
+    "equinusocio.vsc-material-theme-icons",
+    "howardzuo.vscode-npm-dependency",
+    "herrmannplatz.npm-dependency-links",
+    "christian-kohler.npm-intellisense",
+    "mskelton.npm-outdated",
+    "fabiospampinato.vscode-open-in-npm",
+    "ibm.output-colorizer",
+    "esbenp.prettier-vscode",
+    "jundat95.react-native-snippet",
+    "msjsdiag.vscode-react-native",
+    "sibiraj-s.vscode-scss-formatter",
+    "mrmlnc.vscode-scss",
+    "richie5um2.vscode-sort-json"
+  ]
 }
