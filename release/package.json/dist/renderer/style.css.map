@@ -1,0 +1,1 @@
+{"version":3,"file":"style.css","mappings":"AAAA,sBAEE,UADA,kBACA","sources":["webpack://desktop-configure/./src/renderer/Dashboard/Dashboard.module.scss"],"sourcesContent":[".dashboard {\n  font-family: \"Roboto\";\n  color: red;\n}\n"],"names":[],"sourceRoot":""}

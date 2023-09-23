@@ -37,96 +37,46 @@
   ],
   "css.format.enable": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll": true,
+    "source.fixAll.eslint": true,
+    "source.fixAll.scss": true
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.foldingMaximumRegions": 65000,
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
-  "editor.inlineSuggest.enabled": true,
-  "editor.linkedEditing": true,
-  "editor.minimap.autohide": true,
-  "editor.minimap.maxColumn": 150,
-  "editor.minimap.renderCharacters": false, //fesf
-  "editor.minimap.scale": 1,
-  "editor.minimap.showSlider": "mouseover",
-  "editor.tokenColorCustomizations": {
-    "comments": "#a8a8a8",
-    "textMateRules": [
-      {
-        "name": "CSS Class and Support - Property Name",
-        "scope": [
-          "source.css support.type.property-name",
-          "source.scss support.type.property-name",
-          "source.postcss support.type.property-name"
-        ],
-        "settings": {
-          "foreground": "#9CDCFE"
-        }
-      }
-    ]
-  },
-  "errorLens.gutterIconSet": "letter",
   "eslint.codeActionsOnSave.mode": "all",
   "eslint.enable": true,
   "eslint.format.enable": false,
-  "eslint.probe": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
+  "eslint.probe": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "eslint.run": "onType",
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "files.associations": {
+    ".eslintignore": "ignore",
     ".eslintrc": "jsonc",
-    ".prettierrc": "jsonc",
-    ".eslintignore": "ignore"
+    ".prettierrc": "jsonc"
   },
-
-  "javascript.validate.enable": false,
-  "explorer.confirmDragAndDrop": false,
   "files.eol": "\n",
   "files.exclude": {
     ".git": true,
-    "dist": true,
     "node_modules": true
   },
-  "files.trimTrailingWhitespace": true,
   "files.watcherExclude": {
-    "**/node_modules/*/**": true,
     ".git": true,
-    "dist": true
-  },
-  "git.confirmSync": false,
-  "gitProjectManager.baseProjectsFolders": [
-    "C:\\Users\\Matt\\Desktop\\Code",
-    "C:\\Users\\Matt-Laptop\\Desktop\\Code"
-  ],
-  "gitProjectManager.openInNewWindow": true,
-  "github.copilot.enable": {
-    "*": true
+    "node_modules": true
   },
   "html.format.enable": false,
   "javascript.format.enable": false,
   "javascript.suggestionActions.enabled": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
+  "javascript.validate.enable": false,
   "markdown.extension.preview.autoShowPreviewToSide": true,
   "markdown.occurrencesHighlight.enabled": true,
   "material-icon-theme.activeIconPack": "react",
-  "material-icon-theme.files.color": "#000000",
-  "material-icon-theme.folders.color": "#eb7734",
   "material-icon-theme.hidesExplorerArrows": true,
   "npm-intellisense.importQuotes": "\"",
   "npm-intellisense.showBuildInLibs": true,
   "npm-outdated.majorUpdateProtection": false,
   "npm.exclude": "release/**",
-  "prettier.bracketSameLine": true,
   "prettier.configPath": ".prettierrc.js",
   "scss.completion.completePropertyWithSemicolon": true,
   "scss.completion.triggerPropertyValueCompletion": true,
@@ -135,49 +85,20 @@
   "scssFormatter.printWidth": 100,
   "scssFormatter.singleQuote": false,
   "search.exclude": {
-    "dist": true,
-    ".git": true,
-    ".eslintcache": true,
+    "*.{css,sass,scss}.d.ts": true,
     ".erb/dll": true,
-    "release/{build,app/dist}": true,
+    ".eslintcache": true,
+    ".git": true,
+    "dist": true,
     "node_modules": true,
     "npm-debug.log.*": true,
-    "test/**/__snapshots__": true,
     "package-lock.json": true,
-    "*.{css,sass,scss}.d.ts": true
-  },
-  "sortJSON.contextMenu": {
-    "sortJSONAlphaNum": false,
-    "sortJSONAlphaNumReverse": false,
-    "sortJSONKeyLength": false,
-    "sortJSONKeyLengthReverse": false,
-    "sortJSONReverse": false,
-    "sortJSONType": false,
-    "sortJSONTypeReverse": false,
-    "sortJSONValues": false,
-    "sortJSONValuesReverse": false
-  },
-  "terminal.integrated.defaultProfile.windows": "Git Bash",
-  "terminal.integrated.enableMultiLinePasteWarning": false,
-  "terminal.integrated.gpuAcceleration": "on",
-  "terminal.integrated.lineHeight": 1.2,
-  "terminal.integrated.profiles.windows": {
-    "Git Bash": {
-      "path": "C:\\Program Files\\Git\\bin\\bash.exe",
-      "source": "Git Bash"
-    },
-    "WSL": {
-      "icon": "terminal-ubuntu",
-      "path": "C:\\WINDOWS\\System32\\wsl.exe",
-      "source": "Windows Subsystem for Linux"
-    }
+    "release/{build,app/dist}": true,
+    "test/**/__snapshots__": true
   },
   "typescript.format.enable": false,
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.editor.closeOnFileDelete": true,
-  "workbench.iconTheme": "material-icon-theme",
-  "workbench.startupEditor": "none",
-  "workbench.tree.indent": 10,
-  "workbench.colorTheme": "Community Material Theme Darker High Contrast"
+  "workbench.colorTheme": "Default Dark Modern",
+  "workbench.iconTheme": "material-icon-theme"
 }

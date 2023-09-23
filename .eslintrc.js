@@ -7,6 +7,11 @@ module.exports = {
     },
     ecmaVersion: "latest",
     sourceType: "module",
+    env: {
+      node: true,
+      es2021: true,
+      commonjs: true,
+    },
   },
   extends: [
     "eslint:recommended",
@@ -61,7 +66,7 @@ module.exports = {
     ],
   },
   env: {
-    browser: true,
+    node: true,
     es2021: true,
     commonjs: true,
   },

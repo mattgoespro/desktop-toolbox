@@ -42,7 +42,7 @@ async function createWindow() {
     ? path.join(process.resourcesPath, "assets")
     : path.join(__dirname, "../../assets");
 
-  let mainWindow = new BrowserWindow({
+  const mainWindow = new BrowserWindow({
     show: false,
     width: 1024,
     height: 728,
@@ -64,8 +64,8 @@ async function createWindow() {
     mainWindow.show();
   });
 
-  mainWindow.on("closed", () => {
-    mainWindow = null;
+  mainWindow.on("close", () => {
+    app.quit();
   });
 
   // Open urls in the user's browser
