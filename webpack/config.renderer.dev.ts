@@ -22,7 +22,9 @@ if (process.env.NODE_ENV === "production") {
 
 const port = process.env.PORT || 1212;
 const manifest = path.resolve(webpackPaths.dllPath, "renderer.json");
-const skipDLLs = module.parent?.filename.includes("config.renderer.dev.dll");
+const skipDLLs =
+  module.parent?.filename.includes("config.renderer.dev.dll") ||
+  module.parent?.filename.includes("webpack.config.renderer.dev");
 
 console.log(skipDLLs);
 /**
@@ -114,7 +116,7 @@ const configuration: Configuration = {
             sourceType: "var"
           })
         ]),
-
+    new ReactRefreshWebpackPlugin(),
     new NoEmitOnErrorsPlugin(),
     new EnvironmentPlugin({
       NODE_ENV: "development"
