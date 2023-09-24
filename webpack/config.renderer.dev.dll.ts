@@ -19,7 +19,7 @@ const configuration: Configuration = {
   mode: "development",
   target: "electron-renderer",
   externals: ["fsevents", "crypto-browserify"],
-  module: require("./config.renderer.dev").default,
+  module: require("./config.renderer.dev").default.module,
   entry: {
     renderer: Object.keys(dependencies || {})
   },

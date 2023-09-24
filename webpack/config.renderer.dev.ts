@@ -68,7 +68,7 @@ const configuration: Configuration = {
           },
           {
             loader: "css-loader",
-            options: { modules: true }
+            options: { modules: true, sourceMap: true, importLoaders: 1 }
           },
           "sass-loader"
         ]
