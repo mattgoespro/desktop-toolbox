@@ -13,7 +13,7 @@ export default {
   appPath,
   distPath,
   releasePath,
-  dllPath: path.join(__dirname, "../dll"),
+  dllPath: path.join(rootPath, "dll"),
   srcMainPath: path.join(srcPath, "main"),
   srcRendererPath: path.join(srcPath, "renderer"),
   appPackagePath: path.join(appPath, "package.json"),

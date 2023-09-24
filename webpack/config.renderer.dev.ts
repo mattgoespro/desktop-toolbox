@@ -22,10 +22,9 @@ if (process.env.NODE_ENV === "production") {
 
 const port = process.env.PORT || 1212;
 const manifest = path.resolve(webpackPaths.dllPath, "renderer.json");
-const skipDLLs =
-  require.main?.filename.includes("config.renderer.dev.dll") ||
-  require.main?.filename.includes("config.eslint");
+const skipDLLs = module.parent?.filename.includes("config.renderer.dev.dll");
 
+console.log(skipDLLs);
 /**
  * Warn if the DLL is not built
  */
