@@ -1,9 +1,10 @@
 import path from "path";
 
-const rootPath = path.join(__dirname, "../..");
+const rootPath = path.join(__dirname, "../");
+console.log(rootPath);
 const srcPath = path.join(rootPath, "src");
 const releasePath = path.join(rootPath, "release");
-const appPath = path.join(releasePath, "package.json");
+const appPath = path.join(releasePath, "app");
 const distPath = path.join(appPath, "dist");
 
 export default {
@@ -15,7 +16,7 @@ export default {
   dllPath: path.join(__dirname, "../dll"),
   srcMainPath: path.join(srcPath, "main"),
   srcRendererPath: path.join(srcPath, "renderer"),
-  appPackagePath: path.join(appPath, "app"),
+  appPackagePath: path.join(appPath, "package.json"),
   appNodeModulesPath: path.join(appPath, "node_modules"),
   srcNodeModulesPath: path.join(srcPath, "node_modules"),
   distMainPath: path.join(distPath, "main"),

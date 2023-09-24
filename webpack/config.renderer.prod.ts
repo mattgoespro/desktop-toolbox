@@ -2,17 +2,16 @@
  * Build config for electron renderer process
  */
 
+import path from "path";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import path from "path";
 import TerserPlugin from "terser-webpack-plugin";
-import webpack from "webpack";
+import { DefinePlugin, EnvironmentPlugin } from "webpack";
 import { merge } from "webpack-merge";
-import checkNodeEnv from "../scripts/check-node-env";
-import deleteSourceMaps from "../scripts/delete-source-maps";
-import baseConfig from "./webpack.config.base";
-import webpackPaths from "./webpack.paths";
+import deleteSourceMaps from "./utils";
+import baseConfig, { checkNodeEnv } from "./config.base";
+import webpackPaths from "./paths";
 
 checkNodeEnv("production");
 deleteSourceMaps();
@@ -27,8 +26,8 @@ export default merge(baseConfig, {
     publicPath: "./",
     filename: "renderer.js",
     library: {
-      type: "umd",
-    },
+      type: "umd"
+    }
   },
   module: {
     rules: [
@@ -41,25 +40,25 @@ export default merge(baseConfig, {
             options: {
               modules: true,
               sourceMap: true,
-              importLoaders: 1,
-            },
+              importLoaders: 1
+            }
           },
-          "sass-loader",
+          "sass-loader"
         ],
-        include: /\.module\.s?(c|a)ss$/,
+        include: /\.module\.s?(c|a)ss$/
       },
       {
         test: /\.s?(a|c)ss$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
-        exclude: /\.module\.s?(c|a)ss$/,
+        exclude: /\.module\.s?(c|a)ss$/
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: "asset/resource",
+        type: "asset/resource"
       },
       {
         test: /\.(png|jpg|jpeg|gif)$/i,
-        type: "asset/resource",
+        type: "asset/resource"
       },
       {
         test: /\.svg$/,
@@ -70,28 +69,28 @@ export default merge(baseConfig, {
               prettier: false,
               svgo: false,
               svgoConfig: {
-                plugins: [{ removeViewBox: false }],
+                plugins: [{ removeViewBox: false }]
               },
               titleProp: true,
-              ref: true,
-            },
+              ref: true
+            }
           },
-          "file-loader",
-        ],
-      },
-    ],
+          "file-loader"
+        ]
+      }
+    ]
   },
   optimization: {
     minimize: true,
-    minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
+    minimizer: [new TerserPlugin(), new CssMinimizerPlugin()]
   },
   plugins: [
-    new webpack.EnvironmentPlugin({
+    new EnvironmentPlugin({
       NODE_ENV: "production",
-      DEBUG_PROD: false,
+      DEBUG_PROD: false
     }),
     new MiniCssExtractPlugin({
-      filename: "style.css",
+      filename: "style.css"
     }),
     new HtmlWebpackPlugin({
       filename: "index.html",
@@ -99,13 +98,13 @@ export default merge(baseConfig, {
       minify: {
         collapseWhitespace: true,
         removeAttributeQuotes: true,
-        removeComments: true,
+        removeComments: true
       },
       isBrowser: false,
-      isDevelopment: false,
+      isDevelopment: false
     }),
-    new webpack.DefinePlugin({
-      "process.type": '"renderer"',
-    }),
-  ],
+    new DefinePlugin({
+      "process.type": '"renderer"'
+    })
+  ]
 });

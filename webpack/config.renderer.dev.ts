@@ -1,15 +1,20 @@
-import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 import { execSync } from "child_process";
 import fs from "fs";
-import HtmlWebpackPlugin from "html-webpack-plugin";
 import path from "path";
-import webpack from "webpack";
+import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import {
+  DllReferencePlugin,
+  Configuration,
+  NoEmitOnErrorsPlugin,
+  LoaderOptionsPlugin,
+  EnvironmentPlugin
+} from "webpack";
 import "webpack-dev-server";
 import { merge } from "webpack-merge";
-import checkNodeEnv from "../scripts/check-node-env";
-import baseConfig from "./webpack.config.base";
-import webpackPaths from "./webpack.paths";
-import { killSubprocessesMiddleware, startPreloadTaskMiddleware } from "./webpack.middleware";
+import baseConfig, { checkNodeEnv } from "./config.base";
+import { killSubprocessesMiddleware, startPreloadTaskMiddleware } from "./middleware";
+import webpackPaths from "./paths";
 
 if (process.env.NODE_ENV === "production") {
   checkNodeEnv("development");
@@ -18,8 +23,8 @@ if (process.env.NODE_ENV === "production") {
 const port = process.env.PORT || 1212;
 const manifest = path.resolve(webpackPaths.dllPath, "renderer.json");
 const skipDLLs =
-  require.main?.filename.includes("webpack.config.renderer.dev.dll") ||
-  require.main?.filename.includes("webpack.config.eslint");
+  require.main?.filename.includes("config.renderer.dev.dll") ||
+  require.main?.filename.includes("config.eslint");
 
 /**
  * Warn if the DLL is not built
@@ -31,7 +36,7 @@ if (!skipDLLs && !(fs.existsSync(webpackPaths.dllPath) && fs.existsSync(manifest
   execSync("npm run postinstall");
 }
 
-const configuration: webpack.Configuration = {
+const configuration: Configuration = {
   devtool: "inline-source-map",
   mode: "development",
   target: ["web", "electron-renderer"],
@@ -104,21 +109,21 @@ const configuration: webpack.Configuration = {
     ...(skipDLLs
       ? []
       : [
-          new webpack.DllReferencePlugin({
+          new DllReferencePlugin({
             context: webpackPaths.dllPath,
             manifest: require(manifest),
             sourceType: "var"
           })
         ]),
 
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.EnvironmentPlugin({
+    new NoEmitOnErrorsPlugin(),
+    new EnvironmentPlugin({
       NODE_ENV: "development"
     }),
-    new webpack.LoaderOptionsPlugin({
+    new LoaderOptionsPlugin({
       debug: true
     }),
-    new ReactRefreshWebpackPlugin(),
+    // new ReactRefreshWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: path.join("index.html"),
       template: path.join(webpackPaths.srcRendererPath, "index.ejs"),

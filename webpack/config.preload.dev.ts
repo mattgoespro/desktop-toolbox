@@ -1,15 +1,14 @@
 import path from "path";
-import webpack from "webpack";
+import { Configuration, LoaderOptionsPlugin, EnvironmentPlugin } from "webpack";
 import { merge } from "webpack-merge";
-import baseConfig from "./webpack.config.base";
-import webpackPaths from "./webpack.paths";
-import checkNodeEnv from "../scripts/check-node-env";
+import baseConfig, { checkNodeEnv } from "./config.base";
+import webpackPaths from "./paths";
 
 if (process.env.NODE_ENV === "production") {
   checkNodeEnv("development");
 }
 
-const configuration: webpack.Configuration = {
+const configuration: Configuration = {
   devtool: "inline-source-map",
   mode: "development",
   target: "electron-preload",
@@ -18,22 +17,22 @@ const configuration: webpack.Configuration = {
     path: webpackPaths.dllPath,
     filename: "preload.js",
     library: {
-      type: "umd",
-    },
+      type: "umd"
+    }
   },
   plugins: [
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: "development",
+    new EnvironmentPlugin({
+      NODE_ENV: "development"
     }),
-    new webpack.LoaderOptionsPlugin({
-      debug: true,
-    }),
+    new LoaderOptionsPlugin({
+      debug: true
+    })
   ],
   node: {
     __dirname: false,
-    __filename: false,
+    __filename: false
   },
-  watch: true,
+  watch: true
 };
 
 export default merge(baseConfig, configuration);

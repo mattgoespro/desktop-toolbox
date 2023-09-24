@@ -11,7 +11,7 @@ import { app, BrowserWindow, shell, ipcMain } from "electron";
 import debug from "electron-debug";
 import installDebugTools, {
   REACT_DEVELOPER_TOOLS,
-  BACKBONE_DEBUGGER,
+  BACKBONE_DEBUGGER
 } from "electron-devtools-installer";
 import log from "electron-log";
 import { autoUpdater } from "electron-updater";
@@ -23,12 +23,11 @@ if (process.env.NODE_ENV === "production") {
   installSourceMapSupport();
 }
 
-const isDebug =
-  process.env.NODE_ENV === "development" || process.env.DEBUG_PROD === "true";
+const isDebug = process.env.NODE_ENV === "development" || process.env.DEBUG_PROD === "true";
 
 async function startDebugger() {
   await installDebugTools([REACT_DEVELOPER_TOOLS, BACKBONE_DEBUGGER], {
-    forceDownload: !!process.env.UPGRADE_EXTENSIONS,
+    forceDownload: !!process.env.UPGRADE_EXTENSIONS
   });
   debug();
 }
@@ -50,8 +49,8 @@ async function createWindow() {
     webPreferences: {
       preload: app.isPackaged
         ? path.join(__dirname, "preload.js")
-        : path.join(__dirname, "../../.erb/dll/preload.js"),
-    },
+        : path.join(__dirname, "../../dll/preload.js")
+    }
   });
 
   mainWindow.loadURL(resolveHtmlPath("index.html"));

@@ -2,20 +2,19 @@
  * Builds the DLL for development electron renderer process
  */
 
-import webpack from "webpack";
 import path from "path";
+import { Configuration, LoaderOptionsPlugin, EnvironmentPlugin, DllPlugin } from "webpack";
 import { merge } from "webpack-merge";
-import baseConfig from "./webpack.config.base";
-import webpackPaths from "./webpack.paths";
-import { dependencies } from "../../package.json";
-import checkNodeEnv from "../scripts/check-node-env";
-import webpackConfigRendererDev from "./webpack.config.renderer.dev";
+import { dependencies } from "../package.json";
+import baseConfig, { checkNodeEnv } from "./config.base";
+import webpackConfigRendererDev from "./config.renderer.dev";
+import webpackPaths from "./paths";
 
 checkNodeEnv("development");
 
 const dist = webpackPaths.dllPath;
 
-const configuration: webpack.Configuration = {
+const configuration: Configuration = {
   context: webpackPaths.rootPath,
   devtool: "eval",
   mode: "development",
@@ -23,34 +22,34 @@ const configuration: webpack.Configuration = {
   externals: ["fsevents", "crypto-browserify"],
   module: webpackConfigRendererDev.module,
   entry: {
-    renderer: Object.keys(dependencies || {}),
+    renderer: Object.keys(dependencies || {})
   },
   output: {
     path: dist,
     filename: "[name].dev.dll.js",
     library: {
       name: "renderer",
-      type: "var",
-    },
+      type: "var"
+    }
   },
   plugins: [
-    new webpack.DllPlugin({
+    new DllPlugin({
       path: path.join(dist, "[name].json"),
-      name: "[name]",
+      name: "[name]"
     }),
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: "development",
+    new EnvironmentPlugin({
+      NODE_ENV: "development"
     }),
-    new webpack.LoaderOptionsPlugin({
+    new LoaderOptionsPlugin({
       debug: true,
       options: {
         context: webpackPaths.srcPath,
         output: {
-          path: webpackPaths.dllPath,
-        },
-      },
-    }),
-  ],
+          path: webpackPaths.dllPath
+        }
+      }
+    })
+  ]
 };
 
 export default merge(baseConfig, configuration);

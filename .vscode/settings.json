@@ -14,6 +14,11 @@
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true
   },
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true
+  },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnPaste": true,
@@ -51,9 +56,7 @@
   "eslint.run": "onType",
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "files.associations": {
-    ".eslintignore": "ignore",
-    ".eslintrc": "jsonc",
-    ".prettierrc": "jsonc"
+    ".eslintignore": "ignore"
   },
   "files.eol": "\n",
   "files.exclude": {
@@ -86,19 +89,21 @@
   "scssFormatter.singleQuote": false,
   "search.exclude": {
     "*.{css,sass,scss}.d.ts": true,
-    ".erb/dll": true,
-    ".eslintcache": true,
+    "dll": true,
     ".git": true,
     "dist": true,
     "node_modules": true,
     "npm-debug.log.*": true,
     "package-lock.json": true,
-    "release/{build,app/dist}": true,
-    "test/**/__snapshots__": true
+    "release/{build,app/dist}": true
   },
+  "shellcheck.exclude": ["1017"],
   "typescript.format.enable": false,
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "workbench.colorTheme": "Default Dark Modern",
-  "workbench.iconTheme": "material-icon-theme"
+  "workbench.iconTheme": "vs-seti",
+  "[ignore]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  }
 }
