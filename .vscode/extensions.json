@@ -1,15 +1,12 @@
 {
   "recommendations": [
-    "dsznajder.es7-react-js-snippets",
     "bierner.markdown-preview-github-styles",
-    "jundat95.react-native-snippet",
     "dbaeumer.vscode-eslint",
     "herrmannplatz.npm-dependency-links",
     "formulahendry.auto-close-tag",
     "mskelton.npm-outdated",
     "christian-kohler.npm-intellisense",
     "sibiraj-s.vscode-scss-formatter",
-    "howardzuo.vscode-npm-dependency",
     "mrmlnc.vscode-scss",
     "fabiospampinato.vscode-open-in-npm",
     "naumovs.color-highlight",
@@ -17,6 +14,17 @@
     "davidanson.vscode-markdownlint",
     "msjsdiag.vscode-react-native",
     "johnguo.columnpaste",
-    "better-ts-errors.better-ts-errors"
+    "better-ts-errors.better-ts-errors",
+    "usernamehw.errorlens",
+    "felipecaputo.git-project-manager",
+    "github.copilot",
+    "github.copilot-chat",
+    "eamodio.gitlens",
+    "ibm.output-colorizer",
+    "esbenp.prettier-vscode",
+    "jundat95.react-native-snippet",
+    "richie5um2.vscode-sort-json",
+    "dsznajder.es7-react-js-snippets",
+    "gregorbiswanger.json2ts"
   ]
 }

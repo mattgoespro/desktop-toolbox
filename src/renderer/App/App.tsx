@@ -1,6 +1,8 @@
-import React from "react";
 import { MemoryRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.scss";
 import Dashboard from "./Dashboard/Dashboard";
+
+
 
 export default function App() {
   return (

@@ -85,9 +85,8 @@ async function createWindow() {
  * Configures the IP (Inter-process) communication events between the main and renderer processes.
  */
 function configureIpc(): void {
-  ipcMain.on("ipc-example", async (event, arg) => {
+  ipcMain.on("ipc-example", async (event, _arg) => {
     const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
-    console.log(msgTemplate(arg));
     event.reply("ipc-example", msgTemplate("pong"));
   });
 }

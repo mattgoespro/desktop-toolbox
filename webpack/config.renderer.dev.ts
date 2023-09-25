@@ -14,6 +14,7 @@ import "webpack-dev-server";
 import { merge } from "webpack-merge";
 import baseConfig, { checkNodeEnv } from "./config.base";
 import { killSubprocessesMiddleware, startPreloadTaskMiddleware } from "./middleware";
+import MiniCssExtractWebpackPlugin from "mini-css-extract-plugin";
 import webpackPaths from "./paths";
 
 if (process.env.NODE_ENV === "production") {
@@ -26,7 +27,6 @@ const skipDLLs =
   module.parent?.filename.includes("config.renderer.dev.dll") ||
   module.parent?.filename.includes("webpack.config.renderer.dev");
 
-console.log(skipDLLs);
 /**
  * Warn if the DLL is not built
  */
@@ -59,24 +59,30 @@ const configuration: Configuration = {
       {
         test: /\.scss$/,
         use: [
-          {
-            loader: "@teamsupercell/typings-for-css-modules-loader",
-            options: {
-              formatter: "prettier",
-              prettierConfigFile: path.resolve(__dirname, ".prettierrc.js")
-            }
-          },
+          "style-loader",
           {
             loader: "css-loader",
             options: { modules: true, sourceMap: true, importLoaders: 1 }
           },
+          {
+            loader: "@teamsupercell/typings-for-css-modules-loader",
+            options: {
+              formatter: "prettier",
+              prettierConfigFile: path.resolve(__dirname, "../.prettierrc.js")
+            }
+          },
+
           "sass-loader"
         ]
       },
       {
         test: /\.css$/,
         exclude: "/node_modules/",
-        use: ["@teamsupercell/typings-for-css-modules-loader", "css-loader"]
+        use: [
+          MiniCssExtractWebpackPlugin.loader,
+          "@teamsupercell/typings-for-css-modules-loader",
+          "css-loader"
+        ]
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
@@ -124,7 +130,6 @@ const configuration: Configuration = {
     new LoaderOptionsPlugin({
       debug: true
     }),
-    // new ReactRefreshWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: path.join("index.html"),
       template: path.join(webpackPaths.srcRendererPath, "index.ejs"),

@@ -14,11 +14,6 @@
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true
   },
-  "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format",
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": true
-  },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnPaste": true,
@@ -97,13 +92,11 @@
     "package-lock.json": true,
     "release/{build,app/dist}": true
   },
-  "shellcheck.exclude": ["1017"],
   "typescript.format.enable": false,
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "workbench.colorTheme": "Default Dark Modern",
-  "workbench.iconTheme": "vs-seti",
-  "[ignore]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
-  }
+  "workbench.iconTheme": "material-icon-theme",
+  "react-native-tools.networkInspector.consoleLogsColorTheme": "Dark",
+  "react-native-tools.projectRoot": "${workspaceFolder}/src/renderer"
 }

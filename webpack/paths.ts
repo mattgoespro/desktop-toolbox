@@ -1,7 +1,6 @@
 import path from "path";
 
 const rootPath = path.join(__dirname, "..");
-console.log(rootPath);
 const srcPath = path.join(rootPath, "src");
 const releasePath = path.join(rootPath, "release");
 const appPath = path.join(releasePath, "app");
