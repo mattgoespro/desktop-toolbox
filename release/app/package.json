@@ -1,10 +1,10 @@
 {
-  "name": "desktop-configure",
+  "dependencies": {},
   "main": "./dist/main/main.js",
+  "name": "desktop-configure",
   "scripts": {
-    "rebuild": "node -r ts-node/register ../../.erb/scripts/electron-rebuild.js",
+    "link-modules": "node -r ts-node/register ../../scripts/link-modules.ts",
     "postinstall": "npm run rebuild && npm run link-modules",
-    "link-modules": "node -r ts-node/register ../../.erb/scripts/link-modules.ts"
-  },
-  "dependencies": {}
+    "rebuild": "node -r ts-node/register  ../../scripts/electron-rebuild.ts"
+  }
 }

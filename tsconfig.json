@@ -5,14 +5,15 @@
     "module": "commonjs",
     "lib": ["dom", "es2021"],
     "jsx": "react-jsx",
+    "strict": true,
     "sourceMap": true,
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "allowJs": true,
-    "outDir": ".erb/dll"
+    "outDir": "dll"
   },
-  "exclude": ["test", "release/build", "release/app/dist", ".erb/dll"]
+  "exclude": ["release/build", "release/app/dist"]
 }
