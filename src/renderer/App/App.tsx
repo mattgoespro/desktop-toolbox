@@ -1,15 +1,12 @@
-import { MemoryRouter as Router, Routes, Route } from "react-router-dom";
-import "./App.scss";
-import Dashboard from "./Dashboard/Dashboard";
-
-
+import { Provider } from "react-redux";
+import { RouterProvider } from "react-router-dom";
+import store from "./Redux/Store";
+import router from "./Shared/Router";
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-      </Routes>
-    </Router>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   );
 }

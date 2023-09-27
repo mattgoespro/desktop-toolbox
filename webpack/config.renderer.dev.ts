@@ -61,17 +61,16 @@ const configuration: Configuration = {
         use: [
           "style-loader",
           {
-            loader: "css-loader",
-            options: { modules: true, sourceMap: true, importLoaders: 1 }
-          },
-          {
             loader: "@teamsupercell/typings-for-css-modules-loader",
             options: {
               formatter: "prettier",
               prettierConfigFile: path.resolve(__dirname, "../.prettierrc.js")
             }
           },
-
+          {
+            loader: "css-loader",
+            options: { modules: true, sourceMap: true, importLoaders: 1 }
+          },
           "sass-loader"
         ]
       },

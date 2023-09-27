@@ -82,6 +82,7 @@
   "scss.showErrors": true,
   "scssFormatter.printWidth": 100,
   "scssFormatter.singleQuote": false,
+  "auto-close-tag.disableOnLanguage": ["javascript", "typescript", "plaintext"],
   "search.exclude": {
     "*.{css,sass,scss}.d.ts": true,
     "dll": true,

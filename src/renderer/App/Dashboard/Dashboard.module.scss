@@ -1,7 +1,19 @@
+.dashboard-app {
+  display: flex;
+  width: 100%;
+}
+
 .dashboard {
-  background-color: red;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.utility-cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 1rem;
 }
