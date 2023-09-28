@@ -12,7 +12,14 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "allowJs": true,
-    "outDir": "dll"
+    "outDir": "dll",
+    "paths": {
+      "@/*": ["src/*"],
+      "@theme": ["src/renderer/App/Shared/Theme/theme.ts"],
+      "@uuid": ["src/renderer/App/Shared/Utils/uuid.ts"],
+      "@shared/*": ["src/renderer/App/Shared/*"]
+    }
   },
+  "include": ["src/**/*"],
   "exclude": ["release/build", "release/app/dist"]
 }

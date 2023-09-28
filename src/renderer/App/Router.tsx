@@ -1,17 +1,12 @@
 import { Navigate, createHashRouter } from "react-router-dom";
-import Dashboard from "../Dashboard/Dashboard";
-import PDFToImageConverter from "../Dashboard/PDFToImageConverter/PDFToImageConverter";
-import { AppNavigator } from "../Navigator/AppNavigator";
+import PDFToImageConverter from "./Components/PDFToImageConverter/PDFToImageConverter";
+import { Shell } from "./Components/Shell/Shell";
 
 const router = createHashRouter([
   {
     path: "/",
-    element: <AppNavigator />,
+    element: <Shell />,
     children: [
-      {
-        element: <Dashboard />,
-        index: true
-      },
       {
         path: "/pdf-to-image-converter",
         element: <PDFToImageConverter />

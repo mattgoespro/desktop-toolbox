@@ -49,11 +49,7 @@ class DesktopTools {
 
   public async installExtensions() {
     [REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS].forEach(async (extension) => {
-      await installExtensions(extension, {
-        loadExtensionOptions: {
-          permissions: []
-        }
-      });
+      await installExtensions(extension);
     });
 
     return this;

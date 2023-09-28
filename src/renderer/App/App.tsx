@@ -1,7 +1,7 @@
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
 import store from "./Redux/Store";
-import router from "./Shared/Router";
+import router from "./Router";
 
 export default function App() {
   return (
