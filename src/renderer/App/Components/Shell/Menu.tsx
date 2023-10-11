@@ -1,6 +1,7 @@
 import { ListItemButton, ListItemIcon, ListItemText, List } from "@mui/material";
 import uuid from "../../Shared/Utils/uuid";
-import { apps } from "./apps";
+
+const apps = ["PDF To Image Converter", "Image To Icon Converter"];
 
 export function Menu() {
   const appMenuItems = apps.map((app) => {

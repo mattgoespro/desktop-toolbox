@@ -121,7 +121,10 @@ const configuration: Configuration = {
             sourceType: "var"
           })
         ]),
-    new ReactRefreshWebpackPlugin(),
+    new ReactRefreshWebpackPlugin({
+      include: [webpackPaths.srcRendererPath],
+      forceEnable: true
+    }),
     new NoEmitOnErrorsPlugin(),
     new EnvironmentPlugin({
       NODE_ENV: "development"

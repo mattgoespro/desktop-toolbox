@@ -1,6 +1,6 @@
-import styles from "./PDFToImageConverter.module.scss";
+import styles from "./PdfToImageConverter.module.scss";
 
-export default function PDFToImageConverter() {
+export default function PdfToImageConverter() {
   return (
     <div className={styles.wrapper}>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam totam, ducimus architecto

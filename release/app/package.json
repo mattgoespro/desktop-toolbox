@@ -1,7 +1,7 @@
 {
   "dependencies": {},
   "main": "./dist/main/main.js",
-  "name": "desktop-configure",
+  "name": "desktop-toolbox",
   "scripts": {
     "link-modules": "node -r ts-node/register ../../scripts/link-modules.ts",
     "postinstall": "npm run rebuild && npm run link-modules",

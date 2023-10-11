@@ -1,5 +1,5 @@
 import { Navigate, createHashRouter } from "react-router-dom";
-import PDFToImageConverter from "./Components/PDFToImageConverter/PDFToImageConverter";
+import PdfToImageConverter from "./Components/PdfToImageConverter/PdfToImageConverter";
 import { Shell } from "./Components/Shell/Shell";
 
 const router = createHashRouter([
@@ -9,7 +9,7 @@ const router = createHashRouter([
     children: [
       {
         path: "/pdf-to-image-converter",
-        element: <PDFToImageConverter />
+        element: <PdfToImageConverter />
       },
       {
         path: "*",
