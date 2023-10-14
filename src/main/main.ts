@@ -45,7 +45,7 @@ class DesktopTools {
   private addWindowMenu() {
     Menu.setApplicationMenu(
       new Menu()
-        .prependListener("click", () => window.webContents.reload())
+        .prependListener("click", () => this.window.webContents.reload())
         .addListener("menu-will-show", () => {
           console.log("menu-will-show");
         })
