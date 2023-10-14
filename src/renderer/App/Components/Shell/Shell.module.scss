@@ -1,0 +1,32 @@
+.shell {
+  display: flex;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100px;
+  flex-basis: 1;
+  border-right: 1px solid #e0e0e0;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  font-family: "Nunito";
+  font-weight: 400;
+  color: #0084ff;
+  text-align: center;
+}
+
+.shell-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  flex-basis: 4;
+  margin: 50px;
+}

@@ -2,14 +2,14 @@
  * This module executes inside of electron's main process.
  */
 import path from "path";
-import { app, BrowserWindow, shell, ipcMain } from "electron";
+import { app, BrowserWindow, shell, ipcMain, Menu } from "electron";
 import debug from "electron-debug";
 import installExtensions, {
   REACT_DEVELOPER_TOOLS,
   REDUX_DEVTOOLS
 } from "electron-devtools-installer";
+import { convertPDF } from "pdf2image";
 import { install as installSourceMapSupport } from "source-map-support";
-import MenuBuilder from "./menu";
 import { resolveHtmlPath } from "./util";
 
 class DesktopTools {
@@ -30,8 +30,8 @@ class DesktopTools {
           : path.resolve(__dirname, "../../dll/preload.js")
       }
     });
-    const menuBuilder = new MenuBuilder(this.window);
-    menuBuilder.buildMenu();
+
+    this.addWindowMenu();
 
     if (mode === "debug") {
       debug({
@@ -40,6 +40,19 @@ class DesktopTools {
         showDevTools: true
       });
     }
+  }
+
+  private addWindowMenu() {
+    Menu.setApplicationMenu(
+      new Menu()
+        .prependListener("click", () => window.webContents.reload())
+        .addListener("menu-will-show", () => {
+          console.log("menu-will-show");
+        })
+        .addListener("menu-will-close", () => {
+          console.log("menu-will-close");
+        })
+    );
   }
 
   public async installExtensions() {
@@ -79,9 +92,25 @@ class DesktopTools {
    * Configures the IP (Inter-process) communication events between the main and renderer processes.
    */
   public configureIpc() {
-    ipcMain.on("ipc-example", async (event, _arg) => {
-      const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
-      event.reply("ipc-example", msgTemplate("pong"));
+    ipcMain.on("pdf-to-image", async (event, pdfPaths) => {
+      console.log("convert-pdf-to-image event received", event, pdfPaths);
+
+      convertPDF(pdfPaths, { density: 100, quality: 100 })
+        .then((images) => {
+          event.reply("pdf-to-image", {
+            type: "file-selected",
+            payload: images
+          });
+        })
+        .catch((error) => {
+          event.reply("pdf-to-image", {
+            type: "file-selected",
+            error: error.message
+          });
+        })
+        .finally(() => {
+          event.reply("pdf-to-image");
+        });
     });
 
     return this;

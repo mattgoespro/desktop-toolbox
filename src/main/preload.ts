@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from "electron";
 
-export type Channels = "ipc-example";
+export type Channels = "pdf-to-image";
 
 const electronHandler = {
   ipcRenderer: {

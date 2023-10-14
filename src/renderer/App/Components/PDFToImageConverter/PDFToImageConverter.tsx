@@ -1,11 +1,33 @@
+import { ConvertedFile } from "pdf2image";
+import { PdfToImageEvent } from "ipc/events/pdf-to-image";
+import { windowEventEmitter } from "ipc/window-event-emitter";
 import styles from "./PdfToImageConverter.module.scss";
 
 export default function PdfToImageConverter() {
+  function sendFileSelectMessage() {
+    windowEventEmitter.sendMessage("pdf-to-image");
+  }
+
+  windowEventEmitter.on("pdf-to-image", handleEvent);
+
+  function handleEvent(event: PdfToImageEvent) {
+    switch (event.type) {
+      case "file-selected":
+        handleFileSelected(event.payload);
+        break;
+    }
+  }
+
+  function handleFileSelected(file: ConvertedFile) {
+    console.log(file);
+  }
+
   return (
     <div className={styles.wrapper}>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam totam, ducimus architecto
-      corrupti, corporis est, quis omnis tempora eius assumenda incidunt animi blanditiis. Quod,
-      aliquid labore excepturi recusandae consequatur nemo.
+      <div className={styles["file-select"]}>
+        <label>Select PDF File</label>
+        <button onClick={sendFileSelectMessage}>Select</button>
+      </div>
     </div>
   );
 }

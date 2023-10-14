@@ -14,10 +14,9 @@
     "allowJs": true,
     "outDir": "dll",
     "paths": {
-      "@/*": ["src/*"],
-      "@theme": ["src/renderer/App/Shared/Theme/theme.ts"],
-      "@uuid": ["src/renderer/App/Shared/Utils/uuid.ts"],
-      "@shared/*": ["src/renderer/App/Shared/*"]
+      "ipc/*": ["src/ipc/*"],
+      "uuid-four": ["src/renderer/App/Shared/Utils/uuid-four.ts"],
+      "shared/*": ["src/renderer/App/Shared/*"]
     }
   },
   "include": ["src/**/*"],

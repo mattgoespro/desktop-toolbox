@@ -80,7 +80,10 @@ const configuration: Configuration = {
         use: [
           MiniCssExtractWebpackPlugin.loader,
           "@teamsupercell/typings-for-css-modules-loader",
-          "css-loader"
+          {
+            loader: "css-loader",
+            options: { modules: true, sourceMap: true, importLoaders: 1 }
+          }
         ]
       },
       {
