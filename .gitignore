@@ -1,19 +1,25 @@
-# Logs
-logs
-*.log
+# External
+node_modules
 
-# Runtime data
+# Generated
+*.css.d.ts
+*.sass.d.ts
+*.scss.d.ts
+
+# Runtime
 pids
 *.pid
 *.seed
 
-node_modules
+# DevTool extensions
+resources/devtool-extensions/**/*[!.gitkeep]
 
+# Build
 release/app/dist
 release/build
 dll
 
+# Logs
+logs
+*.log
 npm-debug.log.*
-*.css.d.ts
-*.sass.d.ts
-*.scss.d.ts

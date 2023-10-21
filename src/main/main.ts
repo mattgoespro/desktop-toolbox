@@ -1,8 +1,9 @@
 /**
  * This module executes inside of electron's main process.
  */
+import fs from "fs";
 import path from "path";
-import { app, BrowserWindow, shell, ipcMain, Menu } from "electron";
+import electron, { app, BrowserWindow, shell, ipcMain, Menu, MenuItem } from "electron";
 import debug from "electron-debug";
 import installExtensions, {
   REACT_DEVELOPER_TOOLS,
@@ -21,8 +22,8 @@ class DesktopTools {
   constructor(private mode: "debug" | "production") {
     this.window = new BrowserWindow({
       show: false,
-      width: 1024,
-      height: 728,
+      width: 1200,
+      height: 800,
       icon: path.join(this.resourcesPath, "icon.png"),
       webPreferences: {
         preload: app.isPackaged
@@ -43,21 +44,37 @@ class DesktopTools {
   }
 
   private addWindowMenu() {
-    Menu.setApplicationMenu(
-      new Menu()
-        .prependListener("click", () => this.window.webContents.reload())
-        .addListener("menu-will-show", () => {
-          console.log("menu-will-show");
-        })
-        .addListener("menu-will-close", () => {
-          console.log("menu-will-close");
-        })
-    );
+    const menu = new Menu();
+    menu.insert(0, new MenuItem({ label: "Reload", role: "reload" }));
+
+    if (this.mode === "debug") {
+      this.window.webContents.on("context-menu", (_, props) => {
+        const { x, y } = props;
+
+        Menu.buildFromTemplate([
+          {
+            label: "Inspect element",
+            click: () => {
+              this.window.webContents.inspectElement(x, y);
+            }
+          }
+        ]).popup({ window: this.window });
+      });
+      return;
+    }
+
+    Menu.setApplicationMenu(menu);
   }
 
-  public async installExtensions() {
+  setupDevelopmentEnvironment(): void {}
+
+  public installExtensions() {
     [REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS].forEach(async (extension) => {
-      await installExtensions(extension);
+      installExtensions(extension, {
+        forceDownload: true
+      })
+        .then((name) => console.log(`Added Extension:  ${name}`))
+        .catch((err) => console.log("An error occurred: ", err));
     });
 
     return this;
@@ -140,8 +157,31 @@ app
     await desktopTools.addWindowEventListeners();
     await desktopTools.loadApp();
 
-    app.on("activate", async () => {
-      desktopTools.installSourceMapSupport().configureIpc().installExtensions();
+    [
+      path.resolve(__dirname, "../../resources/devtool-extensions/react"),
+      path.resolve(__dirname, "../../resources/devtool-extensions/redux")
+    ].forEach(async (devtoolPath) => {
+      try {
+        fs.opendir(devtoolPath, (err, extensionDir) => {
+          if (err) {
+            console.error(`error: unable to open directory '${extensionDir}'`, err);
+            return;
+          }
+
+          extensionDir
+            .read()
+            .then(async (versionDir) => {
+              await electron.session.defaultSession.loadExtension(versionDir.path);
+            })
+            .catch((err) => {
+              console.error("error: unable to read extension version directory", err);
+            });
+        });
+      } catch (err) {
+        console.error(err);
+      }
+
+      desktopTools.installSourceMapSupport().configureIpc();
     });
   })
   .catch((err) => {

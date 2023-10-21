@@ -1,14 +1,4 @@
 {
-  "[dockerfile]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true
-  },
-  "[nginx]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true
-  },
   "[scss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnPaste": true,
@@ -26,15 +16,13 @@
   },
   "auto-close-tag.activationOnLanguage": [
     "html",
-    "xml",
     "javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact",
-    "plaintext",
-    "markdown",
-    "html"
+    "markdown"
   ],
+  "auto-close-tag.disableOnLanguage": ["javascript", "typescript", "plaintext"],
   "css.format.enable": false,
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
@@ -42,25 +30,23 @@
     "source.fixAll.scss": true
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnPaste": true,
-  "editor.formatOnSave": true,
   "eslint.codeActionsOnSave.mode": "all",
   "eslint.enable": true,
   "eslint.format.enable": false,
   "eslint.probe": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "eslint.run": "onType",
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
-  "files.associations": {
-    ".eslintignore": "ignore"
-  },
-  "files.eol": "\n",
+  "explorer.confirmDragAndDrop": false,
   "files.exclude": {
     ".git": true,
+    "dll": true,
     "node_modules": true
   },
   "files.watcherExclude": {
     ".git": true,
-    "node_modules": true
+    "dll": true,
+    "node_modules": true,
+    "resources": true
   },
   "html.format.enable": false,
   "javascript.format.enable": false,
@@ -70,34 +56,32 @@
   "markdown.extension.preview.autoShowPreviewToSide": true,
   "markdown.occurrencesHighlight.enabled": true,
   "material-icon-theme.activeIconPack": "react",
+  "material-icon-theme.files.color": "#000000",
+  "material-icon-theme.folders.color": "#eb7734",
   "material-icon-theme.hidesExplorerArrows": true,
-  "npm-intellisense.importQuotes": "\"",
-  "npm-intellisense.showBuildInLibs": true,
-  "npm-outdated.majorUpdateProtection": false,
   "npm.exclude": "release/**",
   "prettier.configPath": ".prettierrc.js",
+  "react-native-tools.networkInspector.consoleLogsColorTheme": "Dark",
+  "react-native-tools.projectRoot": "${workspaceFolder}/src/renderer",
   "scss.completion.completePropertyWithSemicolon": true,
   "scss.completion.triggerPropertyValueCompletion": true,
   "scss.format.enable": false,
   "scss.showErrors": true,
   "scssFormatter.printWidth": 100,
   "scssFormatter.singleQuote": false,
-  "auto-close-tag.disableOnLanguage": ["javascript", "typescript", "plaintext"],
   "search.exclude": {
     "*.{css,sass,scss}.d.ts": true,
-    "dll": true,
     ".git": true,
     "dist": true,
+    "dll": true,
     "node_modules": true,
     "npm-debug.log.*": true,
     "package-lock.json": true,
-    "release/{build,app/dist}": true
+    "release/{build,app/dist}": true,
+    "resources": true
   },
   "typescript.format.enable": false,
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "Default Dark Modern",
-  "workbench.iconTheme": "vs-seti",
-  "react-native-tools.networkInspector.consoleLogsColorTheme": "Dark",
-  "react-native-tools.projectRoot": "${workspaceFolder}/src/renderer"
+  "workbench.iconTheme": "material-icon-theme"
 }

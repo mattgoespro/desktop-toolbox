@@ -15,8 +15,9 @@
     "outDir": "dll",
     "paths": {
       "ipc/*": ["src/ipc/*"],
-      "uuid-four": ["src/renderer/App/Shared/Utils/uuid-four.ts"],
-      "shared/*": ["src/renderer/App/Shared/*"]
+      "uuid-four": ["src/renderer/App/Utils/uuid-four.ts"],
+      "shared/*": ["src/renderer/App/Components/Shared/*"],
+      "redux/*": ["src/renderer/App/Redux/*"]
     }
   },
   "include": ["src/**/*"],

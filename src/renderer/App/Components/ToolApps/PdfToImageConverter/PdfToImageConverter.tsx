@@ -24,10 +24,7 @@ export default function PdfToImageConverter() {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles["file-select"]}>
-        <label>Select PDF File</label>
-        <button onClick={sendFileSelectMessage}>Select</button>
-      </div>
+      <div className={styles["file-select"]}></div>
     </div>
   );
 }

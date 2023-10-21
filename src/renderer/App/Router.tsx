@@ -1,7 +1,7 @@
 import { Navigate, createHashRouter } from "react-router-dom";
-import { ImageToIconConverter } from "./Components/ImageToIconConverter/ImageToIconConverter";
-import PdfToImageConverter from "./Components/PdfToImageConverter/PdfToImageConverter";
 import { Shell } from "./Components/Shell/Shell";
+import { ImageToIconConverter } from "./Components/ToolApps/ImageToIconConverter/ImageToIconConverter";
+import PdfToImageConverter from "./Components/ToolApps/PdfToImageConverter/PdfToImageConverter";
 
 const router = createHashRouter([
   {

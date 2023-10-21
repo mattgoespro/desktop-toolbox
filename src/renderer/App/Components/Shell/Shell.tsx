@@ -1,14 +1,12 @@
-import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
-import styles from "./Shell.module.scss";
 import { useDispatch } from "react-redux";
-import { setTitle } from "../../Redux/Title/actions";
-import { selectTitle } from "../../Redux/Title/selectors";
-import Title from "../../Shared/Components/Title/Title";
+import { Link, Outlet } from "react-router-dom";
+import { setTitle } from "redux/Title/actions";
+import { selectTitle } from "redux/Title/selectors";
+import Title from "shared/Title/Title";
+import styles from "./Shell.module.scss";
 
 export function Shell() {
   const dispatch = useDispatch();
-  const title = selectTitle();
 
   function setAppTitle(title: string) {
     dispatch(setTitle({ title: title }));
@@ -24,7 +22,7 @@ export function Shell() {
           onClick={() => setAppTitle("Image to Icon")}
         >
           Image to Icon
-        </Link>{" "}
+        </Link>
         <Link
           className={styles["nav-link"]}
           to="pdf-to-image"
@@ -35,7 +33,7 @@ export function Shell() {
         </Link>
       </div>
       <div className={styles["shell-content"]}>
-        <Title title={title} />
+        <Title title={selectTitle()} />
         <Outlet />
       </div>
     </div>

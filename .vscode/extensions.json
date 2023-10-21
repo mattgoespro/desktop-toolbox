@@ -9,11 +9,9 @@
     "sibiraj-s.vscode-scss-formatter",
     "mrmlnc.vscode-scss",
     "fabiospampinato.vscode-open-in-npm",
-    "naumovs.color-highlight",
     "yzhang.markdown-all-in-one",
     "davidanson.vscode-markdownlint",
     "msjsdiag.vscode-react-native",
-    "johnguo.columnpaste",
     "better-ts-errors.better-ts-errors",
     "usernamehw.errorlens",
     "felipecaputo.git-project-manager",
@@ -25,8 +23,6 @@
     "jundat95.react-native-snippet",
     "richie5um2.vscode-sort-json",
     "dsznajder.es7-react-js-snippets",
-    "gregorbiswanger.json2ts",
-    "ms-azuretools.vscode-docker",
     "formulahendry.auto-rename-tag"
   ]
 }
