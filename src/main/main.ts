@@ -13,6 +13,8 @@ import { convertPDF } from "pdf2image";
 import { install as installSourceMapSupport } from "source-map-support";
 import { resolveHtmlPath } from "./util";
 
+const RESOURCES_PATH = path.resolve(__dirname, "../../resources");
+
 class DesktopTools {
   private resourcesPath = app.isPackaged
     ? path.join(process.resourcesPath, "assets")
@@ -145,6 +147,16 @@ class DesktopTools {
   }
 }
 
+function readDirectoryPaths(dirPath: string) {
+  return fs
+    .readdirSync(dirPath, {
+      encoding: "utf8",
+      withFileTypes: true
+    })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => path.join(dirPath, entry.name));
+}
+
 const isDebugMode =
   process.env.NODE_ENV === "development" || process.env.DEBUG_PROD === "true"
     ? "debug"
@@ -157,32 +169,15 @@ app
     await desktopTools.addWindowEventListeners();
     await desktopTools.loadApp();
 
-    [
-      path.resolve(__dirname, "../../resources/devtool-extensions/react"),
-      path.resolve(__dirname, "../../resources/devtool-extensions/redux")
-    ].forEach(async (devtoolPath) => {
-      try {
-        fs.opendir(devtoolPath, (err, extensionDir) => {
-          if (err) {
-            console.error(`error: unable to open directory '${extensionDir}'`, err);
-            return;
-          }
+    const extensionsPath = path.join(RESOURCES_PATH, "devtool-extensions");
+    const extensionsDir = readDirectoryPaths(extensionsPath);
 
-          extensionDir
-            .read()
-            .then(async (versionDir) => {
-              await electron.session.defaultSession.loadExtension(versionDir.path);
-            })
-            .catch((err) => {
-              console.error("error: unable to read extension version directory", err);
-            });
-        });
-      } catch (err) {
-        console.error(err);
-      }
-
-      desktopTools.installSourceMapSupport().configureIpc();
-    });
+    for (const extensionDir of extensionsDir) {
+      const versionDir = readDirectoryPaths(extensionDir)[0];
+      await electron.session.defaultSession.loadExtension(
+        path.join(extensionsPath, extensionDir, versionDir)
+      );
+    }
   })
   .catch((err) => {
     console.error("Error creating window: ", err);

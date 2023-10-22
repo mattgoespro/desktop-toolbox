@@ -1,0 +1,27 @@
+.button {
+  font-family: "Nunito";
+  font-size: 24px;
+}
+
+.normal {
+  font-size: 18px;
+  width: 125px;
+  height: 33px;
+}
+
+$primary: darken(orange, 10%);
+
+.primary {
+  background-color: $primary;
+  border: 1px solid $primary;
+  border-radius: 8px;
+  color: white;
+  font-family: "Roboto";
+  font-weight: 100;
+
+  &:hover {
+    background-color: #ff8c00;
+    border: 1px solid #ff8c00;
+    transition: background-color 0.4s ease-in-out;
+  }
+}

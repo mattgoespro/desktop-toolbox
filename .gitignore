@@ -11,8 +11,9 @@ pids
 *.pid
 *.seed
 
-# DevTool extensions
-resources/devtool-extensions/**/*[!.gitkeep]
+# Exclude folders in resources/devtools-extensions except for the .gitkeep
+resources/devtool-extensions/**/*
+!resources/devtool-extensions/**/.gitkeep
 
 # Build
 release/app/dist

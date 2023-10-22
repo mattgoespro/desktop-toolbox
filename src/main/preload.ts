@@ -1,22 +1,27 @@
-import { contextBridge, ipcRenderer, IpcRendererEvent } from "electron";
-
-export type Channels = "pdf-to-image";
+import { IpcRendererEvent, contextBridge, ipcRenderer } from "electron";
+import { ChannelEvent } from "./ipc/events/channel";
 
 const electronHandler = {
   ipcRenderer: {
-    sendMessage(channel: Channels, ...args: unknown[]) {
-      ipcRenderer.send(channel, ...args);
-    },
-    on(channel: Channels, func: (...args: unknown[]) => void) {
-      const subscription = (_event: IpcRendererEvent, ...args: unknown[]) => func(...args);
-      ipcRenderer.on(channel, subscription);
+    windowEventEmitter: {
+      emitEvent<T extends ChannelEvent>(
+        channel: T["channel"],
+        event: T["event"],
+        payload: T["payload"] = undefined
+      ) {
+        ipcRenderer.send(channel, event, payload);
+      },
+      handleEvent<T extends ChannelEvent>(
+        channel: T["channel"],
+        func: (payload: T["payload"]) => void
+      ) {
+        const subscription = (_event: IpcRendererEvent, payload: T["payload"]) => func(payload);
+        ipcRenderer.on(channel, subscription);
 
-      return () => {
-        ipcRenderer.removeListener(channel, subscription);
-      };
-    },
-    once(channel: Channels, func: (...args: unknown[]) => void) {
-      ipcRenderer.once(channel, (_event, ...args) => func(...args));
+        return () => {
+          ipcRenderer.removeListener(channel, subscription);
+        };
+      }
     }
   }
 };

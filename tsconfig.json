@@ -14,7 +14,13 @@
     "allowJs": true,
     "outDir": "dll",
     "paths": {
-      "ipc/*": ["src/ipc/*"],
+      "main/*": ["src/main/*"],
+      "ipc/*": [
+        "src/main/ipc/*.ts",
+        "src/main/ipc/channels/*",
+        "src/main/ipc/events/*",
+        "src/main/ipc/handlers/*"
+      ],
       "uuid-four": ["src/renderer/App/Utils/uuid-four.ts"],
       "shared/*": ["src/renderer/App/Components/Shared/*"],
       "redux/*": ["src/renderer/App/Redux/*"]

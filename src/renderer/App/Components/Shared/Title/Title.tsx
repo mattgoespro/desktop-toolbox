@@ -1,10 +1,13 @@
-import { DOMAttributes, ReactNode } from "react";
+import styles from "./Title.module.scss";
 
-type TitleProps = {
+interface TitleProps {
+  [key: string]: string;
   title: string;
   subtitle?: string;
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>;
+}
 
 export default function Title(props: TitleProps) {
-  return <h1>{props.title}</h1>;
+  const { title, subtitle, ...rest } = props;
+
+  return <h1 className={[rest.className, styles.title].join(" ")}>{title}</h1>;
 }
