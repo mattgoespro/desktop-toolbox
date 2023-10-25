@@ -1,18 +1,12 @@
 import { useDispatch } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
-import { setTitle } from "redux/Title/actions";
-import { selectTitle } from "redux/Title/selectors";
 import Title from "shared/Title/Title";
 import styles from "./Shell.module.scss";
-import { useCallback } from "react";
+import { useState } from "react";
 
 export function Shell() {
   const dispatch = useDispatch();
-
-  const setAppTitle = useCallback((title: string) => {
-    console.log("Set title to", title);
-    dispatch(setTitle({ title: title }));
-  }, []);
+  const [appTitle, setAppTitle] = useState("");
 
   return (
     <div className={styles.shell}>
@@ -35,7 +29,7 @@ export function Shell() {
         </Link>
       </div>
       <div className={styles["shell-content"]}>
-        <Title className={styles.title} title={selectTitle()} />
+        <Title className={styles.title} title={appTitle} />
         <Outlet />
       </div>
     </div>

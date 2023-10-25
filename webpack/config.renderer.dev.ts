@@ -130,7 +130,8 @@ const configuration: Configuration = {
     }),
     new NoEmitOnErrorsPlugin(),
     new EnvironmentPlugin({
-      NODE_ENV: "development"
+      NODE_ENV: "development",
+      RESOURCE_DEVTOOLS: process.env.RESOURCE_DEVTOOLS ?? false
     }),
     new LoaderOptionsPlugin({
       debug: true

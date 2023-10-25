@@ -19,7 +19,7 @@
         "src/main/ipc/*.ts",
         "src/main/ipc/channels/*",
         "src/main/ipc/events/*",
-        "src/main/ipc/handlers/*"
+        "src/main/ipc/event-handlers/*"
       ],
       "uuid-four": ["src/renderer/App/Utils/uuid-four.ts"],
       "shared/*": ["src/renderer/App/Components/Shared/*"],
