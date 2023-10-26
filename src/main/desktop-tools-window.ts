@@ -1,3 +1,4 @@
+import fs from "fs";
 import os from "os";
 import path from "path";
 import electron, { app, BrowserWindow, Menu, MenuItem, shell, ipcMain } from "electron";
@@ -102,13 +103,6 @@ export class DesktopToolsWindow {
   }
 
   public async installDevToolExtensions() {
-    // const supportedExtensions = [
-    //   { name: "react-devtools", reference: REACT_DEVTOOLS },
-    //   { name: "redux-devtools", reference: REDUX_DEVTOOLS }
-    // ].reduce((acc, extension) => {
-    //   acc.set(extension.reference.id, extension);
-    //   return acc;
-    // }, new Map());
     const supportedExtensions = new Map([
       [REACT_DEVTOOLS.id, ["react-devtools", "4.28.4_0", REACT_DEVTOOLS]],
       [REDUX_DEVTOOLS.id, ["redux-devtools", "3.1.3_0", REDUX_DEVTOOLS]]
@@ -126,8 +120,8 @@ export class DesktopToolsWindow {
         "Extensions"
       );
 
-      if (!chromeExtensionsDirectory) {
-        throw new Error("Could not find Chrome extensions directory");
+      if (!fs.existsSync(chromeExtensionsDirectory)) {
+        throw new Error("devtool extensions: could not find Chrome extensions directory");
       }
 
       const extensionDirs = getChildDirectories(chromeExtensionsDirectory);
