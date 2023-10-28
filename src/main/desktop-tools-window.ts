@@ -29,7 +29,8 @@ export class DesktopToolsWindow {
         preload: app.isPackaged
           ? path.join(__dirname, "preload.js")
           : path.resolve(__dirname, "../../dll/preload.js"),
-        nodeIntegration: true
+        nodeIntegration: true,
+        webSecurity: false
       }
     });
 

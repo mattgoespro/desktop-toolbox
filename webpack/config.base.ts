@@ -3,7 +3,7 @@
  */
 
 import TsconfigPathsPlugins from "tsconfig-paths-webpack-plugin";
-import { Configuration, EnvironmentPlugin } from "webpack";
+import { Configuration, EnvironmentPlugin, ContextReplacementPlugin } from "webpack";
 import { dependencies as externals } from "../release/app/package.json";
 import webpackPaths from "./paths";
 
@@ -51,7 +51,8 @@ const configuration: Configuration = {
   plugins: [
     new EnvironmentPlugin({
       NODE_ENV: "production"
-    })
+    }),
+    new ContextReplacementPlugin(/any-promise/)
   ]
 };
 

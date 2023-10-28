@@ -12,27 +12,18 @@ export function ImageToIconConverter() {
       channel: "image-to-icon",
       event: "select-file"
     });
-  };
 
-  const handleFileSelect = (filePath: string) => {
-    setImagePath(filePath);
+    windowEventEmitter.handleEvent<FileSelectedEvent>("image-to-icon", (response) => {
+      console.log(response.payload.filePath);
+      setImagePath(response.payload.filePath);
+    });
   };
 
   return (
     <div className={styles.wrapper}>
       <div className={styles["select-image"]}>
         <label>Select an image</label>
-        <Button
-          type="primary"
-          onClick={() => {
-            sendSelectFileEvent();
-
-            windowEventEmitter.handleEvent<FileSelectedEvent>("image-to-icon", (payload) => {
-              console.log("file selected", payload);
-              handleFileSelect(payload.filePath);
-            });
-          }}
-        >
+        <Button type="primary" onClick={sendSelectFileEvent}>
           Open file
         </Button>
       </div>

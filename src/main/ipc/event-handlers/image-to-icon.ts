@@ -1,5 +1,10 @@
-import { IpcMainEvent, IpcMain, dialog, BrowserWindow } from "electron";
+import fs from "fs";
+import path from "path";
+import url from "url";
+import { IpcMainEvent, IpcMain, dialog, BrowserWindow, app } from "electron";
 import { ImageToIconEventType } from "../events/image-to-icon";
+
+const TEMP_UPLOADS_PATH = path.join(app.getPath("temp"), "image-to-icon", "uploads");
 
 export const ImageToIconListenerFn = async (event: IpcMainEvent, type: ImageToIconEventType) => {
   switch (type.event) {
@@ -21,10 +26,21 @@ export const onSelectFileEvent = (event: IpcMainEvent) => {
   }
 
   const filePath = selectedImages[0];
+  const fileName = path.basename(filePath);
+
+  if (!fs.existsSync(TEMP_UPLOADS_PATH)) {
+    fs.mkdirSync(TEMP_UPLOADS_PATH, { recursive: true });
+  }
+
+  const targetPath = path.join(TEMP_UPLOADS_PATH, fileName);
+
+  fs.copyFileSync(filePath, targetPath);
 
   event.reply("image-to-icon", {
     event: "file-selected",
-    payload: filePath
+    payload: {
+      filePath: targetPath
+    }
   });
 };
 
