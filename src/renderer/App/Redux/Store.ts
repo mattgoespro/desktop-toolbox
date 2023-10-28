@@ -8,7 +8,7 @@ const store = configureStore({
   reducer: {
     titleReducer
   },
-  enhancers: composeEnhancers()
+  enhancers: composeEnhancers
 });
 
 export default store;

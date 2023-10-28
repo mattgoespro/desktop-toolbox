@@ -1,14 +1,13 @@
 import fs from "fs";
 import os from "os";
 import path from "path";
-import electron, { app, BrowserWindow, Menu, MenuItem, shell, ipcMain } from "electron";
+import electron, { app, Menu, MenuItem, shell, BrowserWindow } from "electron";
 import installDevToolExtension, {
   REDUX_DEVTOOLS,
   REACT_DEVELOPER_TOOLS as REACT_DEVTOOLS
 } from "electron-devtools-installer";
 import { install as installSourceMapSupport } from "source-map-support";
-import { ImageToIconListener } from "./ipc/event-handlers/image-to-icon-handler";
-import { PdfToImageListener } from "./ipc/event-handlers/pdf-to-image-handler";
+import { imageToIconHandler } from "./ipc/event-handlers/image-to-icon";
 import { getChildDirectories, inDebugMode, inProductionMode, resolveHtmlPath } from "./util";
 
 export class DesktopToolsWindow {
@@ -79,16 +78,13 @@ export class DesktopToolsWindow {
       return { action: "deny" };
     });
 
+    this.attachToMainProcess(imageToIconHandler);
+
     return this;
   }
 
-  /**
-   * Configures the IP (Inter-process) communication events between the main and renderer processes.
-   */
-  public configureIpc() {
-    ipcMain.on("pdf-to-image", PdfToImageListener);
-    ipcMain.on("image-to-icon", ImageToIconListener);
-    return this;
+  private attachToMainProcess(attachHandler: (ipcMain: Electron.IpcMain) => void) {
+    attachHandler(electron.ipcMain);
   }
 
   public installSourceMapSupport() {
@@ -104,7 +100,7 @@ export class DesktopToolsWindow {
 
   public async installDevToolExtensions() {
     const supportedExtensions = new Map([
-      [REACT_DEVTOOLS.id, ["react-devtools", "4.28.4_0", REACT_DEVTOOLS]],
+      [REACT_DEVTOOLS.id, ["react-devtools", "4.28.5_2", REACT_DEVTOOLS]],
       [REDUX_DEVTOOLS.id, ["redux-devtools", "3.1.3_0", REDUX_DEVTOOLS]]
     ]);
 

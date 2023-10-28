@@ -1,4 +1,4 @@
-import { IpcMainEvent, ipcMain } from "electron";
+import { IpcMainEvent } from "electron";
 import { convertPDF } from "pdf2image";
 
 export const PdfToImageListener = async (event: IpcMainEvent, payload) => {

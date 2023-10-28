@@ -2,13 +2,21 @@ import { windowEventEmitter } from "ipc/window-event-emitter";
 import { FileSelectedEvent, SelectFileEvent } from "main/ipc/events/image-to-icon";
 import { Button } from "shared/Button/Button";
 import styles from "./ImageToIconConverter.module.scss";
+import { useState } from "react";
 
 export function ImageToIconConverter() {
+  const [imagePath, setImagePath] = useState<string>(null);
+
   const sendSelectFileEvent = () => {
-    windowEventEmitter.emitEvent<SelectFileEvent>("image-to-icon", "select-file");
+    windowEventEmitter.emitEvent<SelectFileEvent>({
+      channel: "image-to-icon",
+      event: "select-file"
+    });
   };
 
-  const handleFileSelect = (filePath) => {};
+  const handleFileSelect = (filePath: string) => {
+    setImagePath(filePath);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -19,13 +27,17 @@ export function ImageToIconConverter() {
           onClick={() => {
             sendSelectFileEvent();
 
-            windowEventEmitter.handleEvent<FileSelectedEvent>("image-to-icon", (event) => {
-              handleFileSelect(event.filePath);
+            windowEventEmitter.handleEvent<FileSelectedEvent>("image-to-icon", (payload) => {
+              console.log("file selected", payload);
+              handleFileSelect(payload.filePath);
             });
           }}
         >
           Open file
         </Button>
+      </div>
+      <div className={styles["image-display-frame"]}>
+        <img src={imagePath} alt="selected-image" />
       </div>
     </div>
   );

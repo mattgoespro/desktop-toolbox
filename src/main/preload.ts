@@ -1,17 +1,16 @@
 import { IpcRendererEvent, contextBridge, ipcRenderer } from "electron";
-import { ChannelEvent } from "./ipc/events/channel";
+import { Channel, ChannelEvent } from "./ipc/events/channel";
 
 const electronHandler = {
   windowEventEmitter: {
-    emitEvent<T extends ChannelEvent>(
-      channel: T["channel"],
-      event: T["event"],
-      payload: T["payload"] = undefined
-    ) {
+    emitEvent<T extends ChannelEvent<string>>(event: T) {
+      const channel = event.channel;
+      const payload = event.payload;
+
       ipcRenderer.send(channel, event, payload);
     },
-    handleEvent<T extends ChannelEvent>(
-      channel: T["channel"],
+    handleEvent<T extends ChannelEvent<string>>(
+      channel: Channel<T>,
       func: (payload: T["payload"]) => void
     ) {
       const subscription = (_event: IpcRendererEvent, payload: T["payload"]) => func(payload);

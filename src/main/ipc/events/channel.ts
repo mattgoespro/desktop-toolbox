@@ -1,11 +1,14 @@
-export type Channel<T extends ChannelEvent> = T["channel"];
+export type Payload<Map, Key extends keyof Map> = Map[Key];
 
 export type ChannelEvent<
-  Channel extends string = string,
-  Event extends string = string,
-  Payload = object
+  ChannelName extends string,
+  Map extends Record<string, unknown> = Record<string, unknown>,
+  Event extends keyof Map = keyof Map
 > = {
-  channel: Channel;
+  channel: ChannelName;
   event: Event;
-  payload: Payload;
+  payload?: Payload<Map, Event>;
 };
+
+export type Channel<T extends ChannelEvent<string, Record<string, unknown>, string>> = T["channel"];
+export type Event<T extends ChannelEvent<string, Record<string, unknown>, string>> = T["event"];

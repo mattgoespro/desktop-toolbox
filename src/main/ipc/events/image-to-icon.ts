@@ -1,17 +1,16 @@
 import { ChannelEvent } from "./channel";
 
-export interface FileSelectedEventPayload {
-  filePath: string;
-}
+export type ImageToIconEvents = "select-file" | "file-selected";
 
-export type SelectFileEvent = ChannelEvent<
-  "image-to-icon",
-  "select-file",
-  FileSelectedEventPayload
->;
+export type ImageToIconEventMap = {
+  "select-file": null;
+  "file-selected": {
+    filePath: string;
+  };
+};
 
-export type FileSelectedEvent = ChannelEvent<
-  "image-to-icon",
-  "file-selected",
-  FileSelectedEventPayload
->;
+export type ImageToIconEventType = SelectFileEvent | FileSelectedEvent;
+
+export type SelectFileEvent = ChannelEvent<"image-to-icon", ImageToIconEventMap, "select-file">;
+
+export type FileSelectedEvent = ChannelEvent<"image-to-icon", ImageToIconEventMap, "file-selected">;
