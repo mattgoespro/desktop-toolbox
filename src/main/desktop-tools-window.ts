@@ -7,7 +7,7 @@ import installDevToolExtension, {
   REACT_DEVELOPER_TOOLS as REACT_DEVTOOLS
 } from "electron-devtools-installer";
 import { install as installSourceMapSupport } from "source-map-support";
-import { imageToIconHandler } from "./ipc/event-handlers/image-to-icon";
+import { imageToIconEventHandler } from "./ipc/apps/image-to-icon/event-handlers";
 import { getChildDirectories, inDebugMode, inProductionMode, resolveHtmlPath } from "./util";
 
 export class DesktopToolsWindow {
@@ -79,7 +79,7 @@ export class DesktopToolsWindow {
       return { action: "deny" };
     });
 
-    this.attachToMainProcess(imageToIconHandler);
+    this.attachToMainProcess(imageToIconEventHandler);
 
     return this;
   }
