@@ -1,5 +1,5 @@
-import { windowEventEmitter } from "ipc/window-event-emitter";
-import { FileSelectedEvent, SelectFileEvent } from "main/ipc/apps/image-to-icon/events";
+import { windowEventEmitter } from "window-event-emitter";
+import { FileSelectedEvent, SelectFileEvent } from "app/events/image-to-icon";
 import { Button } from "shared/Button/Button";
 import styles from "./ImageToIconConverter.module.scss";
 import { useState } from "react";

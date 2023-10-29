@@ -14,7 +14,6 @@ import "webpack-dev-server";
 import { merge } from "webpack-merge";
 import baseConfig, { checkNodeEnv } from "./config.base";
 import { killSubprocessesMiddleware, startPreloadTaskMiddleware } from "./middleware";
-import MiniCssExtractWebpackPlugin from "mini-css-extract-plugin";
 import webpackPaths from "./paths";
 
 if (process.env.NODE_ENV === "production") {
@@ -78,7 +77,6 @@ const configuration: Configuration = {
         test: /\.css$/,
         exclude: "/node_modules/",
         use: [
-          MiniCssExtractWebpackPlugin.loader,
           "@teamsupercell/typings-for-css-modules-loader",
           {
             loader: "css-loader",

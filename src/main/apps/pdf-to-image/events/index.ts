@@ -1,4 +1,4 @@
-import { ChannelEvent } from "main/ipc/channel";
+import { ChannelEvent } from "window-event-emitter";
 
 export type PdfToImageEvents = "select-file" | "file-selected";
 

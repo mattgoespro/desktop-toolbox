@@ -4,7 +4,7 @@
 import { app } from "electron";
 import debug from "electron-debug";
 import { DesktopToolsWindow } from "./desktop-tools-window";
-import { inDebugMode } from "./util";
+import { inDebugMode } from "./utils";
 
 if (inDebugMode()) {
   debug({

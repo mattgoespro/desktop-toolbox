@@ -14,13 +14,12 @@
     "allowJs": true,
     "outDir": "dll",
     "paths": {
-      "main/*": ["src/main/*"],
-      "ipc/*": [
-        "src/main/ipc/*.ts",
-        "src/main/ipc/channels/*",
-        "src/main/ipc/events/*",
-        "src/main/ipc/event-handlers/*"
-      ],
+      "image-to-icon/event-handler": ["src/main/apps/image-to-icon/event-handlers/index.ts"],
+      "image-to-icon/events/*": ["src/main/apps/image-to-icon/events/*"],
+      "window-event-emitter": ["src/main/shared/window-event-emitter.ts"],
+      "file-picker-dialog": ["src/main/shared/file-picker-dialog.ts"],
+      "utils/*": ["src/main/utils.ts"],
+      "preload": ["src/main/preload.ts"],
       "uuid-four": ["src/renderer/App/Utils/uuid-four.ts"],
       "shared/*": ["src/renderer/App/Components/Shared/*"],
       "redux/*": ["src/renderer/App/Redux/*"]

@@ -1,11 +1,11 @@
 import { IpcMainEvent } from "electron";
-import { chooseFile } from "../../../shared/file-chooser";
+import { chooseFile } from "file-picker-dialog";
 
 export const onSelectFileEvent = (event: IpcMainEvent) => {
   const pdfPath = chooseFile({
-    title: "Select a PDF",
-    name: "PDF",
-    extensions: ["pdf"]
+    dialogTitle: "Select a PDF",
+    fileExtensionPreset: "PDF",
+    fileExtensionFilter: ["pdf"]
   });
 
   event.reply("pdf-to-image", {

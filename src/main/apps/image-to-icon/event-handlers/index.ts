@@ -3,7 +3,7 @@ import { ImageToIconEventType } from "../events";
 import { onConvertImageEvent } from "./convert-image";
 import { onSelectFileEvent } from "./select-file";
 
-export const ImageToIconListenerFn = async (event: IpcMainEvent, type: ImageToIconEventType) => {
+const ImageToIconListenerFn = async (event: IpcMainEvent, type: ImageToIconEventType) => {
   switch (type.event) {
     case "select-file":
       onSelectFileEvent(event);

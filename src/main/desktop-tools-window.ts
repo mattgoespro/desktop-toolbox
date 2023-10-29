@@ -7,8 +7,8 @@ import installDevToolExtension, {
   REACT_DEVELOPER_TOOLS as REACT_DEVTOOLS
 } from "electron-devtools-installer";
 import { install as installSourceMapSupport } from "source-map-support";
-import { imageToIconEventHandler } from "./ipc/apps/image-to-icon/event-handlers";
-import { getChildDirectories, inDebugMode, inProductionMode, resolveHtmlPath } from "./util";
+import { imageToIconEventHandler } from "image-to-icon/event-handler";
+import { getChildDirectories, inDebugMode, inProductionMode, resolveHtmlPath } from "./utils";
 
 export class DesktopToolsWindow {
   private RESOURCE_DEVTOOLS = process.env.RESOURCE_DEVTOOLS;

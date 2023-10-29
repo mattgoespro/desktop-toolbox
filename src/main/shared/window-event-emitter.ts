@@ -1,3 +1,7 @@
+import { WindowEventEmitter } from "preload";
+
+export const windowEventEmitter: WindowEventEmitter = window.electron.windowEventEmitter;
+
 export type Payload<Map, Key extends keyof Map> = Map[Key];
 
 export type ChannelEvent<

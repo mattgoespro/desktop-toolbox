@@ -1,4 +1,4 @@
-import { ChannelEvent } from "../../../channel";
+import { ChannelEvent } from "window-event-emitter";
 
 export type ImageToIconEvents = "select-file";
 

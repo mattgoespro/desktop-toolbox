@@ -1,11 +1,11 @@
 import { IpcMainEvent } from "electron";
-import { chooseFile } from "../../../shared/file-chooser";
+import { chooseFile } from "file-picker-dialog";
 
 export const onSelectFileEvent = (event: IpcMainEvent) => {
   const imagePath = chooseFile({
-    title: "Select an image",
-    name: "Images",
-    extensions: ["jpg", "jpeg", "png", "gif", "svg"]
+    dialogTitle: "Select an image",
+    fileExtensionPreset: "Images",
+    fileExtensionFilter: ["jpg", "jpeg", "png", "gif", "svg"]
   });
 
   event.reply("image-to-icon", {
