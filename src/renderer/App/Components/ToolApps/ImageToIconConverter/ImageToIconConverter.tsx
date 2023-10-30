@@ -1,19 +1,19 @@
-import { windowEventEmitter } from "window-event-emitter";
-import { FileSelectedEvent, SelectFileEvent } from "app/events/image-to-icon";
-import { Button } from "shared/Button/Button";
+import { ImageFileSelectedEvent, SelectImageFileEvent } from "main/apps/image-to-icon/events";
 import styles from "./ImageToIconConverter.module.scss";
 import { useState } from "react";
+import { Button } from "shared/Button/Button";
+import { windowEventEmitter } from "main/shared/window-event-emitter";
 
 export function ImageToIconConverter() {
   const [imagePath, setImagePath] = useState<string>(null);
 
   const sendSelectFileEvent = () => {
-    windowEventEmitter.emitEvent<SelectFileEvent>({
+    windowEventEmitter.emitEvent<SelectImageFileEvent>({
       channel: "image-to-icon",
       event: "select-file"
     });
 
-    windowEventEmitter.handleEvent<FileSelectedEvent>("image-to-icon", (response) => {
+    windowEventEmitter.handleEvent<ImageFileSelectedEvent>("image-to-icon", (response) => {
       console.log(response.payload.filePath);
       setImagePath(response.payload.filePath);
     });

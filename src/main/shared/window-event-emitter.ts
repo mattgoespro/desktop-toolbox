@@ -1,4 +1,4 @@
-import { WindowEventEmitter } from "preload";
+import { WindowEventEmitter } from "../preload";
 
 export const windowEventEmitter: WindowEventEmitter = window.electron.windowEventEmitter;
 

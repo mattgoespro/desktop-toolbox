@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
-import Title from "shared/Title/Title";
 import styles from "./Shell.module.scss";
 import { useState } from "react";
+import Title from "shared/Title/Title";
 
 export function Shell() {
   const dispatch = useDispatch();

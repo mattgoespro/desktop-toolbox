@@ -1,5 +1,5 @@
 import { IpcMainEvent } from "electron";
-import { chooseFile } from "file-picker-dialog";
+import { chooseFile } from "../../../shared/file-picker-dialog";
 
 export const onSelectFileEvent = (event: IpcMainEvent) => {
   const imagePath = chooseFile({

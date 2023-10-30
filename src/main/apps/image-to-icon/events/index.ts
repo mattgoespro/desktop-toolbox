@@ -1,4 +1,6 @@
-import { ChannelEvent } from "window-event-emitter";
+import { ChannelEvent } from "../../../shared/window-event-emitter";
+
+export type ImageToIconChannel = "image-to-icon";
 
 export type ImageToIconEvents = "select-file";
 
@@ -12,19 +14,22 @@ export type ImageToIconEventPayloadMap = {
   };
 };
 
-export type ImageToIconEventType = SelectFileEvent | FileSelectedEvent | ConvertImageEvent;
+export type ImageFileSelectedEvent = ChannelEvent<
+  ImageToIconChannel,
+  ImageToIconEventPayloadMap,
+  "file-selected"
+>;
 
-export type SelectFileEvent = ChannelEvent<
-  "image-to-icon",
+export type SelectImageFileEvent = ChannelEvent<
+  ImageToIconChannel,
   ImageToIconEventPayloadMap,
   "select-file"
 >;
 
-export type FileSelectedEvent = ChannelEvent<
-  "image-to-icon",
-  ImageToIconEventPayloadMap,
-  "file-selected"
->;
+export type ImageToIconEventType =
+  | SelectImageFileEvent
+  | ImageFileSelectedEvent
+  | ConvertImageEvent;
 
 export type ConvertImageEvent = ChannelEvent<
   "image-to-icon",

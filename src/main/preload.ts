@@ -1,5 +1,5 @@
 import { IpcRendererEvent, contextBridge, ipcRenderer } from "electron";
-import { Channel, ChannelEvent } from "window-event-emitter";
+import { Channel, ChannelEvent } from "./shared/window-event-emitter";
 
 const electronHandler = {
   windowEventEmitter: {
