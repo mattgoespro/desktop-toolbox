@@ -24,6 +24,10 @@ const configuration: Configuration = {
   module: {
     rules: [
       {
+        test: /\.node$/,
+        use: "node-loader"
+      },
+      {
         test: /\.[jt]sx?$/,
         exclude: /node_modules/,
         use: {
@@ -44,9 +48,9 @@ const configuration: Configuration = {
     }
   },
   resolve: {
-    extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
+    extensions: [".js", ".ts", ".tsx", ".json"],
     modules: [webpackPaths.srcPath, "node_modules"],
-    plugins: [new TsconfigPathsPlugins({})]
+    plugins: [new TsconfigPathsPlugins()]
   },
   plugins: [
     new EnvironmentPlugin({

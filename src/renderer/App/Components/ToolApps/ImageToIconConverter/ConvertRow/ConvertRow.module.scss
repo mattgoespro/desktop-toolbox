@@ -1,0 +1,30 @@
+.convert-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border: 1px solid gray;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+label {
+  margin: 5px 5px;
+  font-size: 14px;
+  color: #f7f7f7;
+  text-align: center;
+  font-family: "Roboto";
+  font-style: italic;
+  font-weight: 300;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1;
+
+  .action-button {
+    margin: 0 10px;
+  }
+}

@@ -156,7 +156,7 @@ export class DesktopToolsWindow {
       return;
     }
 
-    console.log(`Installing devtool extensions from 'electron-devtools-installer'\\n`);
+    console.log(`Installing devtool extensions from 'electron-devtools-installer'\n`);
 
     for (const extension of Object.values(supportedExtensions)) {
       try {

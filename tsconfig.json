@@ -16,7 +16,7 @@
     "paths": {
       "main/*": ["src/main/*"],
       "uuid-four/*": ["src/renderer/App/Utils/uuid-four.ts"],
-      "shared/*": ["src/renderer/App/Components/Shared/*"],
+      "renderer/shared/*": ["src/renderer/App/Components/Shared/*"],
       "redux/*": ["src/renderer/App/Redux/*"]
     }
   },
