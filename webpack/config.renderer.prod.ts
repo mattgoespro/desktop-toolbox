@@ -7,11 +7,11 @@ import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import TerserPlugin from "terser-webpack-plugin";
-import { DefinePlugin, EnvironmentPlugin, HotModuleReplacementPlugin } from "webpack";
+import { DefinePlugin, EnvironmentPlugin } from "webpack";
 import { merge } from "webpack-merge";
-import deleteSourceMaps from "./utils";
 import baseConfig, { checkNodeEnv } from "./config.base";
 import webpackPaths from "./paths";
+import deleteSourceMaps from "./utils";
 
 checkNodeEnv("production");
 deleteSourceMaps();

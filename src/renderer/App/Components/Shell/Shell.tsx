@@ -1,11 +1,9 @@
-import { useDispatch } from "react-redux";
-import { Link, Outlet } from "react-router-dom";
-import styles from "./Shell.module.scss";
 import { useState } from "react";
+import { Link, Outlet } from "react-router-dom";
 import Title from "renderer/shared/Title/Title";
+import styles from "./Shell.module.scss";
 
 export function Shell() {
-  const dispatch = useDispatch();
   const [appTitle, setAppTitle] = useState("");
 
   return (

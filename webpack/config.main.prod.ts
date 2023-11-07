@@ -6,9 +6,9 @@ import path from "path";
 import TerserPlugin from "terser-webpack-plugin";
 import { Configuration, DefinePlugin, EnvironmentPlugin } from "webpack";
 import { merge } from "webpack-merge";
-import deleteSourceMaps from "./utils";
 import baseConfig, { checkNodeEnv } from "./config.base";
 import webpackPaths from "./paths";
+import deleteSourceMaps from "./utils";
 
 checkNodeEnv("production");
 deleteSourceMaps();

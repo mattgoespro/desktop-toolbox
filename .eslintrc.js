@@ -26,14 +26,14 @@ module.exports = {
       typescript: true,
       node: true,
       webpack: {
-        config: "webpack/config.renderer.dev.ts"
+        config: "./webpack/config.renderer.dev.ts"
       }
     },
     react: {
       version: "detect"
     }
   },
-  ignorePatterns: ["src/**/*.[s]css.d.ts", "**/*.html"],
+  ignorePatterns: ["src/renderer/**/*.scss.d.ts", "dll/**/*.js", "release/app/build/**/*"],
   rules: {
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": [

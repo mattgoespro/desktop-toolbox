@@ -1,16 +1,16 @@
-import { Button } from "renderer/shared/Button/Button";
-import styles from "./ConvertRow.module.scss";
-import { windowEventEmitter } from "main/shared/window-event-emitter";
+import { useState } from "react";
 import {
   ConvertImageEvent,
   ImageFileSelectedEvent,
   SelectImageFileEvent
 } from "main/apps/image-to-icon/events";
-import { useState } from "react";
+import { windowEventEmitter } from "main/shared/window-event-emitter";
+import { Button } from "renderer/shared/Button/Button";
+import styles from "./ConvertRow.module.scss";
 
 export function ConvertRow() {
   const [selectedImagePath, setSelectedImagePath] = useState<string | null>(null);
-  const [convertedIconPath, setConvertedIconPath] = useState<string | null>(null);
+  const [, setConvertedIconPath] = useState<string | null>(null);
 
   const sendSelectImageEvent = () => {
     windowEventEmitter.emitEvent<SelectImageFileEvent>({

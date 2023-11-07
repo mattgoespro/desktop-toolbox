@@ -19,6 +19,7 @@ const configuration: Configuration = {
   mode: "development",
   target: "electron-renderer",
   externals: ["fsevents", "crypto-browserify"],
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   module: require("./config.renderer.dev").default.module,
   entry: {
     renderer: Object.keys(dependencies || {})
