@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { useState } from "react";
 import {
   ConvertImageEvent,
@@ -5,7 +6,6 @@ import {
   SelectImageFileEvent
 } from "main/apps/image-to-icon/events";
 import { windowEventEmitter } from "main/shared/window-event-emitter";
-import { Button } from "renderer/shared/Button/Button";
 import styles from "./ConvertRow.module.scss";
 
 export function ConvertRow() {
@@ -47,16 +47,16 @@ export function ConvertRow() {
       )}
       <div className={styles["action-buttons"]}>
         <Button
-          className={styles["action-button"]}
-          type="secondary"
+          // className={styles["action-button"]}
+          variant="outlined"
           onClick={sendSelectImageEvent}
           size="small"
         >
           Select
         </Button>
         <Button
-          className={styles["action-button"]}
-          type="primary"
+          // className={styles["action-button"]}
+          variant="text"
           size="small"
           onClick={sendConvertImageEvent}
           disabled={selectedImagePath == null}

@@ -5,7 +5,7 @@ import webpackPaths from "../webpack/paths";
 
 if (Object.keys(dependencies || {}).length > 0 && fs.existsSync(webpackPaths.appNodeModulesPath)) {
   const electronRebuildCmd =
-    "../node_modules/.bin/electron-rebuild --force --types prod,dev,optional --module-dir .";
+    "../../node_modules/.bin/electron-rebuild --force --types prod,dev,optional --module-dir .";
   execSync(
     process.platform === "win32" ? electronRebuildCmd.replace(/\//g, "\\") : electronRebuildCmd,
     {

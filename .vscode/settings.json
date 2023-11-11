@@ -40,13 +40,15 @@
   "files.exclude": {
     ".git": true,
     "dll": true,
-    "node_modules": true
+    "node_modules": true,
+    "release/app/{dist,build,node_modules}": true
   },
   "files.watcherExclude": {
     ".git": true,
     "dll": true,
     "node_modules": true,
-    "resources": true
+    "resources": true,
+    "release/app/{dist,build,node_modules}": true
   },
   "html.format.enable": false,
   "javascript.format.enable": false,
@@ -83,5 +85,12 @@
   "typescript.format.enable": false,
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.iconTheme": "material-icon-theme"
+  "workbench.iconTheme": "material-icon-theme",
+  "code-runner.cwd": "${workspaceFolder}",
+  "code-runner.defaultLanguage": "TypeScript",
+  "code-runner.executorMap": {
+    "javascript": "node",
+    "typescript": "ts-node"
+  },
+  "code-runner.fileDirectoryAsCwd": true
 }

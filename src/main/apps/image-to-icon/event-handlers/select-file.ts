@@ -13,6 +13,18 @@ export const onSelectFileEvent = async (event: IpcMainEvent) => {
     fileExtensionFilter: ["jpg", "jpeg", "png", "gif", "svg"]
   });
 
+  if (!imagePath) {
+    event.reply("image-to-icon", {
+      event: "convert-image",
+      payload: {
+        error: {
+          message: "No file selected."
+        }
+      }
+    });
+    return;
+  }
+
   // check if the image dimensions are valid
   const image = sharp(imagePath);
   const imageMetadata = await image.metadata();
