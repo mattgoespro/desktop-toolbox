@@ -11,3 +11,9 @@ declare module "@mui/material/Button" {
     link: true;
   }
 }
+
+declare module "@mui/material/ListItem" {
+  interface ListItemBaseProps {
+    contained?: boolean;
+  }
+}

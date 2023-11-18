@@ -14,15 +14,15 @@
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true
   },
-  "auto-close-tag.activationOnLanguage": [
-    "html",
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "markdown"
-  ],
+  "auto-close-tag.activationOnLanguage": ["html", "javascriptreact", "typescriptreact", "markdown"],
   "auto-close-tag.disableOnLanguage": ["javascript", "typescript", "plaintext"],
+  "code-runner.cwd": "${workspaceFolder}",
+  "code-runner.defaultLanguage": "TypeScript",
+  "code-runner.executorMap": {
+    "javascript": "node",
+    "typescript": "ts-node"
+  },
+  "code-runner.fileDirectoryAsCwd": true,
   "css.format.enable": false,
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
@@ -40,15 +40,15 @@
   "files.exclude": {
     ".git": true,
     "dll": true,
-    "node_modules": true,
+    "**/node_modules/**": true,
     "release/app/{dist,build,node_modules}": true
   },
   "files.watcherExclude": {
     ".git": true,
     "dll": true,
-    "node_modules": true,
-    "resources": true,
-    "release/app/{dist,build,node_modules}": true
+    "**/node_modules/**": true,
+    "release/app/{dist,build,node_modules}": true,
+    "resources": true
   },
   "html.format.enable": false,
   "javascript.format.enable": false,
@@ -86,11 +86,6 @@
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "workbench.iconTheme": "material-icon-theme",
-  "code-runner.cwd": "${workspaceFolder}",
-  "code-runner.defaultLanguage": "TypeScript",
-  "code-runner.executorMap": {
-    "javascript": "node",
-    "typescript": "ts-node"
-  },
-  "code-runner.fileDirectoryAsCwd": true
+  "auto-close-tag.enableAutoCloseTag": false,
+  "auto-close-tag.SublimeText3Mode": true
 }

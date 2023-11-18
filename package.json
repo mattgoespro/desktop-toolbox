@@ -18,7 +18,7 @@
     "lint": "NODE_ENV=development eslint .",
     "package": "npm run build && electron-builder build --publish never",
     "prepackage": "ts-node ./scripts/prepackage.ts",
-    "clean": "concurrently \"ts-node scripts/remove-builds.ts\" \"ts-node scripts/remove-node-modules.ts\""
+    "clean": "concurrently \"node -r ts-node/register scripts/remove-builds.ts\" \"node -r ts-node/register scripts/remove-node-modules.ts\""
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",

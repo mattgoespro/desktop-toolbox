@@ -1,10 +1,11 @@
-import { ListItem } from "@mui/material";
+import { LocalCarWashOutlined, TableBar } from "@mui/icons-material";
 import { ThemeProvider } from "@mui/system";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import CollapseSidebar from "renderer/shared/Sidebar/Sidebar";
 import { theme } from "renderer/shared/Theme/Theme";
 import Title from "renderer/shared/Title/Title";
+import { ListItem } from "../Shared/ListItem/ListItem";
+import { CollapseSidebar } from "../Shared/Sidebar/Sidebar";
 import { RouterLink } from "../Shared/Theme/MaterialRouterLink";
 import styles from "./Shell.module.scss";
 
@@ -14,7 +15,7 @@ export function Shell() {
   return (
     <ThemeProvider theme={theme}>
       <CollapseSidebar>
-        <ListItem>
+        <ListItem contained icon={LocalCarWashOutlined}>
           <RouterLink
             type="button"
             to="image-to-icon"
@@ -24,7 +25,7 @@ export function Shell() {
             Image to Icon
           </RouterLink>
         </ListItem>
-        <ListItem>
+        <ListItem contained icon={TableBar}>
           <RouterLink
             to="pdf-to-image"
             relative="route"

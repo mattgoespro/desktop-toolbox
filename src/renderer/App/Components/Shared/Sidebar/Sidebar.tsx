@@ -5,7 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton/ListItemButton";
 import Box from "@mui/system/Box";
-import { useState } from "react";
+import { createElement, useState } from "react";
 
 export const StyledDrawer = styled(Drawer)(({ theme }) => ({
   "& .MuiDrawer-paper": {
@@ -16,28 +16,46 @@ export const StyledDrawer = styled(Drawer)(({ theme }) => ({
 }));
 
 type SidebarProps = {
-  children?: React.ReactNode[];
+  children?: JSX.Element[];
 };
 
-const CollapseSidebar = (props: SidebarProps) => {
+export function CollapseSidebar(props: SidebarProps) {
   const [open, setOpen] = useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
+  const toggleDrawer = (open: boolean) => {
+    setOpen(open);
   };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  function getListItemIcons(): JSX.Element[] {
+    return props.children
+      .filter((child) => child.type.name === "ListItem")
+      .map((listItem, index) => (
+        <IconButton key={index} color="inherit" aria-label="open drawer">
+          {createElement(
+            listItem.props.icon,
+            listItem.props.icon.props,
+            listItem.props.icon.props.children.map((c) => createElement(c))
+          )}
+        </IconButton>
+      ));
+  }
 
   return (
-    <Box sx={{ bgcolor: "background.paper" }}>
-      <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerOpen}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        bgcolor: "background.paper"
+      }}
+    >
+      <IconButton color="inherit" aria-label="open drawer" onClick={() => toggleDrawer(true)}>
         <MenuIcon />
       </IconButton>
+      {getListItemIcons()}
       <StyledDrawer variant="persistent" anchor="left" open={open}>
         <div>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={() => toggleDrawer(true)}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
@@ -49,6 +67,4 @@ const CollapseSidebar = (props: SidebarProps) => {
       </StyledDrawer>
     </Box>
   );
-};
-
-export default CollapseSidebar;
+}

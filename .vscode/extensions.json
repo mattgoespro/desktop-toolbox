@@ -1,9 +1,7 @@
 {
   "recommendations": [
-    "bierner.markdown-preview-github-styles",
     "dbaeumer.vscode-eslint",
     "herrmannplatz.npm-dependency-links",
-    "formulahendry.auto-close-tag",
     "mskelton.npm-outdated",
     "christian-kohler.npm-intellisense",
     "sibiraj-s.vscode-scss-formatter",
@@ -18,9 +16,7 @@
     "github.copilot",
     "github.copilot-chat",
     "eamodio.gitlens",
-    "ibm.output-colorizer",
     "esbenp.prettier-vscode",
-    "jundat95.react-native-snippet",
     "richie5um2.vscode-sort-json",
     "dsznajder.es7-react-js-snippets",
     "formulahendry.auto-rename-tag",
