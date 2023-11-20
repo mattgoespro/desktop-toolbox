@@ -1,4 +1,4 @@
-import uuid from "src/renderer/App/Utils/uuid-version-four";
+import generateUuid from "src/renderer/App/Utils/gen-uuid";
 import { ConvertRow } from "./ConvertRow/ConvertRow";
 import styles from "./ImageToIconConverter.module.scss";
 
@@ -10,7 +10,7 @@ export function ImageToIconConverter() {
       </div>
       <div className={styles["convert-rows"]}>
         {Array.of(1, 2, 3, 4, 5).map(() => {
-          return <ConvertRow key={uuid()}></ConvertRow>;
+          return <ConvertRow key={generateUuid()}></ConvertRow>;
         })}
       </div>
     </div>

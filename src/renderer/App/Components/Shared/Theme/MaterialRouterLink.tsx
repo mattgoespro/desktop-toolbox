@@ -2,19 +2,27 @@ import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import { Link as ReactRouterLink, LinkProps as ReactRouterLinkProps } from "react-router-dom";
 
-export type RouterLinkProps = Pick<ReactRouterLinkProps, "to" | "relative" | "children"> & {
+export type RouterLinkBaseProps = Pick<ReactRouterLinkProps, "to" | "relative" | "children"> & {
   type: "link" | "button";
 };
 
-export type RouterLinkButtonProps = Omit<RouterLinkProps, "type"> & {
+export type RouterLinkButtonProps = Omit<RouterLinkBaseProps, "type"> & {
   type: "button";
+  children?: JSX.Element[];
+  name?: string;
   onClick?: () => void;
 };
 
-export function RouterLink(props: RouterLinkProps | RouterLinkButtonProps) {
+type RouterLinkProps = RouterLinkBaseProps | RouterLinkButtonProps;
+
+export function RouterLink(props: RouterLinkProps) {
   if (props.type === "link") {
     return <Link component={ReactRouterLink} {...props} />;
   }
 
-  return <Button variant="link" component={ReactRouterLink} {...props} />;
+  return (
+    <Button variant="link" component={ReactRouterLink} {...props}>
+      {props.children}
+    </Button>
+  );
 }

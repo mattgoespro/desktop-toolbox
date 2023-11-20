@@ -24,6 +24,7 @@ const router = createHashRouter([
       },
       {
         path: "*",
+        index: true,
         element: <Navigate to="/" />
       }
     ]

@@ -1,14 +1,16 @@
-import { SvgIconComponent } from "@mui/icons-material";
-import { ListItemProps as MuiListItemProps, ListItem as MuiListItem } from "@mui/material";
+import { ListItemProps, ListItem, styled } from "@mui/material";
 
-type ContainedProps<T extends MuiListItemProps> = T["contained"] extends true
-  ? {
-      icon: SvgIconComponent;
+export const ListItemStyled = styled(ListItem)<ListItemProps>(({ theme }) => ({
+  "&.ListItem-root": {
+    color: theme.palette.text.primary,
+    display: "flex",
+    alignItems: "center",
+    padding: theme.spacing(1, 2),
+    borderRadius: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    fontSize: theme.typography.body1.fontSize,
+    "&:hover": {
+      backgroundColor: theme.palette.action.hover
     }
-  : unknown;
-
-export type ListItemProps<T extends MuiListItemProps> = T & ContainedProps<T>;
-
-export function ListItem<T extends MuiListItemProps>(props: ListItemProps<T>) {
-  return <MuiListItem {...props}>{props.children}</MuiListItem>;
-}
+  }
+}));
