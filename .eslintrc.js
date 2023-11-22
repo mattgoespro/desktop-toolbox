@@ -33,7 +33,7 @@ module.exports = {
       version: "detect"
     }
   },
-  ignorePatterns: ["src/renderer/**/*.scss.d.ts", "dll/**/*.js", "release/app/build/**/*"],
+  ignorePatterns: ["**/build/**/*", "**/node_modules/**/*", "*.d.ts", "dll/"],
   rules: {
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": [

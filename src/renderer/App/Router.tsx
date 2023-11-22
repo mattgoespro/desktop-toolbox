@@ -1,9 +1,8 @@
 import { ThemeProvider } from "@mui/system";
 import { Navigate, createHashRouter } from "react-router-dom";
-import { theme } from "./Components/Shared/Theme/Theme";
 import { Shell } from "./Components/Shell/Shell";
-import { ImageToIconConverter } from "./Components/ToolApps/ImageToIconConverter/ImageToIconConverter";
-import PdfToImageConverter from "./Components/ToolApps/PdfToImageConverter/PdfToImageConverter";
+import { ImageToIconConverter } from "./Components/Tools/ImageToIconConverter/ImageToIconConverter";
+import { theme } from "./Shared/theme/theme";
 
 const router = createHashRouter([
   {
@@ -14,10 +13,6 @@ const router = createHashRouter([
       </ThemeProvider>
     ),
     children: [
-      {
-        path: "pdf-to-image",
-        element: <PdfToImageConverter />
-      },
       {
         path: "image-to-icon",
         element: <ImageToIconConverter />
