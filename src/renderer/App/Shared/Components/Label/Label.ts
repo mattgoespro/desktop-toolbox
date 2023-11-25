@@ -1,7 +1,7 @@
 import { FormLabel } from "@mui/material";
-import { styled } from "../../theme/theme";
+import { createStyledComponent } from "@Theme/theme";
 
-export const Label = styled(FormLabel)(({ theme }) => ({
+export const Label = createStyledComponent(FormLabel)(({ theme }) => ({
   color: theme.palette.text.primary,
   fontSize: theme.typography.body1.fontSize,
   fontWeight: theme.typography.body1.fontWeight,

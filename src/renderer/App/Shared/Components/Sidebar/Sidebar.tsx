@@ -1,11 +1,12 @@
-import { Stack, styled } from "@mui/material";
+import { Stack } from "@mui/material";
 import { ReactNode } from "react";
+import { createStyledComponent } from "../../Theme/theme";
 
 type SidebarProps = {
   children: ReactNode;
 };
 
-export const Sidebar = styled(Stack)<SidebarProps>(({ theme }) => ({
+export const Sidebar = createStyledComponent(Stack)<SidebarProps>(({ theme }) => ({
   width: 240,
   flexShrink: 0,
   [`& .MuiDrawer-paper`]: {

@@ -1,12 +1,13 @@
 import { Button } from "@mui/material";
 import { useState } from "react";
+import { FlexBox } from "@Components/FlexBox/FlexBox";
+import { Label } from "@Components/Label/Label";
 import {
   ConvertImageEvent,
   ImageFileSelectedEvent,
   SelectImageFileEvent
 } from "main/apps/image-to-icon/events";
 import { windowEventEmitter } from "main/shared/window-event-emitter";
-import styles from "./ConvertRow.module.scss";
 
 export function ConvertRow() {
   const [selectedImagePath, setSelectedImagePath] = useState<string | null>(null);
@@ -41,21 +42,13 @@ export function ConvertRow() {
     });
   };
   return (
-    <div className={styles["convert-row"]}>
-      {(selectedImagePath && <label>{selectedImagePath}</label>) ?? (
-        <label className={styles["select-label"]}>Select an image</label>
-      )}
-      <div className={styles["action-buttons"]}>
-        <Button
-          // className={styles["action-button"]}
-          variant="outlined"
-          onClick={sendSelectImageEvent}
-          size="small"
-        >
+    <FlexBox>
+      {(selectedImagePath && <Label>{selectedImagePath}</Label>) ?? <Label>Select an image</Label>}
+      <FlexBox>
+        <Button variant="outlined" onClick={sendSelectImageEvent} size="small">
           Select
         </Button>
         <Button
-          // className={styles["action-button"]}
           variant="text"
           size="small"
           onClick={sendConvertImageEvent}
@@ -63,7 +56,7 @@ export function ConvertRow() {
         >
           Convert
         </Button>
-      </div>
-    </div>
+      </FlexBox>
+    </FlexBox>
   );
 }

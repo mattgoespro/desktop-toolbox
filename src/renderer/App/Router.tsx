@@ -1,8 +1,8 @@
 import { ThemeProvider } from "@mui/system";
 import { Navigate, createHashRouter } from "react-router-dom";
+import { theme } from "@Theme/theme";
 import { Shell } from "./Components/Shell/Shell";
 import { ImageToIconConverter } from "./Components/Tools/ImageToIconConverter/ImageToIconConverter";
-import { theme } from "./Shared/theme/theme";
 
 const router = createHashRouter([
   {

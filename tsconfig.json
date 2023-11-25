@@ -4,6 +4,7 @@
     "target": "es2021",
     "module": "commonjs",
     "lib": ["dom", "es2021"],
+    "types": ["node", "./src/renderer/App/Shared/Theme/theme.d.ts"],
     "jsx": "react-jsx",
     "sourceMap": true,
     "baseUrl": ".",
@@ -14,12 +15,14 @@
     "allowJs": true,
     "outDir": "dll",
     "paths": {
+      "src/*": ["src/*"],
       "main/*": ["src/main/*"],
-      "uuid-four/*": ["src/renderer/App/Utils/uuid-four.ts"],
-      "renderer/shared/*": ["src/renderer/App/Components/Shared/*"],
-      "redux/*": ["src/renderer/App/Redux/*"]
+      "@Components/*": ["src/renderer/App/Shared/Components/*"],
+      "@Theme/*": ["src/renderer/App/Shared/Theme/*"],
+      "@Redux/*": ["src/renderer/App/Redux/*"],
+      "generate-uuid": ["src/renderer/App/Shared/Utils/uuid.ts"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "**/*.d.ts"],
   "exclude": ["release/build", "release/app/dist"]
 }

@@ -1,6 +1,6 @@
 import Link from "@mui/material/Link";
 import { Link as ReactRouterLink, LinkProps as ReactRouterLinkProps } from "react-router-dom";
-import { StyledButton } from "../Button/Button";
+import { Button } from "../Button/Button";
 
 export type RouterLinkBaseProps = Pick<ReactRouterLinkProps, "to" | "relative" | "children"> & {
   type: "link" | "button";
@@ -21,8 +21,8 @@ export function RouterLink(props: RouterLinkProps) {
   }
 
   return (
-    <StyledButton component={ReactRouterLink} {...props}>
+    <Button component={ReactRouterLink} {...props}>
       {props.children}
-    </StyledButton>
+    </Button>
   );
 }

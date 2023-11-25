@@ -1,6 +1,6 @@
 import { ListItemProps, ListItem, styled } from "@mui/material";
 
-export const ListItemStyled = styled(ListItem)<ListItemProps>(({ theme }) => ({
+export const ListItemStyled = createStyledComponent(ListItem)<ListItemProps>(({ theme }) => ({
   "&.ListItem-root": {
     color: theme.palette.text.primary,
     display: "flex",

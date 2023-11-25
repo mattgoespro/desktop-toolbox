@@ -1,13 +1,13 @@
+import { theme } from "@Theme/theme";
 import { AbcOutlined } from "@mui/icons-material";
 import { Container } from "@mui/material";
 import { ThemeProvider } from "@mui/system";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { Heading } from "../../Shared/Components/Heading/Heading";
-import { RouterLink } from "../../Shared/Components/RouterLink/RouterLink";
-import { Sidebar } from "../../Shared/Components/Sidebar/Sidebar";
-import { theme } from "../../Shared/theme/theme";
-import generateUuid from "../../Utils/gen-uuid";
+import { Heading } from "@Components/Heading/Heading";
+import { RouterLink } from "@Components/RouterLink/RouterLink";
+import { Sidebar } from "@Components/Sidebar/Sidebar";
+import { uuid } from "generate-uuid";
 
 export function Shell() {
   const [appTitle, setAppTitle] = useState("");
@@ -16,7 +16,7 @@ export function Shell() {
     {
       link: (
         <RouterLink
-          key={generateUuid()}
+          key={uuid()}
           type="button"
           name="Image to Icon"
           to="image-to-icon"
@@ -35,7 +35,7 @@ export function Shell() {
       <Sidebar>
         {routerLinks.map((routerLink) => (
           <RouterLink
-            key={generateUuid()}
+            key={uuid()}
             type="button"
             to={routerLink.link.props.to}
             onClick={() => setAppTitle(routerLink.link.props.name)}
