@@ -4,12 +4,7 @@
     "herrmannplatz.npm-dependency-links",
     "mskelton.npm-outdated",
     "christian-kohler.npm-intellisense",
-    "sibiraj-s.vscode-scss-formatter",
-    "mrmlnc.vscode-scss",
     "fabiospampinato.vscode-open-in-npm",
-    "yzhang.markdown-all-in-one",
-    "davidanson.vscode-markdownlint",
-    "msjsdiag.vscode-react-native",
     "better-ts-errors.better-ts-errors",
     "usernamehw.errorlens",
     "felipecaputo.git-project-manager",
@@ -20,7 +15,6 @@
     "richie5um2.vscode-sort-json",
     "dsznajder.es7-react-js-snippets",
     "formulahendry.auto-rename-tag",
-    "nyxb.vscode-styled-colors",
-    "formulahendry.code-runner"
+    "nyxb.vscode-styled-colors"
   ]
 }

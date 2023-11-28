@@ -1,6 +1,10 @@
-import { ListItemProps, ListItem, styled } from "@mui/material";
+import { ListItem as MuiListItem } from "@mui/material";
+import { createStyledComponent } from "../../Theme/theme";
 
-export const ListItemStyled = createStyledComponent(ListItem)<ListItemProps>(({ theme }) => ({
+export const ListItem = createStyledComponent(MuiListItem, {
+  name: "ListItem",
+  slot: "Root"
+})(({ theme }) => ({
   "&.ListItem-root": {
     color: theme.palette.text.primary,
     display: "flex",
@@ -13,4 +17,4 @@ export const ListItemStyled = createStyledComponent(ListItem)<ListItemProps>(({ 
       backgroundColor: theme.palette.action.hover
     }
   }
-}));
+})) as unknown as typeof MuiListItem;

@@ -16,13 +16,18 @@ export type RouterLinkButtonProps = Omit<RouterLinkBaseProps, "type"> & {
 type RouterLinkProps = RouterLinkBaseProps | RouterLinkButtonProps;
 
 export function RouterLink(props: RouterLinkProps) {
-  if (props.type === "link") {
-    return <Link component={ReactRouterLink} {...props} />;
-  }
+  const { type = "link" } = props;
 
-  return (
-    <Button component={ReactRouterLink} {...props}>
-      {props.children}
-    </Button>
-  );
+  switch (type) {
+    case "button":
+      return (
+        <Button component={ReactRouterLink} {...props}>
+          {"name" in props ? props.name : undefined}
+        </Button>
+      );
+    case "link":
+      return <Link component={ReactRouterLink} {...props} />;
+    default:
+      throw new Error(`Unknown RouterLink type: ${type}`);
+  }
 }

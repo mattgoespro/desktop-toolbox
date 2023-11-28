@@ -21,5 +21,10 @@ export const components: Theme["components"] = {
         }
       }
     ]
-  }
+  },
+  MuiLink: {},
+  FlexContainer: {},
+  Heading: {},
+  Subheading: {},
+  Sidebar: {}
 };

@@ -10,4 +10,4 @@ export const Label = createStyledComponent(FormLabel)(({ theme }) => ({
   fontFamily: theme.typography.body1.fontFamily,
   margin: "0 0 0.5rem 0",
   padding: "0 0 0.5rem 0"
-}));
+})) as typeof FormLabel;

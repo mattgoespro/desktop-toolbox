@@ -6,8 +6,12 @@ type SidebarProps = {
   children: ReactNode;
 };
 
-export const Sidebar = createStyledComponent(Stack)<SidebarProps>(({ theme }) => ({
-  width: 240,
+export const Sidebar = createStyledComponent(Stack, {
+  name: "Sidebar",
+  label: "Sidebar",
+  slot: "Root"
+})<SidebarProps>(({ theme }) => ({
+  width: 150,
   flexShrink: 0,
   [`& .MuiDrawer-paper`]: {
     width: 240,

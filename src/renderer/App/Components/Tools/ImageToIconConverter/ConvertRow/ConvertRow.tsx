@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { useState } from "react";
-import { FlexBox } from "@Components/FlexBox/FlexBox";
+import { FlexContainer } from "src/renderer/App/Shared/Components/FlexContainer/FlexContainer";
 import { Label } from "@Components/Label/Label";
 import {
   ConvertImageEvent,
@@ -42,21 +42,19 @@ export function ConvertRow() {
     });
   };
   return (
-    <FlexBox>
+    <FlexContainer>
       {(selectedImagePath && <Label>{selectedImagePath}</Label>) ?? <Label>Select an image</Label>}
-      <FlexBox>
-        <Button variant="outlined" onClick={sendSelectImageEvent} size="small">
-          Select
-        </Button>
-        <Button
-          variant="text"
-          size="small"
-          onClick={sendConvertImageEvent}
-          disabled={selectedImagePath == null}
-        >
-          Convert
-        </Button>
-      </FlexBox>
-    </FlexBox>
+      <Button variant="outlined" onClick={sendSelectImageEvent} size="small">
+        Select
+      </Button>
+      <Button
+        variant="text"
+        size="small"
+        onClick={sendConvertImageEvent}
+        disabled={selectedImagePath == null}
+      >
+        Convert
+      </Button>
+    </FlexContainer>
   );
 }

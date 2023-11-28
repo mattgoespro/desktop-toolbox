@@ -1,16 +1,17 @@
 import { Theme, ThemeOptions } from "@mui/material";
+import { CSSProperties } from "@mui/styled-engine-sc";
 
 export const typographyOf = (theme: Theme, element: keyof Theme["typography"]) => {
-  return theme.typography[element];
+  return theme.typography[element] as CSSProperties;
 };
 
 export const typography: ThemeOptions["typography"] = (palette) => ({
   h1: {
     fontFamily: '"Nunito", "Roboto", "Helvetica", "Arial", sans-serif',
-    fontSize: 64,
+    fontSize: 32,
     fontWeight: 700,
     letterSpacing: "0.02em",
-    color: palette.grey[900],
+    color: palette.grey[700],
     lineHeight: 1.18
   },
   h2: {

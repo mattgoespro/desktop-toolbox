@@ -6,9 +6,9 @@ import { palette } from "./palette";
 import { typography } from "./typography";
 
 export const theme: Theme = createTheme({
-  ...palette,
-  ...components,
-  ...typography,
+  palette,
+  components,
+  typography,
   spacing: (...args: SpacingArgument[]): string => {
     return args.map((value) => `${value}rem`).join();
   },
