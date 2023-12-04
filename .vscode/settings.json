@@ -14,20 +14,11 @@
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true
   },
-  "auto-close-tag.activationOnLanguage": ["html", "javascriptreact", "typescriptreact", "markdown"],
-  "auto-close-tag.disableOnLanguage": ["javascript", "typescript", "plaintext"],
-  "code-runner.cwd": "${workspaceFolder}",
-  "code-runner.defaultLanguage": "TypeScript",
-  "code-runner.executorMap": {
-    "javascript": "node",
-    "typescript": "ts-node"
-  },
-  "code-runner.fileDirectoryAsCwd": true,
   "css.format.enable": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.fixAll.eslint": true,
-    "source.fixAll.scss": true
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.scss": "explicit"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "eslint.codeActionsOnSave.mode": "all",
@@ -55,7 +46,6 @@
   "javascript.suggestionActions.enabled": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "javascript.validate.enable": false,
-  "markdown.extension.preview.autoShowPreviewToSide": true,
   "markdown.occurrencesHighlight.enabled": true,
   "material-icon-theme.activeIconPack": "react",
   "material-icon-theme.files.color": "#000000",
@@ -63,14 +53,9 @@
   "material-icon-theme.hidesExplorerArrows": true,
   "npm.exclude": "release/**",
   "prettier.configPath": ".prettierrc.js",
-  "react-native-tools.networkInspector.consoleLogsColorTheme": "Dark",
-  "react-native-tools.projectRoot": "${workspaceFolder}/src/renderer",
   "scss.completion.completePropertyWithSemicolon": true,
   "scss.completion.triggerPropertyValueCompletion": true,
   "scss.format.enable": false,
-  "scss.showErrors": true,
-  "scssFormatter.printWidth": 100,
-  "scssFormatter.singleQuote": false,
   "search.exclude": {
     "*.{css,sass,scss}.d.ts": true,
     ".git": true,
@@ -85,7 +70,5 @@
   "typescript.format.enable": false,
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.iconTheme": "material-icon-theme",
-  "auto-close-tag.enableAutoCloseTag": false,
-  "auto-close-tag.SublimeText3Mode": true
+  "workbench.iconTheme": "material-icon-theme"
 }

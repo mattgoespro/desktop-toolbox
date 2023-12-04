@@ -15,6 +15,7 @@
     "richie5um2.vscode-sort-json",
     "dsznajder.es7-react-js-snippets",
     "formulahendry.auto-rename-tag",
-    "nyxb.vscode-styled-colors"
+    "nyxb.vscode-styled-colors",
+    "dennisvhest.npm-browser"
   ]
 }

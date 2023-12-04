@@ -6,10 +6,14 @@ import { palette } from "./palette";
 import { typography } from "./typography";
 
 export const theme: Theme = createTheme({
-  palette,
+  ...palette(),
   components,
   typography,
   spacing: (...args: SpacingArgument[]): string => {
+    if (args.length === 0) {
+      return "0rem";
+    }
+
     return args.map((value) => `${value}rem`).join();
   },
   shape: {

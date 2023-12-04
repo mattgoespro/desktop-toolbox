@@ -1,6 +1,5 @@
 import { Button } from "@mui/material";
 import { useState } from "react";
-import { FlexContainer } from "src/renderer/App/Shared/Components/FlexContainer/FlexContainer";
 import { Label } from "@Components/Label/Label";
 import {
   ConvertImageEvent,
@@ -8,6 +7,7 @@ import {
   SelectImageFileEvent
 } from "main/apps/image-to-icon/events";
 import { windowEventEmitter } from "main/shared/window-event-emitter";
+import { FlexContainer } from "src/renderer/App/Shared/Components/FlexContainer/FlexContainer";
 
 export function ConvertRow() {
   const [selectedImagePath, setSelectedImagePath] = useState<string | null>(null);
@@ -42,7 +42,7 @@ export function ConvertRow() {
     });
   };
   return (
-    <FlexContainer>
+    <FlexContainer flexDirection="row" justifyContent="space-around" alignItems="center">
       {(selectedImagePath && <Label>{selectedImagePath}</Label>) ?? <Label>Select an image</Label>}
       <Button variant="outlined" onClick={sendSelectImageEvent} size="small">
         Select

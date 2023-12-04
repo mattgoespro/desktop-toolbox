@@ -22,20 +22,30 @@ module.exports = {
   ],
   plugins: ["@typescript-eslint"],
   settings: {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
     "import/resolver": {
-      typescript: true,
+      typescript: {
+        project: ["./tsconfig.json"]
+      },
       node: true,
       webpack: {
-        config: "./webpack/config.renderer.dev.ts"
+        config: "./webpack/config.renderer.dev.ts",
+        env: {
+          "process.env.NODE_ENV": "development"
+        }
       }
     },
     react: {
       version: "detect"
     }
   },
-  ignorePatterns: ["**/build/**/*", "**/node_modules/**/*", "*.d.ts", "dll/"],
+  ignorePatterns: [".eslintrc.js", "**/build/**/*", "**/node_modules/**/*", "dll/"],
   rules: {
     "no-unused-vars": "off",
+    "import/no-unresolved": "error",
+    "import/no-commonjs": "error",
     "@typescript-eslint/no-unused-vars": [
       "warn",
       {
