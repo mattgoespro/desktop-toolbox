@@ -6,7 +6,7 @@ import { bindActionCreators, Dispatch } from "redux";
 import { RootAction, RootState } from "redux-observable";
 import { Heading } from "@Components/Heading/Heading";
 import { Sidebar } from "@Components/Sidebar/Sidebar";
-import { SET_HEADING } from "@Redux/Heading/constants";
+import { setHeadingTitle } from "@Redux/Heading/actions";
 import { theme } from "@Theme/theme";
 import { configureRouterLinks } from "../Router/Router";
 
@@ -18,19 +18,10 @@ const mapStateToProps = (state: RootState) => ({
 const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
   bindActionCreators(
     {
-      setHeading
+      setHeadingTitle
     },
     dispatch
   );
-
-const setHeading =
-  (title: string, subtitle?: string) =>
-  async (dispatch: Dispatch): Promise<void> => {
-    dispatch({
-      type: SET_HEADING,
-      payload: { title, subtitle }
-    });
-  };
 
 type ShellProps = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps> & {
@@ -43,7 +34,7 @@ const ShellComponent = (props: ShellProps) => {
     <ThemeProvider theme={theme}>
       <Sidebar>
         {...configureRouterLinks({
-          onClick: props.setHeading
+          onClick: props.setHeadingTitle
         })}
       </Sidebar>
       <Container>

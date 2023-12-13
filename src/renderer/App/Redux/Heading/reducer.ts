@@ -2,12 +2,12 @@ import { combineReducers } from "redux";
 import { ActionType, getType } from "typesafe-actions";
 import * as HeadingActions from "./actions";
 
-export type HeadingState = Readonly<{
+export type HeadingState = {
   title: string;
   subtitle?: string;
-}>;
+};
 
-const defaultState: HeadingState = {
+export const headingDefaultState: HeadingState = {
   title: "Dashboard",
   subtitle: null
 };
@@ -21,7 +21,7 @@ export default combineReducers<HeadingState, HeadingAction>({
         state = action.payload.title;
         return state;
       default:
-        return defaultState.title;
+        return headingDefaultState.title;
     }
   },
   subtitle: (state, action) => {
@@ -30,7 +30,7 @@ export default combineReducers<HeadingState, HeadingAction>({
         state = action.payload.subtitle;
         return state;
       default:
-        return defaultState.subtitle;
+        return headingDefaultState.subtitle;
     }
   }
 });
