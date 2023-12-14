@@ -32,7 +32,7 @@ export default merge(baseConfig, {
   module: {
     rules: [
       {
-        test: /\.s?(a|c)ss$/,
+        test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -42,15 +42,9 @@ export default merge(baseConfig, {
               sourceMap: true,
               importLoaders: 1
             }
-          },
-          "sass-loader"
+          }
         ],
-        include: /\.module\.s?(c|a)ss$/
-      },
-      {
-        test: /\.s?(a|c)ss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
-        exclude: /\.module\.s?(c|a)ss$/
+        include: /\.module\.css$/
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,

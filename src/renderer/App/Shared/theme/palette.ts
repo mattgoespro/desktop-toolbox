@@ -1,20 +1,7 @@
 import { PaletteOptions } from "@mui/material";
 
-export const palette: PaletteOptions = {
-  mode: "light",
-  text: {
-    primary: "#111827",
-    secondary: "#6b7280",
-    disabled: "#9ca3af"
-  },
-  primary: {
-    main: "#3f51b5",
-    dark: "#303f9f"
-  },
-  secondary: {
-    main: "#f50057"
-  },
-  grey: {
+export const palette = (): PaletteOptions => {
+  const grey = {
     "50": "#f9fafb",
     "100": "#f3f4f6",
     "200": "#e5e7eb",
@@ -25,9 +12,31 @@ export const palette: PaletteOptions = {
     "700": "#374151",
     "800": "#1f2937",
     "900": "#111827"
-  },
-  background: {
-    default: "#f5f5f5",
-    paper: "#fafafa"
-  }
+  };
+
+  return {
+    mode: "light",
+    text: {
+      primary: grey["900"],
+      secondary: "#6b7280",
+      disabled: "#9ca3af"
+    },
+    primary: {
+      main: "#388e3c"
+    },
+    secondary: {
+      main: "#0091ea"
+    },
+    info: {
+      main: "#81c784"
+    },
+    success: {
+      main: "#7cb342"
+    },
+
+    background: {
+      default: "#f5f5f5",
+      paper: "#fafafa"
+    }
+  };
 };

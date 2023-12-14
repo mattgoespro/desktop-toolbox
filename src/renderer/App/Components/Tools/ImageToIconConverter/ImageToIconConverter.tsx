@@ -4,7 +4,7 @@ import { ConvertRow } from "./ConvertRow/ConvertRow";
 
 export function ImageToIconConverter() {
   return (
-    <FlexContainer>
+    <FlexContainer flexDirection="column" justifyContent="center" alignItems="center">
       {Array.of(1, 2, 3, 4, 5).map(() => {
         return <ConvertRow key={uuid()}></ConvertRow>;
       })}

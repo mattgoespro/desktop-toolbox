@@ -4,7 +4,7 @@
   "description": "A utility toolbox for everyday desktop activities.",
   "main": "./dist/main/main.js",
   "dependencies": {
-    "sharp": "^0.32.6"
+    "sharp": "^0.33.0"
   },
   "scripts": {
     "link-modules": "node -r ts-node/register ../../scripts/link-modules.ts",

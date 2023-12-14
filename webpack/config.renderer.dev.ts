@@ -56,28 +56,9 @@ const configuration: Configuration = {
   module: {
     rules: [
       {
-        test: /\.scss$/,
-        use: [
-          "style-loader",
-          {
-            loader: "@teamsupercell/typings-for-css-modules-loader",
-            options: {
-              formatter: "prettier",
-              prettierConfigFile: path.resolve(__dirname, "../.prettierrc.js")
-            }
-          },
-          {
-            loader: "css-loader",
-            options: { modules: true, sourceMap: true, importLoaders: 1 }
-          },
-          "sass-loader"
-        ]
-      },
-      {
         test: /\.css$/,
         exclude: "/node_modules/",
         use: [
-          "@teamsupercell/typings-for-css-modules-loader",
           {
             loader: "css-loader",
             options: { modules: true, sourceMap: true, importLoaders: 1 }

@@ -1,8 +1,5 @@
 import _Button from "@mui/material/Button";
-import { Heading, Subheading } from "../Components/Heading/Heading";
-import { Link } from "../Components/Link/Link";
-import { FlexContainer } from "../Components/FlexContainer/FlexContainer";
-import { ComponentsProps } from "@mui/material/styles";
+import { ComponentsOverrides, ComponentsProps, ComponentsVariants } from "@mui/material/styles";
 import { RouterLinkBaseProps } from "../Components/RouterLink/RouterLink";
 
 declare module "@mui/material/styles" {
@@ -12,7 +9,11 @@ declare module "@mui/material/styles" {
     Heading?: React.HTMLAttributes<"h1">;
     Subheading?: React.HTMLAttributes<"h2">;
     Link?: RouterLinkBaseProps;
-    FlexContainer?: ComponentsProps["MuiContainer"];
+    FlexContainer?: {
+      defaultProps?: ComponentsProps["MuiContainer"];
+      styleOverrides?: ComponentsOverrides<Theme>["MuiContainer"];
+      variants?: ComponentsVariants["MuiContainer"];
+    };
     Sidebar?: ComponentsProps["MuiStack"];
   }
 
