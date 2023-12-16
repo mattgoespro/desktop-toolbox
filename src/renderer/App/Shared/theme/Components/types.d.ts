@@ -1,10 +1,8 @@
-import _Button from "@mui/material/Button";
+import { Theme } from "@mui/material";
 import { ComponentsOverrides, ComponentsProps, ComponentsVariants } from "@mui/material/styles";
-import { RouterLinkBaseProps } from "../Components/RouterLink/RouterLink";
+import { RouterLinkBaseProps } from "../../Components/RouterLink/RouterLink";
 
 declare module "@mui/material/styles" {
-  interface Theme {}
-
   interface Components {
     Heading?: React.HTMLAttributes<"h1">;
     Subheading?: React.HTMLAttributes<"h2">;
@@ -16,11 +14,6 @@ declare module "@mui/material/styles" {
     };
     Sidebar?: ComponentsProps["MuiStack"];
   }
-
-  interface ButtonPropsVariantOverrides {
-    link: true;
-    icon: true;
-  }
 }
 
 declare module "@mui/material/Button" {
@@ -30,4 +23,4 @@ declare module "@mui/material/Button" {
   }
 }
 
-declare module "@mui/system/Container" {}
+export {};

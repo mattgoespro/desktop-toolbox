@@ -6,8 +6,8 @@ import {
 } from "@mui/material";
 import { OverridableStringUnion } from "@mui/types";
 import { CSSProperties } from "styled-components";
+import { typographyOf } from "../../Theme/Typography/typography";
 import { createStyledComponent } from "../../Theme/theme";
-import { typographyOf } from "../../Theme/typography";
 
 type ButtonProps = { variant: "link" | "icon" };
 type ButtonVariants = ButtonOwnProps["variant"] extends OverridableStringUnion<
@@ -19,30 +19,27 @@ type ButtonVariants = ButtonOwnProps["variant"] extends OverridableStringUnion<
 
 const styleButtonVariant = (theme: Theme, variant: ButtonVariants) => {
   const typography = typographyOf(theme, "button") as CSSProperties;
-  let style: Record<string, unknown> = { ...typography };
+  let style: Record<string, unknown> = {
+    ...typography,
+    padding: theme.spacing(1.5, 2),
+    cursor: "pointer",
+    "&:disabled": {
+      backgroundColor: theme.palette.grey[300],
+      color: theme.palette.grey[700],
+      cursor: "not-allowed"
+    }
+  };
 
   switch (variant) {
-    case "link":
-      style = {
-        ...style,
-        color: "inherit",
-        backgroundColor: "transparent",
-        "&:hover": {
-          backgroundColor: "transparent"
-        }
-      };
-      break;
     case "icon":
       style = {
         ...style,
+        border: "1px solid",
+        borderColor: "transparent",
         padding: 0,
         minWidth: 0,
         width: 40,
-        height: 40,
-        borderRadius: "50%",
-        "&:hover": {
-          backgroundColor: "transparent"
-        }
+        height: 40
       };
       break;
     case "contained":
@@ -51,9 +48,6 @@ const styleButtonVariant = (theme: Theme, variant: ButtonVariants) => {
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.common.white,
         borderRadius: theme.shape.borderRadius,
-        padding: theme.spacing(1, 2),
-        border: "none",
-        cursor: "pointer",
         transition: "all 0.2s ease-in-out",
         "&:hover": {
           backgroundColor: theme.palette.primary.dark
@@ -61,24 +55,31 @@ const styleButtonVariant = (theme: Theme, variant: ButtonVariants) => {
         "&:active": {
           backgroundColor: theme.palette.primary.dark,
           transform: "scale(0.98)"
-        },
-        "&:disabled": {
-          backgroundColor: theme.palette.grey[300],
-          color: theme.palette.grey[500],
-          cursor: "not-allowed"
         }
       };
       break;
     case "outlined":
       style = {
         ...style,
-        backgroundColor: theme.palette.common.white,
+        backgroundColor: theme.palette.background.grey,
         color: theme.palette.primary.main,
         borderRadius: theme.shape.borderRadius,
-        fontSize: theme.typography.button.fontSize,
-        padding: theme.spacing(1, 2),
         borderColor: theme.palette.primary.main,
-        border: "1px solid",
+        cursor: "pointer",
+        transition: "all 0.2s ease-in-out",
+        "&:hover": {
+          backgroundColor: theme.palette.primary.main,
+          color: theme.palette.common.white
+        }
+      };
+      break;
+    case "text":
+      style = {
+        ...style,
+        backgroundColor: theme.palette.background.grey,
+        color: theme.palette.primary.main,
+        borderRadius: theme.shape.borderRadius,
+        borderColor: theme.palette.primary.main,
         cursor: "pointer",
         transition: "all 0.2s ease-in-out",
         "&:hover": {
@@ -88,19 +89,14 @@ const styleButtonVariant = (theme: Theme, variant: ButtonVariants) => {
       };
       break;
     default:
-      return {};
+      return style;
   }
 
   return style;
 };
 export const Button = createStyledComponent(MuiButton, {
   name: "Button",
-  slot: "Root",
-  overridesResolver(props, styles) {
-    const { variant } = props as ButtonProps;
-
-    return [styles.root, variant === "link" && styles.link, variant === "icon" && styles.icon];
-  }
+  slot: "Root"
 })<MuiButtonProps>(({ theme, variant }) =>
   styleButtonVariant(theme, variant)
 ) as unknown as typeof MuiButton;

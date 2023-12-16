@@ -42,19 +42,32 @@ export function ConvertRow() {
     });
   };
   return (
-    <FlexContainer flexDirection="row" justifyContent="space-around" alignItems="center">
+    <FlexContainer
+      flexDirection="row"
+      justifyContent="space-between"
+      alignItems="center"
+      backgroundColor="paper"
+      sx={{ boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px;" }}
+    >
       {(selectedImagePath && <Label>{selectedImagePath}</Label>) ?? <Label>Select an image</Label>}
-      <Button variant="outlined" onClick={sendSelectImageEvent} size="small">
-        Select
-      </Button>
-      <Button
-        variant="text"
-        size="small"
-        onClick={sendConvertImageEvent}
-        disabled={selectedImagePath == null}
+      <FlexContainer
+        flexDirection="row"
+        justifyContent="end"
+        alignItems="center"
+        backgroundColor="paper"
       >
-        Convert
-      </Button>
+        <Button variant="outlined" onClick={sendSelectImageEvent} size="small">
+          Select
+        </Button>
+        <Button
+          variant="text"
+          size="small"
+          onClick={sendConvertImageEvent}
+          disabled={selectedImagePath == null}
+        >
+          Convert
+        </Button>
+      </FlexContainer>
     </FlexContainer>
   );
 }

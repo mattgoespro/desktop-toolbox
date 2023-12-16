@@ -8,18 +8,25 @@ export const typographyOf = (theme: Theme, element: keyof Theme["typography"]) =
 export const typography: ThemeOptions["typography"] = (palette) => ({
   h1: {
     fontFamily: '"Source Code Pro", "Helvetica", "Arial", sans-serif',
-    color: palette.text.primary
+    color: palette.text.primary,
+    fontSize: "4rem",
+    textAlign: "center"
   },
+
   h2: {
     fontSize: "3rem",
-    fontFamily: '"Nunito", "Helvetica", "Arial", sans-serif'
+    fontFamily: '"Nunito", "Helvetica", "Arial", sans-serif',
+    textAlign: "center"
   },
   h3: {
     fontSize: "2.4rem",
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif'
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    textAlign: "center"
   },
-  h4: {
-    fontSize: "2rem"
+  label: {
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontSize: "1.5rem",
+    textAlign: "center"
   },
   body1: {
     fontFamily: '"Nunito", "Helvetica", "Arial", sans-serif'
@@ -28,6 +35,7 @@ export const typography: ThemeOptions["typography"] = (palette) => ({
     fontFamily: '"Nunito", "Helvetica", "Arial", sans-serif'
   },
   button: {
-    fontFamily: '"Nunito", "Helvetica", "Arial", sans-serif'
+    fontFamily: '"Nunito", "Helvetica", "Arial", sans-serif',
+    textAlign: "center"
   }
 });

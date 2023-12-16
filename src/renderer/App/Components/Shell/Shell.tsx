@@ -1,13 +1,11 @@
-import { Container } from "@mui/material";
-import { ThemeProvider } from "@mui/system";
 import { connect } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { bindActionCreators, Dispatch } from "redux";
 import { RootAction, RootState } from "redux-observable";
+import { FlexContainer } from "@Components/FlexContainer/FlexContainer";
 import { Heading } from "@Components/Heading/Heading";
 import { Sidebar } from "@Components/Sidebar/Sidebar";
 import { setHeadingTitle } from "@Redux/Heading/actions";
-import { theme } from "@Theme/theme";
 import { configureRouterLinks } from "../Router/Router";
 
 const mapStateToProps = (state: RootState) => ({
@@ -31,17 +29,22 @@ type ShellProps = ReturnType<typeof mapStateToProps> &
 
 const ShellComponent = (props: ShellProps) => {
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Sidebar>
         {...configureRouterLinks({
           onClick: props.setHeadingTitle
         })}
       </Sidebar>
-      <Container>
+      <FlexContainer
+        flexDirection="column"
+        justifyContent="start"
+        alignItems="center"
+        backgroundColor="lightGrey"
+      >
         <Heading>{props.title}</Heading>
         <Outlet />
-      </Container>
-    </ThemeProvider>
+      </FlexContainer>
+    </>
   );
 };
 

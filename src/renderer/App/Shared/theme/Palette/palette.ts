@@ -2,16 +2,16 @@ import { PaletteOptions } from "@mui/material";
 
 export const palette = (): PaletteOptions => {
   const grey = {
-    "50": "#f9fafb",
-    "100": "#f3f4f6",
-    "200": "#e5e7eb",
-    "300": "#d1d5db",
-    "400": "#9ca3af",
-    "500": "#6b7280",
-    "600": "#4b5563",
-    "700": "#374151",
-    "800": "#1f2937",
-    "900": "#111827"
+    "50": "#fafafa",
+    "100": "#f5f5f5",
+    "200": "#eeeeee",
+    "300": "#e0e0e0",
+    "400": "#bdbdbd",
+    "500": "#9e9e9e",
+    "600": "#757575",
+    "700": "#616161",
+    "800": "#424242",
+    "900": "#212121"
   };
 
   return {
@@ -19,7 +19,7 @@ export const palette = (): PaletteOptions => {
     text: {
       primary: grey["900"],
       secondary: "#6b7280",
-      disabled: "#9ca3af"
+      disabled: grey["500"]
     },
     primary: {
       main: "#388e3c"
@@ -33,10 +33,11 @@ export const palette = (): PaletteOptions => {
     success: {
       main: "#7cb342"
     },
-
     background: {
-      default: "#f5f5f5",
-      paper: "#fafafa"
+      paper: grey["100"],
+      lightGrey: grey["200"],
+      grey: grey["400"],
+      dark: grey["700"]
     }
   };
 };

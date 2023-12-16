@@ -6,7 +6,11 @@ export const Sidebar = createStyledComponent(Stack, {
   label: "Sidebar",
   slot: "Root"
 })(({ theme }) => ({
-  backgroundColor: theme.palette.background.paper,
+  backgroundColor: theme.palette.grey[100],
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
   width: 150,
-  flexShrink: 0
+  flexShrink: 0,
+  padding: theme.spacing(0.5)
 }));
