@@ -25,7 +25,7 @@ export const typography: ThemeOptions["typography"] = (palette) => ({
   },
   label: {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-    fontSize: "1.5rem",
+    fontSize: "1rem",
     textAlign: "center"
   },
   body1: {

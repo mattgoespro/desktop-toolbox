@@ -13,7 +13,6 @@ export const Label = createStyledComponent(FormLabel, {
   }
 })<LabelProps>(({ theme }) => ({
   color: theme.palette.text.primary,
-  // fontSize: theme.typography.body1.fontSize,
   fontSize: theme.typography.label.fontSize,
   fontWeight: theme.typography.body1.fontWeight,
   lineHeight: theme.typography.body1.lineHeight,

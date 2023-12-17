@@ -1,17 +1,41 @@
 import { Button } from "@mui/material";
 import { useState } from "react";
+import { connect } from "react-redux";
+// import { Outlet } from "react-router-dom";
+import { bindActionCreators, Dispatch } from "redux";
+import { RootAction, RootState } from "redux-observable";
+import { FlexContainer } from "@Components/FlexContainer/FlexContainer";
 import { Label } from "@Components/Label/Label";
+import { addCompletedImageConversion } from "@Redux/Tools/ImageToIconConverter/actions";
 import {
-  ConvertImageEvent,
+  // ConvertImageEvent,
   ImageFileSelectedEvent,
   SelectImageFileEvent
 } from "main/apps/image-to-icon/events";
 import { windowEventEmitter } from "main/shared/window-event-emitter";
-import { FlexContainer } from "src/renderer/App/Shared/Components/FlexContainer/FlexContainer";
 
-export function ConvertRow() {
+const mapStateToProps = (state: RootState) => ({
+  title: state.heading.title,
+  subtitle: state.heading.subtitle
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
+  bindActionCreators(
+    {
+      addCompletedImageConversion
+    },
+    dispatch
+  );
+
+type ConvertRowProps = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps> & {
+    title: string;
+    subtitle?: string;
+  };
+
+const ConvertRowComponent = (props: ConvertRowProps) => {
   const [selectedImagePath, setSelectedImagePath] = useState<string | null>(null);
-  const [, setConvertedIconPath] = useState<string | null>(null);
+  // const [, setConvertedIconPath] = useState<string | null>(null);
 
   const sendSelectImageEvent = () => {
     windowEventEmitter.emitEvent<SelectImageFileEvent>({
@@ -28,19 +52,20 @@ export function ConvertRow() {
     });
   };
 
-  const sendConvertImageEvent = () => {
-    windowEventEmitter.emitEvent<ConvertImageEvent>({
-      channel: "image-to-icon",
-      event: "convert-image",
-      payload: {
-        filePath: selectedImagePath
-      }
-    });
+  // const sendConvertImageEvent = () => {
+  //   windowEventEmitter.emitEvent<ConvertImageEvent>({
+  //     channel: "image-to-icon",
+  //     event: "convert-image",
+  //     payload: {
+  //       filePath: selectedImagePath
+  //     }
+  //   });
 
-    windowEventEmitter.handleEvent<ImageFileSelectedEvent>("image-to-icon", (response) => {
-      setConvertedIconPath(response.payload.filePath);
-    });
-  };
+  //   windowEventEmitter.handleEvent<ImageFileSelectedEvent>("image-to-icon", (response) => {
+  //     setConvertedIconPath(response.payload.filePath);
+  //   });
+  // };
+
   return (
     <FlexContainer
       flexDirection="row"
@@ -62,7 +87,7 @@ export function ConvertRow() {
         <Button
           variant="text"
           size="small"
-          onClick={sendConvertImageEvent}
+          onClick={() => props.addCompletedImageConversion(selectedImagePath ?? "")}
           disabled={selectedImagePath == null}
         >
           Convert
@@ -70,4 +95,6 @@ export function ConvertRow() {
       </FlexContainer>
     </FlexContainer>
   );
-}
+};
+
+export const ConvertRow = connect(mapStateToProps, mapDispatchToProps)(ConvertRowComponent);
