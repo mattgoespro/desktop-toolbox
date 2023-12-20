@@ -1,9 +1,9 @@
-import { IpcMainEvent, IpcMain } from "electron";
-import { ImageToIconEventType } from "../events";
+import { IpcMainEvent } from "electron";
+import { Events } from "src/renderer/App/Communication/image-to-icon/events";
 import { onConvertImageEvent } from "./convert-image";
 import { onSelectFileEvent } from "./select-file";
 
-const ImageToIconListenerFn = async (event: IpcMainEvent, type: ImageToIconEventType) => {
+const ImageToIconListenerFn = async (event: IpcMainEvent, type: Events) => {
   switch (type.event) {
     case "select-file":
       onSelectFileEvent(event);
@@ -16,6 +16,6 @@ const ImageToIconListenerFn = async (event: IpcMainEvent, type: ImageToIconEvent
   }
 };
 
-export const imageToIconEventHandler = (ipcMain: IpcMain) => {
+export const imageToIconEventHandler = (ipcMain: Electron.IpcMain) => {
   ipcMain.on("image-to-icon", ImageToIconListenerFn);
 };

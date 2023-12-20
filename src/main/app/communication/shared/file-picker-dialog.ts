@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { BrowserWindow, app, dialog } from "electron";
 
-export interface ChooseFileOptions {
+export interface PickFileOptions {
   dialogTitle: string;
   dialogAction: {
     type: "saveFile" | "openFile" | "openDirectory";
@@ -12,7 +12,7 @@ export interface ChooseFileOptions {
   fileExtensionFilter?: string[];
 }
 
-export function chooseFile(options: ChooseFileOptions) {
+export function pickFile(options: PickFileOptions) {
   let property = null;
 
   switch (options.dialogAction.type) {

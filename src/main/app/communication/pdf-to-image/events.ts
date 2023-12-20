@@ -1,4 +1,4 @@
-import { ChannelEvent } from "../../../shared/window-event-emitter";
+import { ChannelEvent } from "../shared/communication";
 
 export type PdfToImageChannel = "pdf-to-image";
 

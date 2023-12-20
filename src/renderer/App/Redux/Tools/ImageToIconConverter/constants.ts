@@ -1,3 +1,0 @@
-export const ADD_PENDING_IMAGE_CONVERSION = "image-to-icon/convert/PENDING_IMAGE_CONVERSION";
-export const ADD_COMPLETED_IMAGE_CONVERSION = "image-to-icon/convert/COMPLETED_IMAGE_CONVERSION";
-export const ADD_FAILED_IMAGE_CONVERSION = "image-to-icon/convert/FAILED_IMAGE_CONVERSION";

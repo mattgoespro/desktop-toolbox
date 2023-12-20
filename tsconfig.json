@@ -16,6 +16,7 @@
       "@services/*": ["src/renderer/App/Redux/services/*"],
       "generate-uuid": ["src/renderer/App/Shared/Utils/uuid.ts"],
       "main/*": ["src/main/*"],
+      "renderer/*": ["src/renderer/*"],
       "src/*": ["src/*"]
     },
     "resolveJsonModule": true,

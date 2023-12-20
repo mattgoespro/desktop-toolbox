@@ -1,30 +1,126 @@
-import { Epic, RootAction, RootState } from "redux-observable";
+import { Epic, RootAction, RootState, ofType } from "redux-observable";
 import { map } from "rxjs";
-import { ignoreElements, filter } from "rxjs/operators";
-import { isOfType } from "typesafe-actions";
-import { SelectImageFileEvent, ImageFileSelectedEvent } from "main/apps/image-to-icon/events";
-import { windowEventEmitter } from "main/shared/window-event-emitter";
-import { ADD_PENDING_IMAGE_CONVERSION } from "./constants";
+import store from "@Redux/store/store";
+import { ImageFileSelectedReplyEvent } from "main/app/communication/image-to-icon/events";
+import { windowEventEmitter } from "main/app/communication/shared/window-event-emitter";
+import {
+  ConvertImageEvent,
+  SelectImageFileEvent
+} from "../../../Communication/image-to-icon/events";
+import {
+  BEGIN_IMAGE_CONVERSION,
+  setFailedImageConversion,
+  setCompletedImageConversion,
+  queuePendingImageConversion,
+  SELECT_IMAGE_FILE_TO_CONVERT
+} from "./actions";
 
-export const convertImageToIcon: Epic<RootAction, RootAction, RootState> = (action$, _state$) =>
+export const selectImageFileToConvertEpic: Epic<RootAction, RootAction, RootState> = (
+  action$,
+  _state$
+) =>
   action$.pipe(
-    filter(isOfType(ADD_PENDING_IMAGE_CONVERSION)),
-    map((action) => {
-      console.log(action);
-      return new Promise((resolve) => {
-        windowEventEmitter.emitEvent<SelectImageFileEvent>({
-          channel: "image-to-icon",
-          event: "select-file"
-        });
+    ofType(SELECT_IMAGE_FILE_TO_CONVERT),
+    map(async (action) => {
+      console.log("selectImageFileToConvertEpic", action);
 
-        windowEventEmitter.handleEvent<ImageFileSelectedEvent>("image-to-icon", (response) => {
-          if (response.payload?.filePath == null) {
-            return;
-          }
+      const beginImageConversionPromise = new Promise<{ imagePath: string } | undefined>(
+        (resolve) => {
+          windowEventEmitter.emitEvent<SelectImageFileEvent>({
+            channel: "image-to-icon",
+            event: "select-file",
+            payload: {
+              id: action.payload.id
+            }
+          });
 
-          resolve(response.payload.filePath);
-        });
-      });
-    }),
-    ignoreElements()
+          windowEventEmitter.handleEvent<ImageFileSelectedReplyEvent>(
+            "image-to-icon",
+            (response) => {
+              if (response.payload.id !== action.payload.id) {
+                resolve(undefined);
+                return;
+              }
+
+              if (response.payload?.filePath == null) {
+                resolve(null);
+                return;
+              }
+
+              resolve({
+                imagePath: response.payload.filePath
+              });
+            }
+          );
+        }
+      );
+
+      const imageFileSelected = await beginImageConversionPromise;
+
+      if (imageFileSelected === undefined || imageFileSelected === null) {
+        return;
+      }
+
+      if (imageFileSelected !== null) {
+        return store.dispatch(queuePendingImageConversion(action.payload.imagePath));
+      }
+    })
+  );
+
+export const beginImageConversionEpic: Epic<RootAction, RootAction, RootState> = (
+  action$,
+  _state$
+) =>
+  action$.pipe(
+    ofType(BEGIN_IMAGE_CONVERSION),
+    map(async (action) => {
+      const imagePath = action.payload.imagePath;
+
+      const imageFileSelectedPromise = new Promise<{ imagePath: string } | undefined>(
+        (resolve, reject) => {
+          windowEventEmitter.emitEvent<ConvertImageEvent>({
+            channel: "image-to-icon",
+            event: "convert-image",
+            payload: {
+              id: imagePath,
+              filePath: imagePath
+            }
+          });
+
+          windowEventEmitter.handleEvent<ImageFileSelectedReplyEvent>(
+            "image-to-icon",
+            (response) => {
+              if (response.payload?.filePath !== imagePath) {
+                resolve(undefined);
+                return;
+              }
+
+              if (response.payload?.filePath == null) {
+                resolve(null);
+                return;
+              }
+
+              if (response.payload.filePath === "failed") {
+                reject();
+                return;
+              }
+            }
+          );
+        }
+      );
+
+      const imageFileSelected = await imageFileSelectedPromise;
+
+      if (imageFileSelected === undefined) {
+        return;
+      }
+
+      if (imageFileSelected === null) {
+        return store.dispatch(setFailedImageConversion(imagePath));
+      }
+
+      return store.dispatch(
+        setCompletedImageConversion(imagePath, (await imageFileSelectedPromise).imagePath)
+      );
+    })
   );

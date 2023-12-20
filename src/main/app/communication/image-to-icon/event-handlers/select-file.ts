@@ -1,9 +1,9 @@
 import { IpcMainEvent } from "electron";
 import sharp from "sharp";
-import { chooseFile } from "../../../shared/file-picker-dialog";
+import { pickFile } from "../../shared/file-picker-dialog";
 
 export const onSelectFileEvent = async (event: IpcMainEvent) => {
-  const imagePath = chooseFile({
+  const imagePath = pickFile({
     dialogTitle: "Select an image",
     dialogAction: {
       type: "openFile",

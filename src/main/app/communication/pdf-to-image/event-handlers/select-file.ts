@@ -1,8 +1,8 @@
 import { IpcMainEvent } from "electron";
-import { chooseFile } from "../../../shared/file-picker-dialog";
+import { pickFile } from "../../shared/file-picker-dialog";
 
 export const onSelectFileEvent = (event: IpcMainEvent) => {
-  const pdfPath = chooseFile({
+  const pdfPath = pickFile({
     dialogTitle: "Select a PDF",
     dialogAction: {
       type: "openFile",

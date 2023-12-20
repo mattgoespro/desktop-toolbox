@@ -8,8 +8,8 @@ import installDevToolExtension, {
   DevToolExtension
 } from "electron-devtools-installer";
 import { install as installSourceMapSupport } from "source-map-support";
-import { imageToIconEventHandler } from "./apps/image-to-icon/event-handlers";
-import { getChildDirectories, inDebugMode, inProductionMode, resolveHtmlPath } from "./util/utils";
+import { imageToIconEventHandler } from "./app/communication/image-to-icon/event-handlers";
+import { getChildDirectories, inDebugMode, inProductionMode, resolveHtmlPath } from "./utils";
 
 export class DesktopToolsWindow {
   private resourcesPath = app.isPackaged

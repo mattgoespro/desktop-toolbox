@@ -1,8 +1,8 @@
 import { IpcMain, IpcMainEvent } from "electron";
-import { PdfToImageEventType } from "../events";
+import { RendererPdfToImageEvents } from "renderer/App/Communication/pdf-to-image/events";
 import { onSelectFileEvent } from "./select-file";
 
-const PdfToImageListenerFn = async (event: IpcMainEvent, type: PdfToImageEventType) => {
+const PdfToImageListenerFn = async (event: IpcMainEvent, type: RendererPdfToImageEvents) => {
   switch (type.event) {
     case "select-file":
       return onSelectFileEvent(event);

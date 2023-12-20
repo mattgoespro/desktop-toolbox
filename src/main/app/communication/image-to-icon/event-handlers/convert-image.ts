@@ -2,8 +2,9 @@ import fs from "fs";
 import path from "path";
 import { IpcMainEvent, app } from "electron";
 import sharp from "sharp";
-import { saveFile } from "../../../shared/file-picker-dialog";
-import { ConvertImageEvent } from "../events";
+import { ConvertImageEvent } from "src/renderer/App/Communication/image-to-icon/events";
+import { saveFile } from "../../shared/file-picker-dialog";
+import { ConvertReplyEvent } from "../events";
 
 function createTempFolders() {
   // get the path to the temp folder of the app
@@ -57,7 +58,7 @@ export async function onConvertImageEvent(event: IpcMainEvent, type: ConvertImag
     return;
   }
 
-  let payload = null;
+  let payload: ConvertReplyEvent["payload"] = null;
 
   try {
     const iconPath = await convertToICO(tempFilePath);
@@ -68,19 +69,21 @@ export async function onConvertImageEvent(event: IpcMainEvent, type: ConvertImag
     }
 
     payload = {
-      outputIconPath: iconPath
+      outputIconPath: tempFilePath,
+      id: type.payload.id
     };
   } catch (error) {
     console.error(error);
     payload = {
+      id: type.payload.id,
       error: {
         message: error.message
       }
     };
   }
 
-  event.reply("image-to-icon", {
-    event: "convert-image",
+  event.reply<ConvertReplyEvent>("image-to-icon", {
+    event: "convert-image-reply",
     payload
   });
 }
