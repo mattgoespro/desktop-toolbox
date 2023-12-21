@@ -1,4 +1,4 @@
-import { ChannelEvent } from "./window-event-emitter";
+import { ChannelEvent } from "./communication";
 
 export type EventPayloadMap = {
   "select-file": <T>() => {

@@ -21,49 +21,32 @@ export const selectImageFileToConvertEpic: Epic<RootAction, RootAction, RootStat
 ) =>
   action$.pipe(
     ofType(SELECT_IMAGE_FILE_TO_CONVERT),
-    map(async (action) => {
+    map((action) => {
       console.log("selectImageFileToConvertEpic", action);
 
-      const beginImageConversionPromise = new Promise<{ imagePath: string } | undefined>(
-        (resolve) => {
-          windowEventEmitter.emitEvent<SelectImageFileEvent>({
-            channel: "image-to-icon",
-            event: "select-file",
-            payload: {
-              id: action.payload.id
-            }
-          });
+      return new Promise((resolve) => {
+        windowEventEmitter.emitEvent<SelectImageFileEvent>({
+          channel: "image-to-icon",
+          event: "select-file",
+          payload: {
+            id: action.payload.id
+          }
+        });
 
-          windowEventEmitter.handleEvent<ImageFileSelectedReplyEvent>(
-            "image-to-icon",
-            (response) => {
-              if (response.payload.id !== action.payload.id) {
-                resolve(undefined);
-                return;
-              }
+        windowEventEmitter.handleEvent<ImageFileSelectedReplyEvent>("image-to-icon", (response) => {
+          if (response.payload.id !== action.payload.id) {
+            resolve(undefined);
+            return;
+          }
 
-              if (response.payload?.filePath == null) {
-                resolve(null);
-                return;
-              }
+          if (response.payload?.filePath == null) {
+            resolve(null);
+            return;
+          }
 
-              resolve({
-                imagePath: response.payload.filePath
-              });
-            }
-          );
-        }
-      );
-
-      const imageFileSelected = await beginImageConversionPromise;
-
-      if (imageFileSelected === undefined || imageFileSelected === null) {
-        return;
-      }
-
-      if (imageFileSelected !== null) {
-        return store.dispatch(queuePendingImageConversion(action.payload.imagePath));
-      }
+          resolve(store.dispatch(queuePendingImageConversion(action.payload.imagePath)));
+        });
+      });
     })
   );
 

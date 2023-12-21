@@ -8,7 +8,9 @@ import { Label } from "@Components/Label/Label";
 import {
   setCompletedImageConversion,
   beginImageConversion,
-  setFailedImageConversion
+  setFailedImageConversion,
+  queuePendingImageConversion,
+  selectImageFileToConvert
 } from "@Redux/Tools/ImageToIconConverter/actions";
 import { windowEventEmitter } from "main/app/communication/shared/window-event-emitter";
 import {
@@ -23,7 +25,9 @@ const mapStateToProps = (state: RootState) => ({
 const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
   bindActionCreators(
     {
-      queuePendingImageConversion: beginImageConversion,
+      queuePendingImageConversion,
+      beginImageConversion,
+      selectImageFileToConvert,
       setCompletedImageConversion,
       setFailedImageConversion
     },
@@ -61,14 +65,14 @@ const ConvertRowComponent = (props: ConvertRowProps) => {
         alignItems="center"
         backgroundColor="paper"
       >
-        <Button variant="outlined" onClick={() => sendSelectImageEvent()} size="small">
+        <Button variant="outlined" onClick={() => props.selectImageFileToConvert()} size="small">
           Select
         </Button>
         <Button
           variant="text"
           size="small"
           onClick={() => {
-            const actionPayload = props.queuePendingImageConversion(selectedImagePath);
+            const actionPayload = props.beginImageConversion(selectedImagePath);
             console.log("ConvertRowComponent -> actionPayload", actionPayload);
           }}
           disabled={selectedImagePath == null}

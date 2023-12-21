@@ -4,6 +4,7 @@ import { RootAction, RootState, Services, createEpicMiddleware } from "redux-obs
 import { headingDefaultState } from "@Redux/Heading/reducer";
 import { imageToIconDefaultState } from "@Redux/Tools/ImageToIconConverter/reducer";
 import services from "@Redux/services";
+import { rootEpic } from "./root-epic";
 import rootReducer from "./root-reducer";
 
 const epicMiddleware = createEpicMiddleware<RootAction, RootAction, RootState, Services>({
@@ -22,5 +23,7 @@ const store = configureStore({
   preloadedState,
   enhancers: [applyMiddleware(...middlewares)]
 });
+
+epicMiddleware.run(rootEpic);
 
 export default store;

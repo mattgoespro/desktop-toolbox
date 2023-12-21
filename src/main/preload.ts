@@ -10,7 +10,7 @@ const electronHandler = {
       ipcRenderer.send(channel, event, payload);
     },
     handleEvent<T extends ChannelEvent<string>>(channel: Channel<T>, func: (response: T) => void) {
-      const subscription = (_event: IpcRendererEvent, response: T) => func(response);
+      const subscription = (_event: Electron.IpcRendererEvent, response: T) => func(response);
 
       ipcRenderer.on(channel, subscription);
 

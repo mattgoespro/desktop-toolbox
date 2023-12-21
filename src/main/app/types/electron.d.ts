@@ -19,6 +19,10 @@ declare module "electron" {
        * correct process and frame.
        */
       reply<T extends ChannelEvent<string>>(channel: Channel<T>, payload: Omit<T, "channel">): void;
+      on<T extends ChannelEvent<string>>(
+        channel: Channel<T>,
+        listener: (event: IpcMainEvent, payload: T) => void
+      ): this;
     }
   }
 }

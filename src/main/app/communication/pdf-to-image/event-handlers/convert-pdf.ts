@@ -14,8 +14,5 @@ export function onConvertPdfEvent(event: IpcMainEvent, pdfFilePath: string) {
         type: "file-selected",
         error: new Error(error.message)
       });
-    })
-    .finally(() => {
-      event.reply("pdf-to-image");
     });
 }
