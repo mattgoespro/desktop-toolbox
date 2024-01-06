@@ -1,7 +1,7 @@
 {
   "author": "hoppingmode",
   "name": "desktop-toolbox",
-  "description": "A utility toolbox for everyday desktop activities.",
+  "description": "A utility toolbox desktop application for everyday desktop activities.",
   "main": "./src/main/main.ts",
   "scripts": {
     "start": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack serve --config ./webpack/config.renderer.dev.ts",
@@ -15,7 +15,7 @@
     "rebuild": "electron-rebuild --parallel --types prod,dev,optional --module-dir release/app",
     "install-packages": "npm install",
     "postinstall": "electron-builder install-app-deps && cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./webpack/config.renderer.dev.dll.ts",
-    "lint": "NODE_ENV=development eslint src",
+    "lint": "eslint src",
     "package": "npm run build && electron-builder build --publish never",
     "prepackage": "ts-node ./scripts/prepackage.ts",
     "clean": "concurrently \"node -r ts-node/register scripts/remove-builds.ts\" \"node -r ts-node/register scripts/remove-node-modules.ts\""

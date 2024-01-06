@@ -1,5 +1,6 @@
 # External
 node_modules
+temp
 
 # Generated
 *.css.d.ts
