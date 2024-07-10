@@ -1,5 +1,5 @@
 import { FormLabel, FormLabelBaseProps } from "@mui/material";
-import { createStyledComponent } from "@Theme/theme";
+import { createStyledComponent } from "@Theme/Theme";
 
 type LabelProps = FormLabelBaseProps & {
   tooltip?: string;

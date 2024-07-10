@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import { createStyledComponent } from "../../Theme/theme";
+import { createStyledComponent } from "../../Theme/Theme";
 
 export const Sidebar = createStyledComponent(Stack, {
   name: "Sidebar",

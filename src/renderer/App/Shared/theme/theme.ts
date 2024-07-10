@@ -1,9 +1,9 @@
 import { Theme, createTheme } from "@mui/material/styles";
 import { createStyled } from "@mui/system";
 import { SpacingArgument } from "@mui/system/createTheme/createSpacing";
-import { components } from "./Components/components";
-import { palette } from "./Palette/palette";
-import { typography } from "./Typography/typography";
+import { components } from "./Components/Components";
+import { palette } from "./Palette/Palette";
+import { typography } from "./Typography/Typography";
 
 export const theme: Theme = createTheme({
   palette: palette(),

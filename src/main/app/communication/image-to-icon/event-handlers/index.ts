@@ -16,6 +16,6 @@ const ImageToIconListenerFn = async (event: IpcMainEvent, type: Events) => {
   }
 };
 
-export const imageToIconEventHandler = (ipcMain: Electron.IpcMain) => {
+export const imageToIconEventHandler = (ipcMain: Electron.CrossProcessExports.IpcMain) => {
   ipcMain.on("image-to-icon", ImageToIconListenerFn);
 };

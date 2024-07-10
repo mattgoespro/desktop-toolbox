@@ -4,21 +4,20 @@
   "description": "A utility toolbox desktop application for everyday desktop activities.",
   "main": "./src/main/main.ts",
   "scripts": {
-    "start": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack serve --config ./webpack/config.renderer.dev.ts",
-    "start-with-resources": "cross-env NODE_ENV=development RESOURCE_DEVTOOLS=true TS_NODE_TRANSPILE_ONLY=true webpack serve --config ./webpack/config.renderer.dev.ts",
-    "prestart": "ts-node ./scripts/prestart.ts",
+    "start": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true PORT=1212 webpack serve --config ./webpack/config.renderer.dev.ts",
+    "prestart": "ts-node ./tools/check-port-usage.ts",
+    "start:with-resources": "cross-env NODE_ENV=development RESOURCE_DEVTOOLS=true TS_NODE_TRANSPILE_ONLY=true webpack serve --config ./webpack/config.renderer.dev.ts",
     "start:preload": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./webpack/config.preload.dev.ts",
     "build": "concurrently \"npm run build:main\" \"npm run build:renderer\"",
     "build:main": "cross-env NODE_ENV=production TS_NODE_TRANSPILE_ONLY=true webpack --config ./webpack/config.main.prod.ts",
     "build:renderer": "cross-env NODE_ENV=production TS_NODE_TRANSPILE_ONLY=true webpack --config ./webpack/config.renderer.prod.ts",
     "build:lib": "webpack --config ./lib/webpack.lib.ts",
     "rebuild": "electron-rebuild --parallel --types prod,dev,optional --module-dir release/app",
-    "install-packages": "npm install",
     "postinstall": "electron-builder install-app-deps && cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./webpack/config.renderer.dev.dll.ts",
     "lint": "eslint src",
     "package": "npm run build && electron-builder build --publish never",
-    "prepackage": "ts-node ./scripts/prepackage.ts",
-    "clean": "concurrently \"node -r ts-node/register scripts/remove-builds.ts\" \"node -r ts-node/register scripts/remove-node-modules.ts\""
+    "prepackage": "node ./tools/prepackage.ts",
+    "clean": "concurrently \"node ./tools/remove-builds.ts\" \"node ./tools/remove-node-modules.ts\""
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",

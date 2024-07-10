@@ -3,7 +3,7 @@ import { Divider } from "@mui/material";
 import Box from "@mui/material/Box";
 import { ThemeProvider } from "@mui/system";
 import { Navigate, RouteObject, createHashRouter } from "react-router-dom";
-import { theme } from "@Theme/theme";
+import { theme } from "@Theme/Theme";
 import { RouterLink } from "../../Shared/Components/RouterLink/RouterLink";
 import { uuid } from "../../Shared/Utils/uuid";
 import { Shell } from "../Shell/Shell";

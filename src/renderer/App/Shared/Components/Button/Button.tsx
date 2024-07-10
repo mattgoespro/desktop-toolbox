@@ -6,8 +6,8 @@ import {
 } from "@mui/material";
 import { OverridableStringUnion } from "@mui/types";
 import { CSSProperties } from "styled-components";
-import { typographyOf } from "../../Theme/Typography/typography";
-import { createStyledComponent } from "../../Theme/theme";
+import { typographyOf } from "../../Theme/Typography/Typography";
+import { createStyledComponent } from "../../Theme/Theme";
 
 type ButtonProps = { variant: "link" | "icon" };
 type ButtonVariants = ButtonOwnProps["variant"] extends OverridableStringUnion<

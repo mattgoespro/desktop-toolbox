@@ -12,6 +12,7 @@ import {
 } from "webpack";
 import "webpack-dev-server";
 import { merge } from "webpack-merge";
+import { checkPortUsage } from "../tools/check-port-usage";
 import baseConfig, { checkNodeEnv } from "./config.base";
 import { killSubprocessesMiddleware, startPreloadTaskMiddleware } from "./middleware";
 import webpackPaths from "./paths";
@@ -20,7 +21,14 @@ if (process.env.NODE_ENV === "production") {
   checkNodeEnv("development");
 }
 
-const port = process.env.PORT || 1212;
+const port = parseInt(process.env.PORT);
+
+if (Number.isNaN(port)) {
+  throw new Error("PORT is not defined");
+}
+
+checkPortUsage(port);
+
 const manifest = path.resolve(webpackPaths.dllPath, "renderer.json");
 const skipDLLs =
   module.parent?.filename.includes("config.renderer.dev.dll") ||

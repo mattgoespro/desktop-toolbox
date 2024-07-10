@@ -1,5 +1,5 @@
 import { ListItem as MuiListItem } from "@mui/material";
-import { createStyledComponent } from "../../Theme/theme";
+import { createStyledComponent } from "../../Theme/Theme";
 
 export const ListItem = createStyledComponent(MuiListItem, {
   name: "ListItem",

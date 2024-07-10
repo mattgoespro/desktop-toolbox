@@ -70,5 +70,14 @@
   "typescript.format.enable": false,
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
+  "terminal.integrated.defaultProfile.windows": "node-bash",
+  "terminal.integrated.profiles.windows": {
+    "node-bash": {
+      "source": "Git Bash",
+      "env": {
+        "PATH": "${env:PATH};${workspaceFolder}\\node_modules\\.bin"
+      }
+    }
+  },
   "workbench.iconTheme": "material-icon-theme"
 }

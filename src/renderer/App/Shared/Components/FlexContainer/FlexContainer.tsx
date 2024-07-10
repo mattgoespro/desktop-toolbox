@@ -1,6 +1,6 @@
 import { Container, ContainerProps, TypeBackground } from "@mui/material";
 import { StandardLonghandProperties } from "csstype";
-import { createStyledComponent } from "../../Theme/theme";
+import { createStyledComponent } from "../../Theme/Theme";
 
 export type FlexContainerProps = ContainerProps & {
   flexDirection?: "row" | "column";
