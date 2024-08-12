@@ -1,15 +1,12 @@
-import fs from "fs";
-import os from "os";
 import path from "path";
-import electron, { app, Menu, MenuItem, shell, BrowserWindow } from "electron";
+import electron, { app, Menu, shell, BrowserWindow } from "electron";
 import installDevToolExtension, {
   REDUX_DEVTOOLS,
-  REACT_DEVELOPER_TOOLS as REACT_DEVTOOLS,
-  DevToolExtension
+  REACT_DEVELOPER_TOOLS as REACT_DEVTOOLS
 } from "electron-devtools-installer";
 import { install as installSourceMapSupport } from "source-map-support";
 import { imageToIconEventHandler } from "./app/communication/image-to-icon/event-handlers";
-import { getChildDirectories, inDebugMode, inProductionMode, resolveHtmlPath } from "./utils";
+import { inDebugMode, inProductionMode, resolveHtmlPath } from "./utils";
 
 export class DesktopToolsWindow {
   private resourcesPath = app.isPackaged
@@ -36,13 +33,24 @@ export class DesktopToolsWindow {
     this.addWindowMenu();
   }
 
-  private useResourceDevTools() {
-    return Boolean(process.env.RESOURCE_DEVTOOLS ?? false);
-  }
-
   private addWindowMenu() {
-    const menu = new Menu();
-    menu.insert(0, new MenuItem({ label: "Reload", role: "reload" }));
+    const menu = Menu.buildFromTemplate([
+      {
+        label: "File",
+        submenu: [
+          {
+            label: "Exit",
+            role: "quit"
+          },
+          { label: "Reload", role: "reload" },
+          // open devtools
+          {
+            label: "DevTools",
+            role: "toggleDevTools"
+          }
+        ]
+      }
+    ]);
 
     if (inDebugMode()) {
       this.window.webContents.on("context-menu", (_, props) => {
@@ -102,110 +110,39 @@ export class DesktopToolsWindow {
     return this;
   }
 
-  private async installDevToolsFromChromeDirectory(
-    supportedExtensions: Map<string, DevToolExtension>
-  ) {
-    const chromeExtensionsDirectory = path.join(
-      os.homedir(),
-      "AppData",
-      "Local",
-      "Google",
-      "Chrome",
-      "User Data",
-      "Default",
-      "Extensions"
-    );
-
-    if (!fs.existsSync(chromeExtensionsDirectory)) {
-      throw new Error("devtool extensions: could not find Chrome extensions directory");
-    }
-
-    const extensionDirs = getChildDirectories(chromeExtensionsDirectory);
-
-    for (const extensionDir of extensionDirs) {
-      const extensionId = extensionDir.name;
-
-      if (supportedExtensions.has(extensionId)) {
-        const extension = supportedExtensions.get(extensionId);
-        const extensionName = extension[0] as string;
-        const extensionVersion = extension[1];
-
-        const installedVersion = getChildDirectories(extensionDir.path)[0];
-
-        if (installedVersion.name !== extensionVersion) {
-          throw new Error(
-            `devtool extensions: installed version of ${extensionName} (${installedVersion.name}) does not match required version (${extensionVersion})`
-          );
-        }
-
-        try {
-          await electron.session.defaultSession.loadExtension(
-            path.join(extensionDir.path, extensionVersion),
-            {
-              allowFileAccess: true
-            }
-          );
-
-          console.log(`devtool extensions: installed ${extensionName} (id: ${extensionId})`);
-        } catch (err) {
-          throw this.createInstallExtensionError(extensionName, err);
-        }
+  public async installDevToolExtensions() {
+    const supportedExtensions = {
+      [REACT_DEVTOOLS.id]: {
+        name: "react-devtools",
+        reference: REACT_DEVTOOLS
+      },
+      [REDUX_DEVTOOLS.id]: {
+        name: "redux-devtools",
+        reference: REDUX_DEVTOOLS
       }
-    }
-    return;
-  }
+    };
 
-  private async installDevToolsFromElectronDevToolsInstaller(
-    supportedExtensions: Map<string, DevToolExtension>
-  ) {
-    for (const supportedExtension of supportedExtensions.keys()) {
-      const extension = supportedExtensions.get(supportedExtension);
-      const extensionName = extension.name;
+    for (const supportedExtension of Object.entries(supportedExtensions)) {
+      const extensionId = supportedExtension[0];
+      const extensionDetails = supportedExtension[1];
 
       try {
-        await installDevToolExtension(extension.reference, {
+        await installDevToolExtension(extensionDetails.reference, {
           forceDownload: true,
           loadExtensionOptions: {
             allowFileAccess: true
           }
         });
 
-        console.log(`Installed ${extensionName}`);
-      } catch (err) {
-        throw this.createInstallExtensionError(extensionName, err);
+        console.log(`Installed extension: ${extensionDetails.name} (${extensionId})`);
+      } catch (error) {
+        throw new Error(
+          `Failed to install devtools extension: ${extensionDetails.name}\nMessage: ${error.message}\nDetails: ${error.stack}`
+        );
       }
     }
-  }
-
-  public async installDevToolExtensions() {
-    const supportedExtensions = new Map<string, DevToolExtension>()
-      .set(REACT_DEVTOOLS.id, {
-        name: "react-devtools",
-        version: "4.28.5_2",
-        reference: REACT_DEVTOOLS
-      })
-      .set(REDUX_DEVTOOLS.id, {
-        name: "redux-devtools",
-        version: "3.1.3_0",
-        reference: REDUX_DEVTOOLS
-      });
-
-    if (this.useResourceDevTools()) {
-      console.log(`Installing devtool extensions from Chrome directory\n`);
-      await this.installDevToolsFromChromeDirectory(supportedExtensions);
-      return this;
-    }
-
-    console.log(`Installing devtool extensions from 'electron-devtools-installer'\n`);
-    await this.installDevToolsFromElectronDevToolsInstaller(supportedExtensions);
 
     return this;
-  }
-
-  private createInstallExtensionError(extensionName: string, error: Error) {
-    const installError = new Error(`${extensionName} devtools install failed`);
-    installError.stack = `${installError.message}\n${error.stack}`;
-    return installError;
   }
 
   public async loadApp() {

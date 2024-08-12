@@ -1,5 +1,5 @@
 import { Link as MuiLink, LinkProps as MuiLinkProps } from "@mui/material";
-import { createStyledComponent } from "../../Theme/Theme";
+import { createStyledComponent } from "../../theme/theme";
 
 export const Link = createStyledComponent(MuiLink, {
   name: "Link",
@@ -13,4 +13,4 @@ export const Link = createStyledComponent(MuiLink, {
   "&:active": {
     textDecoration: "underline"
   }
-})) as typeof MuiLink;
+}));

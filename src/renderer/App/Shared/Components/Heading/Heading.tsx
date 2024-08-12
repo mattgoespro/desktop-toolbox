@@ -1,5 +1,5 @@
-import { createStyledComponent } from "@Theme/Theme";
-import { typographyOf } from "../../Theme/Typography/Typography";
+import { createStyledComponent } from "@shared/theme/theme";
+import { typographyOf } from "../../theme/typography/typography";
 
 export const Heading = createStyledComponent("h1", {
   name: "Heading",

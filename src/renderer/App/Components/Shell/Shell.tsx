@@ -1,12 +1,12 @@
+import { AppBar } from "@mui/material";
 import { connect } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { bindActionCreators, Dispatch } from "redux";
 import { RootAction, RootState } from "redux-observable";
-import { FlexContainer } from "@Components/FlexContainer/FlexContainer";
-import { Heading } from "@Components/Heading/Heading";
-import { Sidebar } from "@Components/Sidebar/Sidebar";
-import { setHeadingTitle } from "@Redux/Heading/actions";
-import { configureRouterLinks } from "../Router/Router";
+import { setHeadingTitle } from "@redux/heading/actions";
+import { FlexContainer } from "@shared/components/flex-container/flex-container";
+import { Heading } from "@shared/components/heading/heading";
+import { createRouterLinks } from "../router/router";
 
 const mapStateToProps = (state: RootState) => ({
   title: state.heading.title,
@@ -28,18 +28,23 @@ type ShellProps = ReturnType<typeof mapStateToProps> &
   };
 
 const ShellComponent = (props: ShellProps) => {
+  console.log(
+    createRouterLinks({
+      onClick: props.setHeadingTitle
+    })
+  );
   return (
     <>
-      <Sidebar>
-        {...configureRouterLinks({
+      <AppBar>
+        {...createRouterLinks({
           onClick: props.setHeadingTitle
         })}
-      </Sidebar>
+      </AppBar>
       <FlexContainer
         flexDirection="column"
         justifyContent="start"
         alignItems="center"
-        backgroundColor="lightGrey"
+        backgroundColor="dark"
       >
         <Heading>{props.title}</Heading>
         <Outlet />

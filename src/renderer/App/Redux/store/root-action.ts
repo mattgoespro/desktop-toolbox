@@ -1,5 +1,5 @@
-import * as headingActions from "../Heading/actions";
-import * as imageToIconActions from "../Tools/ImageToIconConverter/actions";
+import * as headingActions from "../heading/actions";
+import * as imageToIconActions from "../image-to-icon-converter/actions";
 
 export default {
   heading: headingActions,

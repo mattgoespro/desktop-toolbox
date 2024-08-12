@@ -23,8 +23,10 @@ if (process.env.NODE_ENV === "production") {
 
 const port = parseInt(process.env.PORT);
 
+console.log("Renderer Development Port: ", port);
+
 if (Number.isNaN(port)) {
-  throw new Error("PORT is not defined");
+  throw new Error("Environment: 'PORT'value is not defined");
 }
 
 checkPortUsage(port);
@@ -117,8 +119,7 @@ const configuration: Configuration = {
     }),
     new NoEmitOnErrorsPlugin(),
     new EnvironmentPlugin({
-      NODE_ENV: "development",
-      RESOURCE_DEVTOOLS: process.env.RESOURCE_DEVTOOLS ?? false
+      NODE_ENV: "development"
     }),
     new LoaderOptionsPlugin({
       debug: true

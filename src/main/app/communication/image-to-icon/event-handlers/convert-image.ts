@@ -1,8 +1,8 @@
 import fs from "fs";
 import path from "path";
 import { IpcMainEvent, app } from "electron";
+import { ConvertImageEvent } from "renderer/app/communication/image-to-icon/events";
 import sharp from "sharp";
-import { ConvertImageEvent } from "src/renderer/App/Communication/image-to-icon/events";
 import { saveFile } from "../../shared/file-picker-dialog";
 import { ConvertReplyEvent } from "../events";
 

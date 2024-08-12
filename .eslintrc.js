@@ -29,13 +29,14 @@ module.exports = {
       typescript: {
         project: ["./tsconfig.json"]
       },
-      node: true,
-      webpack: {
-        config: "./webpack/config.renderer.dev.ts",
-        env: {
-          "process.env.NODE_ENV": "development"
-        }
-      }
+      node: true
+      // webpack: {
+      //   config: "./webpack/config.renderer.dev.ts",
+      //   env: {
+      //     NODE_ENV: "development",
+      //     LINT: true
+      //   }
+      // }
     },
     react: {
       version: "detect"

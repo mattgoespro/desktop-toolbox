@@ -1,6 +1,7 @@
 import { Theme } from "@mui/material";
 import { ComponentsOverrides, ComponentsProps, ComponentsVariants } from "@mui/material/styles";
-import { RouterLinkBaseProps } from "../../Components/RouterLink/RouterLink";
+import { AppBarProps } from "../../components/app-bar/app-bar";
+import { RouterLinkBaseProps } from "../../components/router-link/router-link";
 
 declare module "@mui/material/styles" {
   interface Components {
@@ -12,7 +13,7 @@ declare module "@mui/material/styles" {
       styleOverrides?: ComponentsOverrides<Theme>["MuiContainer"];
       variants?: ComponentsVariants["MuiContainer"];
     };
-    Sidebar?: ComponentsProps["MuiStack"];
+    AppBar?: AppBarProps;
   }
 }
 

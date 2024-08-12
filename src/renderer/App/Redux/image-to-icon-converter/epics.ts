@@ -1,12 +1,9 @@
 import { Epic, RootAction, RootState, ofType } from "redux-observable";
 import { map } from "rxjs";
-import store from "@Redux/store/store";
 import { ImageFileSelectedReplyEvent } from "main/app/communication/image-to-icon/events";
 import { windowEventEmitter } from "main/app/communication/shared/window-event-emitter";
-import {
-  ConvertImageEvent,
-  SelectImageFileEvent
-} from "../../../Communication/image-to-icon/events";
+import store from "renderer/app/redux/store/store";
+import { ConvertImageEvent, SelectImageFileEvent } from "../../communication/image-to-icon/events";
 import {
   BEGIN_IMAGE_CONVERSION,
   setFailedImageConversion,

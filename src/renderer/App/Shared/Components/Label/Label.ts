@@ -1,5 +1,5 @@
 import { FormLabel, FormLabelBaseProps } from "@mui/material";
-import { createStyledComponent } from "@Theme/Theme";
+import { createStyledComponent } from "@shared/theme/theme";
 
 type LabelProps = FormLabelBaseProps & {
   tooltip?: string;
@@ -21,4 +21,4 @@ export const Label = createStyledComponent(FormLabel, {
   margin: theme.spacing(0.5),
   padding: 0,
   textOverflow: "ellipsis"
-})) as typeof FormLabel;
+}));

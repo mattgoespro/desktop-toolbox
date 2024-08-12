@@ -6,7 +6,6 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true PORT=1212 webpack serve --config ./webpack/config.renderer.dev.ts",
     "prestart": "ts-node ./tools/check-port-usage.ts",
-    "start:with-resources": "cross-env NODE_ENV=development RESOURCE_DEVTOOLS=true TS_NODE_TRANSPILE_ONLY=true webpack serve --config ./webpack/config.renderer.dev.ts",
     "start:preload": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./webpack/config.preload.dev.ts",
     "build": "concurrently \"npm run build:main\" \"npm run build:renderer\"",
     "build:main": "cross-env NODE_ENV=production TS_NODE_TRANSPILE_ONLY=true webpack --config ./webpack/config.main.prod.ts",

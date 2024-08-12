@@ -1,6 +1,6 @@
 import { Container, ContainerProps, TypeBackground } from "@mui/material";
 import { StandardLonghandProperties } from "csstype";
-import { createStyledComponent } from "../../Theme/Theme";
+import { createStyledComponent } from "../../theme/theme";
 
 export type FlexContainerProps = ContainerProps & {
   flexDirection?: "row" | "column";
@@ -9,6 +9,7 @@ export type FlexContainerProps = ContainerProps & {
   backgroundColor?: keyof TypeBackground;
   padTopBottom?: boolean | number;
   padSides?: boolean | number;
+  fixedSize?: string;
 };
 
 export const FlexContainer = createStyledComponent(Container, {
@@ -22,7 +23,8 @@ export const FlexContainer = createStyledComponent(Container, {
       propName !== "alignItems" &&
       propName !== "backgroundColor" &&
       propName !== "padTopBottom" &&
-      propName !== "padSides"
+      propName !== "padSides" &&
+      propName !== "fixedSize"
     );
   }
 })<FlexContainerProps>((options) => {
@@ -39,6 +41,13 @@ export const FlexContainer = createStyledComponent(Container, {
   const sidePadding = padSides != null ? (typeof padSides === "boolean" ? 1 : padSides) : 1;
   const topBottomPadding =
     padTopBottom != null ? (typeof padTopBottom === "boolean" ? 1 : padTopBottom) : 1;
+  let minWidth = "auto";
+  let minHeight = "auto";
+
+  if (options.fixedSize != null) {
+    minWidth = options.fixedSize;
+    minHeight = options.fixedSize;
+  }
 
   return {
     ".MuiContainer-root": {
@@ -49,8 +58,11 @@ export const FlexContainer = createStyledComponent(Container, {
     flexDirection,
     justifyContent,
     alignItems,
+    minWidth,
+    minHeight,
     backgroundColor: theme.palette.background[backgroundColor],
     width: "100%",
+    height: "auto",
     gap: theme.spacing(1)
   };
 });

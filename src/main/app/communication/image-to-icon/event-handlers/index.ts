@@ -1,5 +1,5 @@
 import { IpcMainEvent } from "electron";
-import { Events } from "src/renderer/App/Communication/image-to-icon/events";
+import { Events } from "renderer/app/communication/image-to-icon/events";
 import { onConvertImageEvent } from "./convert-image";
 import { onSelectFileEvent } from "./select-file";
 

@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { applyMiddleware } from "redux";
 import { RootAction, RootState, Services, createEpicMiddleware } from "redux-observable";
-import { headingDefaultState } from "@Redux/Heading/reducer";
-import { imageToIconDefaultState } from "@Redux/Tools/ImageToIconConverter/reducer";
-import services from "@Redux/services";
+import services from "renderer/app/redux/services";
+import { headingDefaultState } from "../heading/reducer";
+import { imageToIconDefaultState } from "../image-to-icon-converter/reducer";
 import { rootEpic } from "./root-epic";
 import rootReducer from "./root-reducer";
 

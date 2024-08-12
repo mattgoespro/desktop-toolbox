@@ -12,7 +12,6 @@ export const typography: ThemeOptions["typography"] = (palette) => ({
     fontSize: "4rem",
     textAlign: "center"
   },
-
   h2: {
     fontSize: "3rem",
     fontFamily: '"Nunito", "Helvetica", "Arial", sans-serif',

@@ -3,20 +3,20 @@ import { useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import { RootAction, RootState } from "redux-observable";
-import { FlexContainer } from "@Components/FlexContainer/FlexContainer";
-import { Label } from "@Components/Label/Label";
 import {
   setCompletedImageConversion,
   beginImageConversion,
   setFailedImageConversion,
   queuePendingImageConversion,
   selectImageFileToConvert
-} from "@Redux/Tools/ImageToIconConverter/actions";
+} from "@redux/image-to-icon-converter/actions";
+import { FlexContainer } from "@shared/components/flex-container/flex-container";
+import { Label } from "@shared/components/label/label";
 import { windowEventEmitter } from "main/app/communication/shared/window-event-emitter";
 import {
   // RendererConvertImageEvent,
   SelectImageFileEvent
-} from "../../../../Communication/image-to-icon/events";
+} from "../../../communication/image-to-icon/events";
 
 const mapStateToProps = (state: RootState) => ({
   imageConversionQueue: state.imageToIcon.imageConversionQueue

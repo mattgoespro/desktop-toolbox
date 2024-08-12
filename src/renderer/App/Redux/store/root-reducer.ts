@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import headingReducer from "../Heading/reducer";
-import imageToIconReducer from "../Tools/ImageToIconConverter/reducer";
+import headingReducer from "../heading/reducer";
+import imageToIconReducer from "../image-to-icon-converter/reducer";
 
 const rootReducer = combineReducers({
   heading: headingReducer,

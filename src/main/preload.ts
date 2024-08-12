@@ -1,4 +1,4 @@
-import { IpcRendererEvent, contextBridge, ipcRenderer } from "electron";
+import { contextBridge, ipcRenderer } from "electron";
 import { Channel, ChannelEvent } from "./app/communication/shared/communication";
 
 const electronHandler = {

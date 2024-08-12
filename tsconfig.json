@@ -10,11 +10,8 @@
     "moduleResolution": "node",
     "outDir": "dll",
     "paths": {
-      "@Components/*": ["src/renderer/App/Shared/Components/*"],
-      "@Redux/*": ["src/renderer/App/Redux/*"],
-      "@Theme/*": ["src/renderer/App/Shared/Theme/*"],
-      "@services/*": ["src/renderer/App/Redux/services/*"],
-      "generate-uuid": ["src/renderer/App/Shared/Utils/uuid.ts"],
+      "@redux/*": ["src/renderer/app/redux/*"],
+      "@shared/*": ["src/renderer/app/shared/*"],
       "main/*": ["src/main/*"],
       "renderer/*": ["src/renderer/*"],
       "src/*": ["src/*"]
