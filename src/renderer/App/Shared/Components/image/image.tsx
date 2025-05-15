@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { createStyledComponent } from "@shared/theme/theme";
+import { createStyled } from "@theme/theme";
 
 export type ImageProps = {
   src: string;
@@ -7,7 +7,7 @@ export type ImageProps = {
   fillSpace?: boolean;
 };
 
-export const Image = createStyledComponent("img", {
+export const Image = createStyled("img", {
   name: "Image",
   slot: "Root"
 })<ImageProps>((options) => {

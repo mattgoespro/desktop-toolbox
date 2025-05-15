@@ -10,13 +10,10 @@ import {
   queuePendingImageConversion,
   selectImageFileToConvert
 } from "@redux/image-to-icon-converter/actions";
-import { FlexContainer } from "@shared/components/flex-container/flex-container";
-import { Label } from "@shared/components/label/label";
 import { windowEventEmitter } from "main/app/communication/shared/window-event-emitter";
-import {
-  // RendererConvertImageEvent,
-  SelectImageFileEvent
-} from "../../../communication/image-to-icon/events";
+import { SelectImageFileEvent } from "../../../communication/image-to-icon/events";
+import { Label } from "@mui/icons-material";
+import Box from "@mui/material/Box";
 
 const mapStateToProps = (state: RootState) => ({
   imageConversionQueue: state.imageToIcon.imageConversionQueue
@@ -51,20 +48,15 @@ const ConvertRowComponent = (props: ConvertRowProps) => {
   };
 
   return (
-    <FlexContainer
+    <Box
+      display="flex"
       flexDirection="row"
       justifyContent="space-between"
       alignItems="center"
-      backgroundColor="paper"
       sx={{ boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px;" }}
     >
       {(selectedImagePath && <Label>{selectedImagePath}</Label>) ?? <Label>Select an image</Label>}
-      <FlexContainer
-        flexDirection="row"
-        justifyContent="end"
-        alignItems="center"
-        backgroundColor="paper"
-      >
+      <Box display="flex" flexDirection="row" justifyContent="end" alignItems="center">
         <Button variant="outlined" onClick={() => props.selectImageFileToConvert()} size="small">
           Select
         </Button>
@@ -79,8 +71,8 @@ const ConvertRowComponent = (props: ConvertRowProps) => {
         >
           Convert
         </Button>
-      </FlexContainer>
-    </FlexContainer>
+      </Box>
+    </Box>
   );
 };
 

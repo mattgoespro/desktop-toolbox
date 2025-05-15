@@ -1,5 +1,5 @@
 import { CSSObject, Drawer, Theme } from "@mui/material";
-import { createStyledComponent } from "../../theme/theme";
+import { createStyled } from "@theme/theme";
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: 200,
@@ -22,7 +22,7 @@ const closedMixin = (theme: Theme): CSSObject => ({
   }
 });
 
-export const SideDrawer = createStyledComponent(Drawer, {
+export const SideDrawer = createStyled(Drawer, {
   shouldForwardProp: (prop) => prop !== "open"
 })(({ theme, open }) => ({
   width: 200,

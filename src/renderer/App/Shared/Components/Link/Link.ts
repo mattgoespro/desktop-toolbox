@@ -1,7 +1,7 @@
 import { Link as MuiLink, LinkProps as MuiLinkProps } from "@mui/material";
-import { createStyledComponent } from "../../theme/theme";
+import { createStyled } from "@theme/theme";
 
-export const Link = createStyledComponent(MuiLink, {
+export const Link = createStyled(MuiLink, {
   name: "Link",
   slot: "Root"
 })<MuiLinkProps>(({ theme }) => ({

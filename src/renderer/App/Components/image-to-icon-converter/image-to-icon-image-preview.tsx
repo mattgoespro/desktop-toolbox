@@ -1,6 +1,4 @@
 import { Container, Typography } from "@mui/material";
-import { FlexContainer } from "@shared/components/flex-container/flex-container";
-import { Subheading } from "@shared/components/heading/heading";
 import { Image } from "@shared/components/image/image";
 
 type ImagePreviewProps = {
@@ -11,12 +9,10 @@ type ImagePreviewProps = {
 export function ImagePreview(props: ImagePreviewProps) {
   return (
     <Container maxWidth="md">
-      <Subheading>
+      <Typography variant="subtitle1" gutterBottom>
         <Typography variant="h6">Preview</Typography>
-      </Subheading>
-      <FlexContainer>
-        <Image src={props.imageSrc} label={`File: ${props.filePath}`} fillSpace />
-      </FlexContainer>
+      </Typography>
+      <Image src={props.imageSrc} label={`File: ${props.filePath}`} fillSpace />
     </Container>
   );
 }

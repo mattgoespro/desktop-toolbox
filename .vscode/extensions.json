@@ -5,7 +5,6 @@
     "mskelton.npm-outdated",
     "christian-kohler.npm-intellisense",
     "fabiospampinato.vscode-open-in-npm",
-    "better-ts-errors.better-ts-errors",
     "usernamehw.errorlens",
     "felipecaputo.git-project-manager",
     "github.copilot-chat",
@@ -14,9 +13,9 @@
     "richie5um2.vscode-sort-json",
     "formulahendry.auto-rename-tag",
     "nyxb.vscode-styled-colors",
-    "pkief.material-icon-theme",
     "markosth09.color-picker",
     "github.copilot",
-    "dsznajder.es7-react-js-snippets"
+    "dsznajder.es7-react-js-snippets",
+    "helgardrichard.helium-icon-theme"
   ]
 }

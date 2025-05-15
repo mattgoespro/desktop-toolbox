@@ -1,12 +1,12 @@
 import { Button } from "@mui/material";
 import { useState } from "react";
-import { FlexContainer } from "@shared/components/flex-container/flex-container";
 import { ImageFileSelectedReplyEvent } from "main/app/communication/image-to-icon/events";
 import { windowEventEmitter } from "main/app/communication/shared/window-event-emitter";
 import { SelectImageFileEvent } from "renderer/app/communication/image-to-icon/events";
 import { uuid } from "renderer/app/shared/utils/generate-uuid";
 import { ConvertRow } from "./convert-row/convert-row";
 import { ItemBatchRadioGroup, ItemBatchSize } from "./image-to-icon-item-batch-radio-group";
+import Box from "@mui/material/Box";
 
 export function ImageToIconConverter() {
   const [count, setCount] = useState<ItemBatchSize>("single");
@@ -26,11 +26,12 @@ export function ImageToIconConverter() {
   }
 
   return (
-    <FlexContainer
+    <Box
+      display="flex"
       flexDirection="column"
       justifyContent="start"
       alignItems="center"
-      backgroundColor="lightGrey"
+      maxWidth="md"
     >
       <ItemBatchRadioGroup onChange={(count) => setCount(count)}></ItemBatchRadioGroup>
       {(count === "single" && (
@@ -53,6 +54,6 @@ export function ImageToIconConverter() {
         Array.of(1, 2, 3, 4, 5).map(() => {
           return <ConvertRow key={uuid()}></ConvertRow>;
         })}
-    </FlexContainer>
+    </Box>
   );
 }

@@ -1,26 +1,26 @@
 {
   "compilerOptions": {
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
-    "esModuleInterop": true,
-    "jsx": "react-jsx",
-    "lib": ["dom", "es2021"],
     "module": "commonjs",
     "moduleResolution": "node",
-    "outDir": "dll",
+    "target": "es2021",
+    "baseUrl": ".",
+    "lib": ["dom", "es2021"],
+    "types": ["node", "react"],
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "paths": {
       "@redux/*": ["src/renderer/app/redux/*"],
       "@shared/*": ["src/renderer/app/shared/*"],
+      "@theme/*": ["src/renderer/app/theme/*"],
       "main/*": ["src/main/*"],
       "renderer/*": ["src/renderer/*"],
       "src/*": ["src/*"]
     },
-    "resolveJsonModule": true,
+    "outDir": "dll",
     "skipLibCheck": true,
-    "sourceMap": true,
-    "target": "es2021",
-    "types": ["node"]
+    "sourceMap": true
   },
   "include": ["src", "webpack"]
 }

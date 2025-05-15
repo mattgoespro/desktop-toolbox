@@ -1,12 +1,11 @@
-import { AppBar } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import Typography from "@mui/material/Typography";
 import { connect } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { bindActionCreators, Dispatch } from "redux";
 import { RootAction, RootState } from "redux-observable";
 import { setHeadingTitle } from "@redux/heading/actions";
-import { FlexContainer } from "@shared/components/flex-container/flex-container";
-import { Heading } from "@shared/components/heading/heading";
-import { createRouterLinks } from "../router/router";
+import Box from "@mui/material/Box";
 
 const mapStateToProps = (state: RootState) => ({
   title: state.heading.title,
@@ -28,27 +27,13 @@ type ShellProps = ReturnType<typeof mapStateToProps> &
   };
 
 const ShellComponent = (props: ShellProps) => {
-  console.log(
-    createRouterLinks({
-      onClick: props.setHeadingTitle
-    })
-  );
   return (
     <>
-      <AppBar>
-        {...createRouterLinks({
-          onClick: props.setHeadingTitle
-        })}
-      </AppBar>
-      <FlexContainer
-        flexDirection="column"
-        justifyContent="start"
-        alignItems="center"
-        backgroundColor="dark"
-      >
-        <Heading>{props.title}</Heading>
+      <AppBar></AppBar>
+      <Box flexDirection="column" justifyContent="start" alignItems="center">
+        <Typography variant="h1">{props.title}</Typography>
         <Outlet />
-      </FlexContainer>
+      </Box>
     </>
   );
 };
