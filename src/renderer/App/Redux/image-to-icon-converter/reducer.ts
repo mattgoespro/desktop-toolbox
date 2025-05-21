@@ -1,4 +1,4 @@
-import { combineReducers } from "redux";
+import { Reducer } from "redux";
 import { ActionType, getType } from "typesafe-actions";
 import * as ImageToIconActions from "./actions";
 
@@ -18,50 +18,36 @@ export const imageToIconDefaultState: ImageToIconState = {
 
 export type ImageToIconAction = ActionType<typeof ImageToIconActions>;
 
-export default combineReducers<ImageToIconState, ImageToIconAction>({
-  imageConversionQueue: (state, action) => {
-    switch (action.type) {
-      case getType(ImageToIconActions.queuePendingImageConversion):
-        if (
-          state.some((imageConversion) => imageConversion.imagePath === action.payload.imagePath)
-        ) {
-          throw new Error(`Image conversion for ${action.payload.imagePath} is already queued.`);
-        }
-
-        // TODO: Handle case when output path already exists (image output name collision)
-
-        return [
-          ...state,
+export const imageToIconStateReducer: Reducer<ImageToIconState, ImageToIconAction> = (
+  state,
+  action
+) => {
+  switch (action.type) {
+    case getType(ImageToIconActions.queuePendingImageConversion):
+      return {
+        ...state,
+        imageConversionQueue: [
+          ...state.imageConversionQueue,
           {
             state: "pending",
             imagePath: action.payload.imagePath
           }
-        ];
-      case getType(ImageToIconActions.setCompletedImageConversion):
-        return state.map((imageConversion) => {
-          if (imageConversion.imagePath !== action.payload.imagePath) {
-            return imageConversion;
+        ]
+      };
+    case getType(ImageToIconActions.beginImageConversion):
+      return {
+        ...state,
+        imageConversionQueue: state.imageConversionQueue.map((conversion) => {
+          if (conversion.imagePath === action.payload.imagePath) {
+            return {
+              ...conversion,
+              state: "pending"
+            };
           }
-
-          return {
-            ...imageConversion,
-            state: "completed",
-            outputIconPath: action.payload.outputIconPath
-          };
-        });
-      case getType(ImageToIconActions.setFailedImageConversion):
-        return state.map((imageConversion) => {
-          if (imageConversion.imagePath !== action.payload.imagePath) {
-            return imageConversion;
-          }
-
-          return {
-            ...imageConversion,
-            state: "failed"
-          };
-        });
-      default:
-        return imageToIconDefaultState.imageConversionQueue;
-    }
+          return conversion;
+        })
+      };
+    default:
+      return state;
   }
-});
+};

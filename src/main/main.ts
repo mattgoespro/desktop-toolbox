@@ -3,7 +3,7 @@
  */
 import { app } from "electron";
 import debug from "electron-debug";
-import { DesktopToolsWindow } from "./desktop-tools-window";
+import { DesktopToolsWindow } from "./window";
 import { inDebugMode } from "./utils";
 
 if (inDebugMode()) {

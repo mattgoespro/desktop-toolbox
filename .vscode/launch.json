@@ -7,9 +7,7 @@
       "request": "launch",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "start"],
-      "env": {
-        "MAIN_ARGS": "--inspect=5858 --remote-debugging-port=9223"
-      }
+      "preLaunchTask": "npm: build:preload"
     },
     {
       "name": "Electron: Renderer",

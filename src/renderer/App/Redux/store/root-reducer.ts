@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
-import headingReducer from "../heading/reducer";
-import imageToIconReducer from "../image-to-icon-converter/reducer";
+import { headingStateReducer } from "../heading/reducer";
+import { imageToIconStateReducer } from "../image-to-icon-converter/reducer";
 
 const rootReducer = combineReducers({
-  heading: headingReducer,
-  imageToIcon: imageToIconReducer
+  heading: headingStateReducer,
+  imageToIcon: imageToIconStateReducer
 });
 
 export default rootReducer;

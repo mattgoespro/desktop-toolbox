@@ -12,24 +12,39 @@ import {
 } from "webpack";
 import "webpack-dev-server";
 import { merge } from "webpack-merge";
-import { checkPortUsage } from "../tools/check-port-usage";
 import baseConfig, { checkNodeEnv } from "./config.base";
-import { killSubprocessesMiddleware, startPreloadTaskMiddleware } from "./middleware";
 import webpackPaths from "./paths";
+import detectPort from "detect-port";
+
+export async function checkPortUsage(port: number) {
+  await new Promise((resolve, reject) =>
+    detectPort(
+      {
+        hostname: "localhost",
+        port: port
+      },
+      (error, port) => {
+        if (error != null) {
+          console.error("error: port is in use");
+          reject(false);
+          return;
+        }
+
+        console.log(`port ${port} is available`);
+
+        resolve(true);
+      }
+    )
+  );
+}
 
 if (process.env.NODE_ENV === "production") {
   checkNodeEnv("development");
 }
 
-const port = parseInt(process.env.PORT);
+const devServerPort = 1212;
 
-console.log("Renderer Development Port: ", port);
-
-if (Number.isNaN(port)) {
-  throw new Error("Environment: 'PORT'value is not defined");
-}
-
-checkPortUsage(port);
+checkPortUsage(devServerPort);
 
 const manifest = path.resolve(webpackPaths.dllPath, "renderer.json");
 const skipDLLs =
@@ -37,12 +52,10 @@ const skipDLLs =
   module.parent?.filename.includes("webpack.config.renderer.dev");
 
 /**
- * Warn if the DLL is not built
+ * Warn if the DLLs aren't built
  */
 if (!skipDLLs && !(fs.existsSync(webpackPaths.dllPath) && fs.existsSync(manifest))) {
-  console.warn(
-    'The DLL files are missing. Sit back while we build them for you with "npm run build-dll"'
-  );
+  console.warn('Building missing DLL files..."');
   execSync("npm run postinstall");
 }
 
@@ -51,7 +64,7 @@ const configuration: Configuration = {
   mode: "development",
   target: ["web", "electron-renderer"],
   entry: [
-    `webpack-dev-server/client?http://localhost:${port}/dist`,
+    `webpack-dev-server/client?http://localhost:${devServerPort}/dist`,
     "webpack/hot/only-dev-server",
     path.join(webpackPaths.srcRendererPath, "index.tsx")
   ],
@@ -109,6 +122,7 @@ const configuration: Configuration = {
       : [
           new DllReferencePlugin({
             context: webpackPaths.dllPath,
+            // eslint-disable-next-line @typescript-eslint/no-require-imports
             manifest: require(manifest),
             sourceType: "var"
           })
@@ -143,7 +157,7 @@ const configuration: Configuration = {
     __filename: false
   },
   devServer: {
-    port,
+    port: devServerPort,
     compress: true,
     hot: true,
     headers: { "Access-Control-Allow-Origin": "*" },
@@ -152,11 +166,6 @@ const configuration: Configuration = {
     },
     historyApiFallback: {
       verbose: true
-    },
-    setupMiddlewares(middlewares) {
-      const { preloadProcess, args } = startPreloadTaskMiddleware();
-      killSubprocessesMiddleware(args, [preloadProcess]);
-      return middlewares;
     }
   }
 };

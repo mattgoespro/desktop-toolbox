@@ -5,7 +5,9 @@ import pluginReact from "eslint-plugin-react";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig([
-  {},
+  {
+    ignores: ["**/node_modules/**", "**/dist/**", "**/dll/**"]
+  },
   {
     files: ["**/*.{ts,tsx,js,mjs,}"],
     plugins: { js },
