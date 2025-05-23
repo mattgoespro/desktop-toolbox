@@ -68,9 +68,9 @@
       "PATH": "${env:PATH};${workspaceFolder}\\node_modules\\.bin"
     },
     "icon": "terminal-debian",
-    "path": "${env:LOCALAPPDATA}\\Programs\\Git\\bin\\bash.exe"
+    "path": "${env:PROGRAMFILES}\\Git\\bin\\bash.exe"
   },
-  "terminal.integrated.defaultProfile.windows": "node-bash-work",
+  "terminal.integrated.defaultProfile.windows": "node-bash",
   "terminal.integrated.profiles.windows": {
     "node-bash": {
       "args": ["-l"],
