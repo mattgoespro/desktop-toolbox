@@ -13,49 +13,26 @@ import {
 import "webpack-dev-server";
 import { merge } from "webpack-merge";
 import baseConfig, { checkNodeEnv } from "./config.base";
+import { killSubprocessesMiddleware, startPreloadTaskMiddleware } from "./middleware";
 import webpackPaths from "./paths";
-import detectPort from "detect-port";
-
-export async function checkPortUsage(port: number) {
-  await new Promise((resolve, reject) =>
-    detectPort(
-      {
-        hostname: "localhost",
-        port: port
-      },
-      (error, port) => {
-        if (error != null) {
-          console.error("error: port is in use");
-          reject(false);
-          return;
-        }
-
-        console.log(`port ${port} is available`);
-
-        resolve(true);
-      }
-    )
-  );
-}
 
 if (process.env.NODE_ENV === "production") {
   checkNodeEnv("development");
 }
 
-const devServerPort = 1212;
-
-checkPortUsage(devServerPort);
-
+const port = process.env.PORT || 1212;
 const manifest = path.resolve(webpackPaths.dllPath, "renderer.json");
 const skipDLLs =
   module.parent?.filename.includes("config.renderer.dev.dll") ||
   module.parent?.filename.includes("webpack.config.renderer.dev");
 
 /**
- * Warn if the DLLs aren't built
+ * Warn if the DLL is not built
  */
 if (!skipDLLs && !(fs.existsSync(webpackPaths.dllPath) && fs.existsSync(manifest))) {
-  console.warn('Building missing DLL files..."');
+  console.warn(
+    'The DLL files are missing. Sit back while we build them for you with "npm run build-dll"'
+  );
   execSync("npm run postinstall");
 }
 
@@ -64,7 +41,7 @@ const configuration: Configuration = {
   mode: "development",
   target: ["web", "electron-renderer"],
   entry: [
-    `webpack-dev-server/client?http://localhost:${devServerPort}/dist`,
+    `webpack-dev-server/client?http://localhost:${port}/dist`,
     "webpack/hot/only-dev-server",
     path.join(webpackPaths.srcRendererPath, "index.tsx")
   ],
@@ -78,16 +55,6 @@ const configuration: Configuration = {
   },
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        exclude: "/node_modules/",
-        use: [
-          {
-            loader: "css-loader",
-            options: { modules: true, sourceMap: true, importLoaders: 1 }
-          }
-        ]
-      },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: "asset/resource"
@@ -133,7 +100,8 @@ const configuration: Configuration = {
     }),
     new NoEmitOnErrorsPlugin(),
     new EnvironmentPlugin({
-      NODE_ENV: "development"
+      NODE_ENV: "development",
+      RESOURCE_DEVTOOLS: process.env.RESOURCE_DEVTOOLS ?? false
     }),
     new LoaderOptionsPlugin({
       debug: true
@@ -149,7 +117,7 @@ const configuration: Configuration = {
       isBrowser: false,
       env: process.env.NODE_ENV,
       isDevelopment: process.env.NODE_ENV !== "production",
-      nodeModules: webpackPaths.releaseAppNodeModulesPath
+      nodeModules: webpackPaths.appNodeModulesPath
     })
   ],
   node: {
@@ -157,7 +125,7 @@ const configuration: Configuration = {
     __filename: false
   },
   devServer: {
-    port: devServerPort,
+    port,
     compress: true,
     hot: true,
     headers: { "Access-Control-Allow-Origin": "*" },
@@ -166,6 +134,11 @@ const configuration: Configuration = {
     },
     historyApiFallback: {
       verbose: true
+    },
+    setupMiddlewares(middlewares) {
+      const { preloadProcess, args } = startPreloadTaskMiddleware();
+      killSubprocessesMiddleware(args, [preloadProcess]);
+      return middlewares;
     }
   }
 };

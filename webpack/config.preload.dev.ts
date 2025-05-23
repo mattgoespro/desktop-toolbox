@@ -3,7 +3,6 @@ import { Configuration, LoaderOptionsPlugin, EnvironmentPlugin } from "webpack";
 import { merge } from "webpack-merge";
 import baseConfig, { checkNodeEnv } from "./config.base";
 import webpackPaths from "./paths";
-import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 
 if (process.env.NODE_ENV === "production") {
   checkNodeEnv("development");
@@ -27,13 +26,13 @@ const configuration: Configuration = {
     }),
     new LoaderOptionsPlugin({
       debug: true
-    }),
-    new ForkTsCheckerWebpackPlugin()
+    })
   ],
   node: {
     __dirname: false,
     __filename: false
-  }
+  },
+  watch: true
 };
 
 export default merge(baseConfig, configuration);

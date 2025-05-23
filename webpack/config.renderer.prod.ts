@@ -3,9 +3,7 @@
  */
 
 import path from "path";
-import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import TerserPlugin from "terser-webpack-plugin";
 import { DefinePlugin, EnvironmentPlugin } from "webpack";
 import { merge } from "webpack-merge";
@@ -31,21 +29,6 @@ export default merge(baseConfig, {
   },
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: "css-loader",
-            options: {
-              modules: true,
-              sourceMap: true,
-              importLoaders: 1
-            }
-          }
-        ],
-        include: /\.module\.css$/
-      },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: "asset/resource"
@@ -76,15 +59,12 @@ export default merge(baseConfig, {
   },
   optimization: {
     minimize: true,
-    minimizer: [new TerserPlugin(), new CssMinimizerPlugin()]
+    minimizer: [new TerserPlugin()]
   },
   plugins: [
     new EnvironmentPlugin({
       NODE_ENV: "production",
       DEBUG_PROD: false
-    }),
-    new MiniCssExtractPlugin({
-      filename: "style.css"
     }),
     new HtmlWebpackPlugin({
       filename: "index.html",

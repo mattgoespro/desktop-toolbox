@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ImageFileSelectedReplyEvent } from "main/app/communication/image-to-icon/events";
 import { windowEventEmitter } from "main/app/communication/shared/window-event-emitter";
 import { SelectImageFileEvent } from "renderer/app/communication/image-to-icon/events";
-import { uuid } from "renderer/app/shared/utils/generate-uuid";
+import { uuid } from "@shared/utils/generate-uuid";
 import { ConvertRow } from "./convert-row/convert-row";
 import { ItemBatchRadioGroup, ItemBatchSize } from "./image-to-icon-item-batch-radio-group";
 import Box from "@mui/material/Box";

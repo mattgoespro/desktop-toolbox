@@ -7,7 +7,6 @@ import { Configuration, LoaderOptionsPlugin, EnvironmentPlugin, DllPlugin } from
 import { merge } from "webpack-merge";
 import { dependencies } from "../package.json";
 import baseConfig, { checkNodeEnv } from "./config.base";
-import * as rendererConfig from "./config.renderer.dev";
 import webpackPaths from "./paths";
 
 checkNodeEnv("development");
@@ -20,7 +19,8 @@ const configuration: Configuration = {
   mode: "development",
   target: "electron-renderer",
   externals: ["fsevents", "crypto-browserify"],
-  module: rendererConfig.default.module,
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  module: require("./config.renderer.dev").default.module,
   entry: {
     renderer: Object.keys(dependencies || {})
   },

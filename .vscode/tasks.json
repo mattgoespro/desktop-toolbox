@@ -2,10 +2,10 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "build: preload",
+      "label": "start: preload",
       "type": "shell",
       "command": "webpack --config ./webpack/config.preload.dev.ts",
-      "detail": "Build preload script.",
+      "detail": "Build the electron preload script.",
       "problemMatcher": "$ts-checker-webpack"
     }
   ]

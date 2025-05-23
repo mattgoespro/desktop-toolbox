@@ -27,7 +27,6 @@ const configuration: Configuration = {
         test: /\.node$/,
         use: "node-loader"
       },
-
       {
         test: /\.[jt]sx?$/,
         exclude: /node_modules/,
