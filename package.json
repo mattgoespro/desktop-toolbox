@@ -102,8 +102,8 @@
     "webpack-merge": "^5.10.0"
   },
   "devEngines": {
-    "node": ">=14.x",
-    "npm": ">=7.x"
+    "node": ">=18.0.0",
+    "npm": ">=6.0.0"
   },
   "build": {
     "productName": "DesktopToolbox",
