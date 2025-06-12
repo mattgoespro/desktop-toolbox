@@ -1,27 +1,29 @@
-# External
-node_modules
-temp
+# Compiled binary addons (https://nodejs.org/api/addons.html)
+build/Release
 
-# Generated
-*.css.d.ts
-*.sass.d.ts
-*.scss.d.ts
+# Dependency directories
+node_modules/
 
-# Runtime
-pids
-*.pid
-*.seed
+# Output of 'npm pack'
+*.tgz
 
-# Exclude folders in resources/devtools-extensions except for the .gitkeep
-resources/devtool-extensions/**/*
-!resources/devtool-extensions/**/.gitkeep
+# dotenv environment variables file
+.env
+.env.test
 
-# Build
-release/app/dist
-release/build
-dll
+# Serverless directories
+.serverless/
 
-# Logs
-logs
-*.log
-npm-debug.log.*
+# FuseBox cache
+.fusebox/
+
+# Webpack
+.webpack/
+
+# Vite
+.vite/
+
+# Electron-Forge
+out/
+
+desktop.ini

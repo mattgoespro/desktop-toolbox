@@ -1,29 +1,28 @@
 {
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Electron: Main",
+      "name": "Attach to Electron Main",
       "type": "node",
-      "request": "launch",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "start"],
-      "env": {
-        "MAIN_ARGS": "--inspect=5858 --remote-debugging-port=9223"
-      }
+      "request": "attach",
+      "outFiles": ["${workspaceFolder}\\.webpack\\**\\*.js"],
+      "port": 9229,
+      "preLaunchTask": "start"
     },
     {
-      "name": "Electron: Renderer",
-      "type": "chrome",
+      "name": "Attach to Renderer",
+      "type": "node",
       "request": "attach",
-      "port": 9223,
-      "webRoot": "${workspaceFolder}",
-      "timeout": 15000
+      "outFiles": ["${workspaceFolder}\\.webpack\\**\\*.js"]
     }
   ],
   "compounds": [
     {
-      "name": "Electron: All",
-      "configurations": ["Electron: Main", "Electron: Renderer"]
+      "name": "Debug Application",
+      "configurations": ["Attach to Electron Main", "Attach to Renderer"]
     }
   ]
 }

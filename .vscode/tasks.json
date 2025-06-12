@@ -2,11 +2,29 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "start: preload",
-      "type": "shell",
-      "command": "webpack --config ./webpack/config.preload.dev.ts",
-      "detail": "Build the electron preload script.",
-      "problemMatcher": "$ts-checker-webpack"
+      "label": "start",
+      "type": "npm",
+      "script": "start",
+      "problemMatcher": [
+        "$ts-checker-webpack-watch",
+        {
+          "owner": "typescript",
+          "fileLocation": ["relative", "${workspaceFolder}"],
+          "severity": "info",
+          "source": "electron-forge",
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "^✔ Checking your system$",
+            "endsPattern": "^✔ Running preStart hook$"
+          },
+          "pattern": {
+            "regexp": "^✔ (.*)$",
+            "file": 1,
+            "message": 0
+          }
+        }
+      ],
+      "isBackground": true
     }
   ]
 }

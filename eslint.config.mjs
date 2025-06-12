@@ -1,37 +1,30 @@
-import eslint from "@eslint/js";
+import js from "@eslint/js";
+import globals from "globals";
 import tseslint from "typescript-eslint";
-import eslintReact from "eslint-plugin-react";
+import pluginReact from "eslint-plugin-react";
 
-export default tseslint.config(
+export default tseslint.config([
+  tseslint.configs.recommended,
   {
-    ignores: ["out/**/*", "node_modules/**/*", "temp/**/*"]
+    ignores: ["**/node_modules/**", "**/.webpack/**", "**/.react-router/**"]
   },
-  eslint.configs.recommended,
-  ...tseslint.configs.recommended,
+  pluginReact.configs.flat.recommended,
   {
-    rules: {
-      "no-unused-vars": "off",
-      "@typescript-eslint/no-unused-vars": [
-        "warn",
-        {
-          varsIgnorePattern: "^_",
-          argsIgnorePattern: "^_"
-        }
-      ]
-    }
-  },
-
-  {
-    ...eslintReact.configs.flat.recommended,
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
+    plugins: {
+      js
+    },
+    languageOptions: { globals: globals.browser },
     settings: {
       react: {
+        extends: ["js/recommended"],
         version: "detect"
       }
-    }
-  },
-  {
+    },
     rules: {
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
       "react/react-in-jsx-scope": "off"
     }
   }
-);
+]);

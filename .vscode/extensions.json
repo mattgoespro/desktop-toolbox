@@ -1,5 +1,7 @@
 {
   "recommendations": [
+    "github.copilot",
+    "github.copilot-chat",
     "dbaeumer.vscode-eslint",
     "herrmannplatz.npm-dependency-links",
     "mskelton.npm-outdated",
@@ -7,14 +9,18 @@
     "fabiospampinato.vscode-open-in-npm",
     "usernamehw.errorlens",
     "felipecaputo.git-project-manager",
-    "github.copilot",
-    "github.copilot-chat",
     "eamodio.gitlens",
-    "ibm.output-colorizer",
     "esbenp.prettier-vscode",
     "richie5um2.vscode-sort-json",
     "dsznajder.es7-react-js-snippets",
     "formulahendry.auto-rename-tag",
-    "yoavbls.pretty-ts-errors"
+    "nyxb.vscode-styled-colors",
+    "yoavbls.pretty-ts-errors",
+    "ambar.bundle-size",
+    "helgardrichard.helium-icon-theme",
+    "ibm.output-colorizer",
+    "meganrogge.template-string-converter",
+    "amodio.tsl-problem-matcher",
+    "antiantisepticeye.vscode-color-picker"
   ]
 }
