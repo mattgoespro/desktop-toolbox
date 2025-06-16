@@ -30,3 +30,8 @@ export type FileSelectedResponseEvent<Channel extends string> = ChannelEvent<
   CommonEventPayloadMap,
   "file-selected"
 >;
+
+export type CommonEvents<Channel extends string = string> =
+  | SelectFileActionEvent<Channel>
+  | SaveToFolderActionEvent<Channel>
+  | FileSelectedResponseEvent<Channel>;

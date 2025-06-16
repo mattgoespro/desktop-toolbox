@@ -2,22 +2,25 @@
 
 import type { GetInfo, GetAnnotations } from "react-router/internal";
 
-type Module = typeof import("../error-boundary.js")
+type Module = typeof import("../error-boundary.js");
 
 type Info = GetInfo<{
-  file: "./error-boundary.tsx",
-  module: Module
-}>
+  file: "./app/error-boundary.tsx";
+  module: Module;
+}>;
 
-type Matches = [{
-  id: "root";
-  module: typeof import("../root.js");
-}, {
-  id: "error-boundary";
-  module: typeof import("../error-boundary.js");
-}];
+type Matches = [
+  {
+    id: "root";
+    module: typeof import("../../root.js");
+  },
+  {
+    id: "app/error-boundary";
+    module: typeof import("../error-boundary.js");
+  }
+];
 
-type Annotations = GetAnnotations<Info & { module: Module, matches: Matches }>;
+type Annotations = GetAnnotations<Info & { module: Module; matches: Matches }>;
 
 export namespace Route {
   // links

@@ -27,4 +27,4 @@ export type ImageFileSelectedReplyEvent = ChannelEvent<
   "file-selected"
 >;
 
-export type ImageToIconEvents = ImageFileSelectedReplyEvent | ConvertReplyEvent;
+export type ImageToIconRendererEvents = ImageFileSelectedReplyEvent | ConvertReplyEvent;

@@ -13,24 +13,20 @@ type Pages = {
   "/": {
     params: {};
   };
+  "/image-to-icon-converter": {
+    params: {};
+  };
   "/*": {
     params: {
       "*": string;
     };
-  };
-  "/image-to-icon-converter": {
-    params: {};
   };
 };
 
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/*" | "/image-to-icon-converter";
-  };
-  "./error-boundary.tsx": {
-    id: "error-boundary";
-    page: "/*";
+    page: "/" | "/image-to-icon-converter" | "/*";
   };
   "./routes/dashboard/dashboard.tsx": {
     id: "routes/dashboard/dashboard";
@@ -39,5 +35,9 @@ type RouteFiles = {
   "./routes/tools/image-to-icon-converter/image-to-icon-converter.tsx": {
     id: "routes/tools/image-to-icon-converter/image-to-icon-converter";
     page: "/image-to-icon-converter";
+  };
+  "./app/error-boundary.tsx": {
+    id: "app/error-boundary";
+    page: "/*";
   };
 };

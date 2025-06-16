@@ -3,7 +3,7 @@ import { FlexBox } from "src/renderer/app/shared/components/flex-box";
 import Typography from "@mui/material/Typography";
 import { ToolTile } from "./tool-tile/tool-tile";
 
-export default function Dashboard({}) {
+export default function Dashboard() {
   return (
     <FlexBox direction="column" justify="start" align="center">
       <Typography variant="h1">Desktop Toolbox</Typography>

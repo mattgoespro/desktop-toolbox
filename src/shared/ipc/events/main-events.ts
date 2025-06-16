@@ -22,3 +22,5 @@ export type ConvertImageActionEvent = ChannelEvent<
   MainEventPayloadMap,
   "convert-image"
 >;
+
+export type ImageToIconMainEvents = SelectImageFileActionEvent | ConvertImageActionEvent;
