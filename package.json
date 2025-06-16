@@ -7,12 +7,13 @@
   "main": ".webpack/main/index.js",
   "scripts": {
     "start": "electron-forge start -i",
-    "prestart": "react-router -c src/renderer/react-router.config.ts typegen",
+    "prestart": "npm run typegen && tsc",
+    "typegen": "react-router -c src/renderer/react-router.config.ts typegen",
     "check": "tsc --noEmit",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts,.tsx ."
+    "lint": "eslint"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

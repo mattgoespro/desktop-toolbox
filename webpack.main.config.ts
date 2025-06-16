@@ -4,15 +4,10 @@ import { rules } from "./webpack.rules";
 import { plugins, resolve } from "./webpack.plugins";
 
 export const mainConfig: Configuration = {
-  /**
-   * This is the main entry point for your application, it's the first file
-   * that runs in the main process.
-   */
   entry: "./src/main/index.ts",
   output: {
     clean: true
   },
-  // Put your normal webpack config below here
   module: {
     rules
   },
