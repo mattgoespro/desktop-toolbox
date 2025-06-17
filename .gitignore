@@ -11,19 +11,16 @@ node_modules/
 .env
 .env.test
 
-# Serverless directories
-.serverless/
-
 # FuseBox cache
 .fusebox/
 
 # Webpack
 .webpack/
 
-# Vite
-.vite/
-
 # Electron-Forge
 out/
+
+# react-router generated types
+src/renderer/.react-router/
 
 desktop.ini

@@ -8,7 +8,7 @@
       "problemMatcher": [
         "$ts-checker-webpack-watch",
         {
-          "owner": "typescript",
+          "owner": "electron-forge",
           "fileLocation": ["relative", "${workspaceFolder}"],
           "severity": "info",
           "source": "electron-forge",
