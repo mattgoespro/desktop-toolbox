@@ -7,10 +7,12 @@
   "main": ".webpack/main/index.js",
   "scripts": {
     "start": "electron-forge start -i",
-    "prestart": "npm run typegen && tsc",
+    "prestart": "npm run typegen && npm run check",
     "typegen": "react-router -c src/renderer/react-router.config.ts typegen",
     "check": "tsc --noEmit",
     "package": "electron-forge package",
+    "prepackage": "npm run typegen && npm run check",
+    "build": "electron-forge make",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "eslint"
@@ -49,7 +51,7 @@
     "@react-router/dev": "^7.6.2",
     "@types/electron-squirrel-startup": "^1.0.2",
     "@types/react-dom": "^19.1.6",
-    "@vercel/webpack-asset-relocator-loader": "^1.7.3",
+    "@vercel/webpack-asset-relocator-loader": "^1.7.1",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^7.1.2",
     "electron": "36.4.0",

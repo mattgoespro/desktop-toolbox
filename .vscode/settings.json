@@ -19,37 +19,42 @@
     "source.fixAll.eslint": "always"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.linkedEditing": true,
   "eslint.codeActionsOnSave.mode": "problems",
   "eslint.enable": true,
   "eslint.format.enable": false,
-  "eslint.useFlatConfig": true,
   "eslint.probe": ["javascript", "typescript", "typescriptreact"],
   "eslint.run": "onType",
+  "eslint.useFlatConfig": true,
   "eslint.validate": ["javascript", "typescript", "typescriptreact"],
   "explorer.confirmDragAndDrop": false,
+  "files.associations": {
+    ".eslintignore": "ignore"
+  },
   "files.exclude": {
     "**/.git/**": true,
     "**/node_modules/**": true
   },
   "files.watcherExclude": {
     "**/.git/**": true,
+    "**/.vscode/**": true,
+    "**/.webpack/**": true,
     "**/node_modules/**": true,
-    "**/.vscode/**": true,
-    "**/.webpack/**": true,
-    "package-lock.json": true
+    "**/package-lock.json": true
   },
+  "npm-intellisense.recursivePackageJsonLookup": false,
+  "npm-outdated.majorUpdateProtection": false,
   "search.exclude": {
+    "**/*.{ts,js,mjs}": true,
     "**/.vscode/**": true,
     "**/.webpack/**": true,
-    "**/*.{ts,js,mjs}": true,
     "package-lock.json": true
   },
   "terminal.integrated.automationProfile.windows": {
     "args": ["-l"],
     "color": "terminal.ansiMagenta",
     "env": {
-      "PATH": "${workspaceFolder}\\node_modules\\.bin;${env:PATH}",
-      "NODE_ENV": "development"
+      "PATH": "${workspaceFolder}\\node_modules\\.bin;${env:PATH}"
     },
     "icon": "terminal-bash",
     "overrideName": true,
@@ -70,6 +75,5 @@
   },
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.iconTheme": "helium-icon-theme",
-  "editor.linkedEditing": true
+  "workbench.iconTheme": "helium-icon-theme"
 }
