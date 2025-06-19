@@ -19,7 +19,6 @@ const config: ForgeConfig = {
       FileDescription: packageJson.description
     }
   },
-  rebuildConfig: {},
   makers: [new MakerSquirrel({})],
   plugins: [
     new AutoUnpackNativesPlugin({}),
