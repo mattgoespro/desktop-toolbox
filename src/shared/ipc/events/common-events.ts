@@ -1,8 +1,8 @@
 import { ChannelEvent } from "../model";
 
 type CommonEventPayloadMap = {
-  "select-file": <T>() => {
-    options: T;
+  "select-file": {
+    options: unknown;
   };
   "file-selected": {
     filePath: string;

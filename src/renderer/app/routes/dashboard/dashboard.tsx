@@ -2,6 +2,7 @@ import { Outlet } from "react-router";
 import Typography from "@mui/material/Typography";
 import { ToolTile } from "./tool-tile/tool-tile";
 import { FlexBox } from "../../shared/components/flex-box";
+import { routes } from "../../shared/routes";
 
 export default function Dashboard() {
   return (
@@ -11,16 +12,14 @@ export default function Dashboard() {
         Select from a library of useful desktop utility applications for everyday use.
       </Typography>
       <FlexBox direction="row" align="center" justify="center" wrap>
-        <ToolTile
-          name="5 Minute Meditation Picker"
-          description="Meditate using a random 5 minute meditation video from the @5minutebygreatmeditation YouTube channel."
-          route="/meditation-picker"
-        />
-        <ToolTile
-          name="Image to Icon Converter"
-          description="Convert images to icons for use in your applications."
-          route="/image-to-icon"
-        />
+        {routes.map((route) => (
+          <ToolTile
+            key={route.route}
+            route={route.route}
+            name={route.name}
+            description={route.description}
+          />
+        ))}
       </FlexBox>
       <Outlet />
     </FlexBox>

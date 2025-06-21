@@ -28,8 +28,8 @@ export class DesktopToolsWindow {
     this.window = new BrowserWindow({
       title: packageJson.displayName,
       icon: path.join(this.resourcesPath, "icon.png"),
-      height: 600,
-      width: 800,
+      height: 720,
+      width: 1024,
       webPreferences: {
         preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
         nodeIntegration: true

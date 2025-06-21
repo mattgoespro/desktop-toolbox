@@ -17,14 +17,12 @@ export function ToolTile({ name, description, route }: ToolTileProps) {
     <Card raised variant="elevation" elevation={3}>
       <CardHeader
         title={name}
-        subheader={description}
         slotProps={{
-          title: { variant: "h5", textTransform: "uppercase" },
-          subheader: { variant: "body2" }
+          title: { variant: "h3", textTransform: "uppercase", color: "secondary" }
         }}
       ></CardHeader>
       <CardContent>
-        <Typography variant="body2">{}</Typography>
+        <Typography variant="body2">{description}</Typography>
       </CardContent>
       <CardActions>
         <Link

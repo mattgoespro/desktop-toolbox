@@ -19,13 +19,18 @@ const config: ForgeConfig = {
       FileDescription: packageJson.description
     }
   },
-  makers: [new MakerSquirrel({})],
+  makers: [
+    new MakerSquirrel({
+      usePackageJson: true
+    })
+  ],
   plugins: [
     new AutoUnpackNativesPlugin({}),
     new WebpackPlugin({
       mainConfig,
       renderer: {
         config: rendererConfig,
+        nodeIntegration: true,
         entryPoints: [
           {
             html: "./src/renderer/index.html",

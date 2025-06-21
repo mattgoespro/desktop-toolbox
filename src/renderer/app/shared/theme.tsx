@@ -39,8 +39,8 @@ export const theme = createTheme({
     fontFamily: "Roboto, sans-serif",
     fontSize: 14,
     h1: {
-      fontFamily: "Open Sans, sans-serif",
-      fontSize: "3.125em",
+      fontFamily: "Nunito, sans-serif",
+      fontSize: "3em",
       fontWeight: 500,
       lineHeight: 1,
       color: palette.text.primary,
@@ -49,14 +49,14 @@ export const theme = createTheme({
     h2: {
       fontFamily: "Inter, sans-serif",
       fontSize: "1.5em",
-      fontWeight: 200,
+      fontWeight: 300,
       color: palette.text.secondary,
       margin: "0.25rem 0.875rem"
     },
     h3: {
       fontFamily: "Inter, sans-serif",
-      fontSize: "1.25em",
-      fontWeight: 500,
+      fontSize: "1em",
+      fontWeight: 300,
       color: palette.text.secondary,
       margin: "0.5rem"
     },
@@ -69,15 +69,15 @@ export const theme = createTheme({
     },
     body1: {
       fontFamily: "Roboto, sans-serif",
-      fontSize: "1.25em",
+      fontSize: "1.125em",
       fontWeight: "normal",
       color: palette.text.primary
     },
     body2: {
       fontFamily: "Roboto, sans-serif",
-      fontSize: "1.125em",
-      fontWeight: "normal",
-      color: palette.text.primary
+      fontSize: "1em",
+      fontWeight: "300",
+      color: palette.text.secondary
     },
     caption: {
       fontFamily: "Inter, sans-serif",
@@ -133,6 +133,31 @@ export const theme = createTheme({
           borderBottom: `1px solid ${theme.palette.divider}`
         })
       }
+    },
+    MuiCard: {
+      defaultProps: {
+        raised: true,
+        variant: "elevation",
+        elevation: 3
+      },
+      styleOverrides: {
+        root: ({ theme }) => ({
+          backgroundColor: theme.palette.background.paper,
+          color: theme.palette.text.primary,
+          borderRadius: theme.shape.borderRadius,
+          boxShadow: theme.shadows[3],
+          margin: "0.5rem"
+        })
+      },
+      variants: [
+        {
+          props: { variant: "outlined", elevation: 3 },
+          style: ({ theme }) => ({
+            border: `1px solid ${theme.palette.divider}`,
+            backgroundColor: theme.palette.background.paper
+          })
+        }
+      ]
     }
   },
   spacing: createSpacing((value: number | string) => {
