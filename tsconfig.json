@@ -1,10 +1,5 @@
 {
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/renderer/.react-router/types/**/*",
-    "node_modules/@react-router"
-  ],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
   "compilerOptions": {
     "module": "nodenext",
     "target": "es2020",
@@ -17,11 +12,9 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "outDir": ".webpack",
-    "rootDirs": ["src/main", "src/renderer/app", "src/renderer/.react-router/types/app"],
     "paths": {
       "@main/*": ["src/main/*"],
-      "@shared/*": ["src/shared/*"],
-      "~/*": ["./*"]
+      "@shared/*": ["src/shared/*"]
     },
     "sourceMap": true
   }

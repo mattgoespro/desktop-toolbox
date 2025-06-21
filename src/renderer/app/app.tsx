@@ -2,13 +2,13 @@ import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./shared/theme";
 import { store } from "./store/store";
-import { Outlet } from "react-router";
+import { AppRouter } from "./app-router";
 
-export default function App() {
+export function App() {
   return (
     <ThemeProvider theme={theme}>
       <Provider store={store}>
-        <Outlet />
+        <AppRouter />
       </Provider>
     </ThemeProvider>
   );

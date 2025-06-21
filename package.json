@@ -7,11 +7,10 @@
   "main": ".webpack/main/index.js",
   "scripts": {
     "start": "electron-forge start -i",
-    "prestart": "npm run typegen && npm run check",
-    "typegen": "react-router -c src/renderer/react-router.config.ts typegen",
+    "prestart": "npm run check",
     "check": "tsc --noEmit",
     "package": "electron-forge package",
-    "prepackage": "npm run typegen && npm run check",
+    "prepackage": "npm run check",
     "build": "electron-forge make",
     "make": "electron-forge make",
     "publish": "electron-forge publish",

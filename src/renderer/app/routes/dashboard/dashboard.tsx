@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
-import { FlexBox } from "src/renderer/app/shared/components/flex-box";
 import Typography from "@mui/material/Typography";
 import { ToolTile } from "./tool-tile/tool-tile";
+import { FlexBox } from "../../shared/components/flex-box";
 
 export default function Dashboard() {
   return (

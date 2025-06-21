@@ -27,7 +27,13 @@ export function ToolTile({ name, description, route }: ToolTileProps) {
         <Typography variant="body2">{}</Typography>
       </CardContent>
       <CardActions>
-        <Link component={ReactRouterLink} to={route} underline="hover" color="primary">
+        <Link
+          component={ReactRouterLink}
+          to={route}
+          underline="hover"
+          color="primary"
+          relative="route"
+        >
           <Typography variant="button">Open Tool</Typography>
         </Link>
       </CardActions>
