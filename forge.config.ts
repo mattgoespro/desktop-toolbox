@@ -30,7 +30,7 @@ const config: ForgeConfig = {
       mainConfig,
       renderer: {
         config: rendererConfig,
-        nodeIntegration: true,
+        // nodeIntegration: true,
         entryPoints: [
           {
             html: "./src/renderer/index.html",

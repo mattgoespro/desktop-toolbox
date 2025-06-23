@@ -1,10 +1,8 @@
 import type { Configuration } from "webpack";
 import { rules } from "./webpack.rules";
 import { plugins, resolve } from "./webpack.plugins";
-import { merge } from "webpack-merge";
-import { commonConfig } from "./webpack.common.config";
 
-export const mainConfig: Configuration = merge(commonConfig, {
+export const mainConfig: Configuration = {
   entry: "./src/main/index.ts",
   output: {
     clean: true
@@ -14,4 +12,4 @@ export const mainConfig: Configuration = merge(commonConfig, {
   },
   plugins,
   resolve: resolve(".js", ".ts", ".jsx", ".tsx", ".css", ".json")
-});
+};
