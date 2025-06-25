@@ -1,5 +1,4 @@
-import path from "path";
-import electron, { app, Menu, shell, BrowserWindow } from "electron";
+import electron, { Menu, BrowserWindow } from "electron";
 import installDevToolExtension, {
   REDUX_DEVTOOLS,
   REACT_DEVELOPER_TOOLS
@@ -16,26 +15,39 @@ import packageJson from "../../package.json";
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
-export class DesktopToolsWindow {
-  private resourcesPath = app.isPackaged
-    ? path.join(process.resourcesPath, "assets")
-    : path.join(__dirname, "../../assets");
+type DesktopToolsWindowConfig = {
+  windowEvents: {
+    onReady: (window: BrowserWindow) => void;
+    onClose: (window: BrowserWindow) => void;
+  };
+  icon?: string;
+};
 
+export class DesktopToolsWindow {
   private window: BrowserWindow;
 
-  constructor() {
-    // Create the browser window.
+  constructor({ windowEvents, icon }: DesktopToolsWindowConfig) {
     this.window = new BrowserWindow({
       title: packageJson.displayName,
-      icon: path.join(this.resourcesPath, "icon.png"),
-      height: 720,
-      width: 1024,
+      icon,
+      width: 900,
+      height: 1920,
       webPreferences: {
         preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
         nodeIntegration: true
       },
       resizable: true
     });
+
+    this.window.on("ready-to-show", () => {
+      windowEvents.onReady(this.window);
+    });
+
+    this.window.on("close", () => {
+      windowEvents.onClose(this.window);
+    });
+
+    this.attachToMainProcess(imageToIconEventHandler);
   }
 
   private addWindowMenu() {
@@ -76,28 +88,11 @@ export class DesktopToolsWindow {
     Menu.setApplicationMenu(menu);
   }
 
-  public async addWindowEventListeners() {
-    this.window.on("ready-to-show", () => {
-      if (!this.window) {
-        throw new Error('"mainWindow" is not defined');
-      }
-
-      this.window.webContents.openDevTools();
-      this.window.show();
+  public onClose(callback: () => void) {
+    this.window.on("close", (event) => {
+      event.preventDefault();
+      callback();
     });
-
-    this.window.on("close", () => {
-      app.quit();
-    });
-
-    this.window.webContents.setWindowOpenHandler((edata) => {
-      shell.openExternal(edata.url);
-      return { action: "deny" };
-    });
-
-    this.attachToMainProcess(imageToIconEventHandler);
-
-    return this;
   }
 
   private attachToMainProcess(attachHandler: (ipcMain: Electron.IpcMain) => void) {
@@ -123,12 +118,13 @@ export class DesktopToolsWindow {
       try {
         await installDevToolExtension(extensionDetails.reference, {
           forceDownload: true,
+          session: this.window.webContents.session,
           loadExtensionOptions: {
             allowFileAccess: true
           }
         });
 
-        console.log(`Installed extension: ${extensionDetails.name} (${extensionId})`);
+        console.log(`Installed DevTools extension: ${extensionDetails.name} (${extensionId})`);
       } catch (error) {
         throw new Error(
           `Failed to install devtools extension: ${extensionDetails.name}\nMessage: ${error.message}\nDetails: ${error.stack}`
@@ -140,10 +136,9 @@ export class DesktopToolsWindow {
   }
 
   public async init() {
-    await this.addWindowEventListeners();
     await this.installDevToolExtensions();
-    await this.window.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
     this.addWindowMenu();
-    this.window.webContents.openDevTools();
+
+    await this.window.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
   }
 }

@@ -1,38 +1,26 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type HeadingState = {
-  title: string;
-  subtitle?: string;
+  heading?: string;
 };
 
 const initialState: HeadingState = {
-  title: "Dashboard",
-  subtitle: ""
+  heading: undefined
 };
 
 const headingSlice = createSlice({
   name: "heading",
   initialState,
   reducers: {
-    headingUpdated: {
-      reducer: (state, action: PayloadAction<HeadingState>) => {
-        state = action.payload;
-      },
-      prepare: (title: string, subtitle?: string) => {
-        return {
-          payload: {
-            title,
-            subtitle: subtitle ?? ""
-          }
-        };
-      }
+    headingChanged: (state, action: PayloadAction<string, "headingChanged">) => {
+      state.heading = action.payload;
     }
   }
 });
 
 // `createSlice` automatically generated action creators with these names.
 // export them as named exports from this "slice" file
-export const { headingUpdated } = headingSlice.actions;
+export const { headingChanged } = headingSlice.actions;
 
 // Export the slice reducer as the default export
 export default headingSlice.reducer;

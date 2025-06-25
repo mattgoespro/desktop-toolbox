@@ -1,17 +1,27 @@
 import { configureStore } from "@reduxjs/toolkit";
+import iconSmithReducer from "./slices/iconsmith.slice";
 import headingReducer from "./slices/heading.slice";
 
 export const store = configureStore({
   reducer: {
-    heading: headingReducer
+    iconSmithReducer,
+    headingReducer
   },
   preloadedState: {},
-  devTools: process.env.NODE_ENV !== "production"
+  /**
+   * Redux DevTools configuration
+   */
+  devTools:
+    process.env.NODE_ENV === "development"
+      ? {
+          name: "Desktop Toolbox DevTools",
+          trace: true,
+          traceLimit: 25,
+          shouldHotReload: true
+        }
+      : false
 });
 
-// Get the type of our store variable
 export type AppStore = typeof store;
-// Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<AppStore["getState"]>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = AppStore["dispatch"];

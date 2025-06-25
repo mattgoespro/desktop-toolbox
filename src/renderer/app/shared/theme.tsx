@@ -14,10 +14,10 @@ export const theme = createTheme({
       main: "#1976d2"
     },
     secondary: {
-      main: "#dc004e"
+      main: "#e7457e"
     },
     error: {
-      main: "#f44336"
+      main: "#ff5151"
     },
     info: {
       main: "#2196f3"

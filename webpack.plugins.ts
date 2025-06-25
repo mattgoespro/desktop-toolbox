@@ -5,7 +5,14 @@ import { DefinePlugin } from "webpack";
 export const plugins = [
   new ForkTsCheckerWebpackPlugin({
     logger: "webpack-infrastructure",
-    async: true
+    async: true,
+    typescript: {
+      memoryLimit: 4096, // Increase memory limit
+      diagnosticOptions: {
+        semantic: true,
+        syntactic: false
+      }
+    }
   }),
   new DefinePlugin({
     "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || "development")

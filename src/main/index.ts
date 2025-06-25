@@ -1,25 +1,28 @@
 /**
- * This module executes inside of electron's main process.
+ * Executes inside of electron's main process.
  */
-import { app, BrowserWindow } from "electron";
+import { app } from "electron";
 import { DesktopToolsWindow } from "./window";
+import path from "path";
+
+async function createApplicationWindow() {
+  const window = new DesktopToolsWindow({
+    windowEvents: {
+      onReady: (window) => {
+        window.show();
+      },
+      onClose: (window) => {
+        window.close();
+      }
+    },
+    icon: app.isPackaged
+      ? path.join(process.resourcesPath, "assets")
+      : path.join(__dirname, "../../assets")
+  });
+  return window;
+}
 
 app.on("ready", async () => {
-  createApplicationWindow();
+  const appWindow = await createApplicationWindow();
+  await appWindow.init();
 });
-
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
-});
-
-app.on("activate", () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createApplicationWindow();
-  }
-});
-function createApplicationWindow() {
-  const window = new DesktopToolsWindow();
-  window.init();
-}

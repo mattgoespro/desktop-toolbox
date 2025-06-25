@@ -12,6 +12,7 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "outDir": ".webpack",
+    "types": ["node", "react", "react-dom"],
     "paths": {
       "@main/*": ["src/main/*"],
       "@shared/*": ["src/shared/*"]

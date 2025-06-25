@@ -7,13 +7,19 @@
       "request": "attach",
       "outFiles": ["${workspaceFolder}\\.webpack\\**\\*.js"],
       "port": 9229,
-      "preLaunchTask": "start"
+      "preLaunchTask": "start",
+      "env": {
+        "NODE_ENV": "development"
+      }
     },
     {
       "name": "Attach to Renderer",
       "type": "node",
       "request": "attach",
-      "outFiles": ["${workspaceFolder}\\.webpack\\**\\*.js"]
+      "outFiles": ["${workspaceFolder}\\.webpack\\**\\*.js"],
+      "env": {
+        "NODE_ENV": "development"
+      }
     }
   ],
   "compounds": [

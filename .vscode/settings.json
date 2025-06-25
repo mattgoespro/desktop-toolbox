@@ -75,5 +75,6 @@
   },
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.iconTheme": "helium-icon-theme"
+  "workbench.iconTheme": "helium-icon-theme",
+  "vscode-color-picker.languages": ["typescript", "typescriptreact"]
 }
