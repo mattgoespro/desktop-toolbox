@@ -1,3 +1,4 @@
+import { ImageFileSelectedReplyEvent } from "@shared/ipc/events/image-to-icon/renderer-events";
 import { pickFile } from "@shared/ipc/main/file-picker-dialog";
 import { IpcMainEvent } from "electron";
 import sharp from "sharp";
@@ -13,7 +14,7 @@ export const onSelectFileEvent = async (event: IpcMainEvent) => {
     fileExtensionFilter: ["jpg", "jpeg", "png", "gif", "svg"]
   });
 
-  if (!imagePath) {
+  if (imagePath == null) {
     event.reply("image-to-icon", {
       event: "convert-image",
       payload: {
@@ -25,13 +26,13 @@ export const onSelectFileEvent = async (event: IpcMainEvent) => {
     return;
   }
 
-  // check if the image dimensions are valid
+  // Check if the image dimensions are valid
   const image = sharp(imagePath);
   const imageMetadata = await image.metadata();
 
   if (imageMetadata.width !== imageMetadata.height) {
-    event.reply("image-to-icon", {
-      event: "convert-image",
+    event.reply<ImageFileSelectedReplyEvent>("image-to-icon", {
+      event: "file-selected",
       payload: {
         error: {
           message: "Image dimensions must be equal."
@@ -41,7 +42,7 @@ export const onSelectFileEvent = async (event: IpcMainEvent) => {
     return;
   }
 
-  event.reply("image-to-icon", {
+  event.reply<ImageFileSelectedReplyEvent>("image-to-icon", {
     event: "file-selected",
     payload: {
       filePath: imagePath

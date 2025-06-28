@@ -30,8 +30,8 @@ export class DesktopToolsWindow {
     this.window = new BrowserWindow({
       title: packageJson.displayName,
       icon,
-      width: 900,
-      height: 1920,
+      width: 1200,
+      height: 1600,
       webPreferences: {
         preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
         nodeIntegration: true
@@ -59,31 +59,28 @@ export class DesktopToolsWindow {
             label: "Exit",
             role: "quit"
           },
-          { label: "Reload", role: "reload" },
-          // open devtools
+          { label: "Reload", role: "reload", accelerator: "Ctrl+R" },
           {
             label: "DevTools",
-            role: "toggleDevTools"
+            role: "toggleDevTools",
+            accelerator: "Ctrl+`"
           }
         ]
       }
     ]);
 
-    if (inDebugMode()) {
-      this.window.webContents.on("context-menu", (_, props) => {
-        const { x, y } = props;
+    this.window.webContents.on("context-menu", (_, props) => {
+      const { x, y } = props;
 
-        Menu.buildFromTemplate([
-          {
-            label: "Inspect element",
-            click: () => {
-              this.window.webContents.inspectElement(x, y);
-            }
+      Menu.buildFromTemplate([
+        {
+          label: "Inspect element",
+          click: () => {
+            this.window.webContents.inspectElement(x, y);
           }
-        ]).popup({ window: this.window });
-      });
-      return;
-    }
+        }
+      ]).popup({ window: this.window });
+    });
 
     Menu.setApplicationMenu(menu);
   }
@@ -127,7 +124,11 @@ export class DesktopToolsWindow {
         console.log(`Installed DevTools extension: ${extensionDetails.name} (${extensionId})`);
       } catch (error) {
         throw new Error(
-          `Failed to install devtools extension: ${extensionDetails.name}\nMessage: ${error.message}\nDetails: ${error.stack}`
+          [
+            `Failed to install devtools extension: ${extensionDetails.name}`,
+            `Message: ${error.message}`,
+            `Details: ${error.stack}`
+          ].join("\n")
         );
       }
     }
@@ -137,8 +138,12 @@ export class DesktopToolsWindow {
 
   public async init() {
     await this.installDevToolExtensions();
-    this.addWindowMenu();
 
     await this.window.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+
+    if (inDebugMode()) {
+      this.addWindowMenu();
+      this.window.webContents.openDevTools({ mode: "right" });
+    }
   }
 }

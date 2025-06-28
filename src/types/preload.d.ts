@@ -15,6 +15,7 @@ declare global {
   interface Window {
     electron: ElectronHandler;
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: typeof compose;
+    __REACT_DEVTOOLS_GLOBAL_HOOK__: unknown;
   }
 }
 

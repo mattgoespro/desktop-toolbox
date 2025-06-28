@@ -30,11 +30,12 @@ const config: ForgeConfig = {
       mainConfig,
       renderer: {
         config: rendererConfig,
-        // nodeIntegration: true,
         entryPoints: [
           {
             html: "./src/renderer/index.html",
-            js: "./src/renderer/index.tsx",
+            js: `./src/renderer/${
+              process.env.NODE_ENV === "development" ? "index.dev.tsx" : "index.tsx"
+            }`,
             name: "main_window",
             preload: {
               js: "./src/shared/framework/preload.ts"
@@ -43,7 +44,7 @@ const config: ForgeConfig = {
         ]
       },
       port: 9222,
-      devContentSecurityPolicy: `default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-eval'; connect-src 'self' ws://localhost:3000; img-src 'self' data:;`
+      devContentSecurityPolicy: `default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-eval'; connect-src 'self' ws://localhost:9222; img-src 'self' data:;`
     }),
     /**
      * Enable/disable various Electron functionality at package time
