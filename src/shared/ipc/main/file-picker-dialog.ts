@@ -4,34 +4,21 @@ import { BrowserWindow, app, dialog } from "electron";
 
 export interface PickFileOptions {
   dialogTitle: string;
-  dialogAction: {
-    type: "saveFile" | "openFile" | "openDirectory";
-    label: string;
-  };
   fileExtensionPreset: string;
   fileExtensionFilter?: string[];
 }
 
-export function pickFile(options: PickFileOptions) {
-  let property = null;
-
-  switch (options.dialogAction.type) {
-    case "openFile":
-      property = "openFile";
-      break;
-    case "openDirectory":
-      property = "openDirectory";
-      break;
-    default:
-      return;
-  }
-
+export function pickFile({
+  dialogTitle,
+  fileExtensionPreset,
+  fileExtensionFilter
+}: PickFileOptions) {
   const selectedFiles = dialog.showOpenDialogSync(BrowserWindow.getFocusedWindow(), {
-    filters: [{ name: options.fileExtensionPreset, extensions: options.fileExtensionFilter ?? [] }],
-    properties: [property],
-    buttonLabel: options.dialogAction.label,
+    title: dialogTitle,
+    properties: ["openFile"],
+    buttonLabel: "Select File",
     defaultPath: app.getPath("desktop"),
-    title: options.dialogTitle
+    filters: [{ name: fileExtensionPreset, extensions: fileExtensionFilter ?? [] }]
   });
 
   if (selectedFiles == null || selectedFiles.length === 0) {
@@ -51,25 +38,21 @@ export interface SaveFileOptions {
   dialogAction: {
     label: string;
   };
-  fileName?: string;
-  fileExtensionFilter?: {
-    name: string;
-    extensions: string[];
-  };
+  defaultSaveFileName?: string;
 }
 
-export function saveFile(options: SaveFileOptions) {
-  const selectedFile = dialog.showSaveDialogSync(BrowserWindow.getFocusedWindow(), {
-    buttonLabel: options.dialogAction.label,
+export function selectFileDestination({
+  dialogTitle,
+  dialogAction,
+  defaultSaveFileName
+}: SaveFileOptions) {
+  const fileDestination = dialog.showSaveDialogSync(BrowserWindow.getFocusedWindow(), {
+    buttonLabel: dialogAction.label,
     properties: ["showOverwriteConfirmation"],
-    defaultPath: path.join(app.getPath("desktop"), options.fileName ?? ""),
-    title: options.dialogTitle,
-    filters: [options.fileExtensionFilter]
+    message: "Select the file destination directory",
+    defaultPath: defaultSaveFileName ?? path.join(app.getPath("desktop"), "icon.ico"),
+    title: dialogTitle
   });
 
-  if (selectedFile == null) {
-    return;
-  }
-
-  return selectedFile;
+  return fileDestination;
 }

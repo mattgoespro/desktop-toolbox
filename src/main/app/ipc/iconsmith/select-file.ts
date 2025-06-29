@@ -1,4 +1,6 @@
-import { ImageFileSelectedReplyEvent } from "@shared/ipc/events/image-to-icon/renderer-events";
+import { IconSmithChannel } from "@shared/ipc/channels";
+import { FileSelectedReplyEvent } from "@shared/ipc/events/common-events";
+import { ConvertImageToIconActionEvent } from "@shared/ipc/events/image-to-icon/main-events";
 import { pickFile } from "@shared/ipc/main/file-picker-dialog";
 import { IpcMainEvent } from "electron";
 import sharp from "sharp";
@@ -6,17 +8,13 @@ import sharp from "sharp";
 export const onSelectFileEvent = async (event: IpcMainEvent) => {
   const imagePath = pickFile({
     dialogTitle: "Select an image",
-    dialogAction: {
-      type: "openFile",
-      label: "Select Image"
-    },
     fileExtensionPreset: "Images",
     fileExtensionFilter: ["jpg", "jpeg", "png", "gif", "svg"]
   });
 
   if (imagePath == null) {
-    event.reply("image-to-icon", {
-      event: "convert-image",
+    event.reply<ConvertImageToIconActionEvent>("iconsmith", {
+      event: "convert-image-to-icon",
       payload: {
         error: {
           message: "No file selected."
@@ -31,7 +29,7 @@ export const onSelectFileEvent = async (event: IpcMainEvent) => {
   const imageMetadata = await image.metadata();
 
   if (imageMetadata.width !== imageMetadata.height) {
-    event.reply<ImageFileSelectedReplyEvent>("image-to-icon", {
+    event.reply<FileSelectedReplyEvent<IconSmithChannel>>("iconsmith", {
       event: "file-selected",
       payload: {
         error: {
@@ -42,7 +40,7 @@ export const onSelectFileEvent = async (event: IpcMainEvent) => {
     return;
   }
 
-  event.reply<ImageFileSelectedReplyEvent>("image-to-icon", {
+  event.reply<FileSelectedReplyEvent<IconSmithChannel>>("iconsmith", {
     event: "file-selected",
     payload: {
       filePath: imagePath

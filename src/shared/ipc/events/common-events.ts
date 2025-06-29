@@ -5,7 +5,10 @@ type CommonEventPayloadMap = {
     options: unknown;
   };
   "file-selected": {
-    filePath: string;
+    filePath?: string;
+    error?: {
+      message: string;
+    };
   };
   "save-to-directory": {
     filePath: string;
@@ -19,19 +22,8 @@ export type SelectFileActionEvent<Channel extends string> = ChannelEvent<
   "select-file"
 >;
 
-export type SaveToFolderActionEvent<Channel extends string> = ChannelEvent<
-  Channel,
-  CommonEventPayloadMap,
-  "save-to-directory"
->;
-
-export type FileSelectedResponseEvent<Channel extends string> = ChannelEvent<
+export type FileSelectedReplyEvent<Channel extends string> = ChannelEvent<
   Channel,
   CommonEventPayloadMap,
   "file-selected"
 >;
-
-export type CommonEvents<Channel extends string = string> =
-  | SelectFileActionEvent<Channel>
-  | SaveToFolderActionEvent<Channel>
-  | FileSelectedResponseEvent<Channel>;

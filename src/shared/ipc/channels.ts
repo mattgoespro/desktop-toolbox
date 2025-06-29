@@ -1,1 +1,1 @@
-export type ImageToIconChannel = "image-to-icon";
+export type IconSmithChannel = "iconsmith";

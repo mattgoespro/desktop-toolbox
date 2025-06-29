@@ -5,13 +5,20 @@ import IconButton from "@mui/material/IconButton";
 import Collapse from "@mui/material/Collapse";
 import CloseIcon from "@mui/icons-material/Close";
 
-export default function AlertPopup() {
+type AlertPopupProps = {
+  message: string;
+  severity: "error" | "warning" | "info" | "success";
+  onClose: () => void;
+};
+
+export function AlertPopup({ message, severity, onClose }: AlertPopupProps) {
   const [open, setOpen] = React.useState(true);
 
   return (
     <Box sx={{ width: "100%" }}>
       <Collapse in={open}>
         <Alert
+          severity={severity}
           action={
             <IconButton
               aria-label="close"
@@ -19,6 +26,7 @@ export default function AlertPopup() {
               size="small"
               onClick={() => {
                 setOpen(false);
+                onClose();
               }}
             >
               <CloseIcon fontSize="inherit" />
@@ -26,7 +34,7 @@ export default function AlertPopup() {
           }
           sx={{ mb: 2 }}
         >
-          Click the close icon to see the Collapse transition in action!
+          {message}
         </Alert>
       </Collapse>
     </Box>

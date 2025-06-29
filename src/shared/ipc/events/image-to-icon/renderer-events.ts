@@ -1,5 +1,6 @@
-import { ImageToIconChannel } from "../../channels";
+import { IconSmithChannel } from "../../channels";
 import { ChannelEvent } from "../../model";
+import { SelectFileActionEvent } from "../common-events";
 
 export type ReplyEventMap = {
   "image-converted": {
@@ -17,15 +18,18 @@ export type ReplyEventMap = {
 };
 
 export type ImageConvertedReplyEvent = ChannelEvent<
-  ImageToIconChannel,
+  IconSmithChannel,
   ReplyEventMap,
   "image-converted"
 >;
 
 export type ImageFileSelectedReplyEvent = ChannelEvent<
-  ImageToIconChannel,
+  IconSmithChannel,
   ReplyEventMap,
   "file-selected"
 >;
 
-export type ImageToIconRendererEvents = ImageFileSelectedReplyEvent | ImageConvertedReplyEvent;
+export type ImageToIconRendererEvents =
+  | SelectFileActionEvent<IconSmithChannel>
+  | ImageFileSelectedReplyEvent
+  | ImageConvertedReplyEvent;
