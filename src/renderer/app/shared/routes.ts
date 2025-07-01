@@ -1,7 +1,7 @@
 export const routes = [
   {
-    route: "/image-to-icon-converter",
-    name: "Image to Icon Converter",
+    route: "/tools/iconsmith",
+    name: "IconSmith",
     description: "Convert images to icons for use in your applications."
   }
 ];

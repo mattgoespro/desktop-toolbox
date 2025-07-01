@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import { headingChanged } from "./store/slices/heading.slice";
 import Box from "@mui/material/Box";
 
-export function Shell() {
+export default function Shell() {
   const dispatch = useAppDispatch();
   const heading = useAppSelector((state) => state.headingReducer.heading);
 

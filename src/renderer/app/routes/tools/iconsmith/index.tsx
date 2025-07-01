@@ -13,7 +13,7 @@ import { FlexBox } from "src/renderer/app/shared/components/flex-box";
 import { useAppDispatch } from "src/renderer/app/store/hooks";
 import { fileSelected } from "src/renderer/app/store/slices/iconsmith.slice";
 
-export function IconSmith() {
+export default function IconSmith() {
   const [selectedImagePath, setSelectedImagePath] = useState<string | null>(null);
   const [alert, setAlert] = useState<{
     message: string;

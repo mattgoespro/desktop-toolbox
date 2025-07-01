@@ -1,17 +1,30 @@
-import { HashRouter, Route, Routes } from "react-router";
+import { createHashRouter, RouterProvider } from "react-router";
+import IconSmith from "./routes/tools/iconsmith";
+import Shell from "./shell";
 import Dashboard from "./routes/dashboard/dashboard";
-import { IconSmith } from "./routes/tools/iconsmith";
-import { Shell } from "./shell";
+
+const router = createHashRouter([
+  {
+    path: "/",
+    Component: Shell,
+    children: [
+      {
+        index: true,
+        Component: Dashboard
+      },
+      {
+        path: "tools",
+        children: [
+          {
+            path: "iconsmith",
+            Component: IconSmith
+          }
+        ]
+      }
+    ]
+  }
+]);
 
 export function AppRouter() {
-  return (
-    <HashRouter>
-      <Routes>
-        <Route element={<Shell />}>
-          <Route index element={<Dashboard />} />
-          <Route path="/image-to-icon-converter" element={<IconSmith />} />
-        </Route>
-      </Routes>
-    </HashRouter>
-  );
+  return <RouterProvider router={router} />;
 }

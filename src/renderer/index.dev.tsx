@@ -13,9 +13,8 @@ async function waitForReactDevTools() {
     }
   }
 }
-(async () => {
-  await waitForReactDevTools();
 
+waitForReactDevTools().then(() => {
   createRoot(document.getElementById("root")!).render(<App />);
   console.log(`Launched renderer application in ${process.env.NODE_ENV} mode.`);
-})();
+});

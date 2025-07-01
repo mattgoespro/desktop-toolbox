@@ -2,7 +2,7 @@
  * Executes inside of electron's main process.
  */
 import { app } from "electron";
-import { DesktopToolsWindow } from "./window";
+import { DesktopToolsWindow } from "./app/window";
 import path from "path";
 
 async function createApplicationWindow() {
@@ -11,8 +11,8 @@ async function createApplicationWindow() {
       onReady: (window) => {
         window.show();
       },
-      onClose: (window) => {
-        window.close();
+      onClose: () => {
+        app.quit();
       }
     },
     icon: app.isPackaged
