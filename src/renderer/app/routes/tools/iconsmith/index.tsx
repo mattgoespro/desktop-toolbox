@@ -12,6 +12,7 @@ import { AlertPopup } from "src/renderer/app/shared/components/alert-popup";
 import { FlexBox } from "src/renderer/app/shared/components/flex-box";
 import { useAppDispatch } from "src/renderer/app/store/hooks";
 import { fileSelected } from "src/renderer/app/store/slices/iconsmith.slice";
+import Paper from "@mui/material/Paper";
 
 export default function IconSmith() {
   const [selectedImagePath, setSelectedImagePath] = useState<string | null>(null);
@@ -80,34 +81,41 @@ export default function IconSmith() {
   }
 
   return (
-    <FlexBox direction="row" justify="center" align="center" sx={{ width: "100%", gap: 1 }}>
-      {(selectedImagePath && <Typography variant="body2">{selectedImagePath}</Typography>) ?? (
-        <Typography variant="body1" sx={{ flexBasis: "50%" }}>
-          Select an image
-        </Typography>
-      )}
+    <Paper variant="outlined">
+      <FlexBox direction="row" justify="center" align="center" sx={{ width: "100%", gap: 1 }}>
+        {(selectedImagePath && <Typography variant="body2">{selectedImagePath}</Typography>) ?? (
+          <Typography variant="body2" sx={{ flexBasis: "50%" }}>
+            Select an image
+          </Typography>
+        )}
 
-      <Button variant="outlined" onClick={onSelectImageFile} size="small" sx={{ flexBasis: "15%" }}>
-        Select
-      </Button>
-      <Button
-        variant="text"
-        size="small"
-        onClick={onConvertImage}
-        disabled={selectedImagePath == null}
-        sx={{ flexBasis: "15%" }}
-      >
-        Convert
-      </Button>
-      {alert && (
-        <AlertPopup
-          severity={alert.severity ?? "error"}
-          message={alert.message}
-          onClose={() => {
-            setAlert(null);
-          }}
-        />
-      )}
-    </FlexBox>
+        <Button
+          variant="outlined"
+          onClick={onSelectImageFile}
+          size="small"
+          sx={{ flexBasis: "15%" }}
+        >
+          Select
+        </Button>
+        <Button
+          variant="text"
+          size="small"
+          onClick={onConvertImage}
+          disabled={selectedImagePath == null}
+          sx={{ flexBasis: "15%" }}
+        >
+          Convert
+        </Button>
+        {alert && (
+          <AlertPopup
+            severity={alert.severity ?? "error"}
+            message={alert.message}
+            onClose={() => {
+              setAlert(null);
+            }}
+          />
+        )}
+      </FlexBox>
+    </Paper>
   );
 }

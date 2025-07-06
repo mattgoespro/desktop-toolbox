@@ -1,0 +1,33 @@
+{
+  // File template for creating a Redux slice
+  "Redux Slice Template": {
+    "prefix": "redux-slice",
+    "isFileTemplate": true,
+    "scope": "typescript",
+    "body": [
+      "import { createSlice, PayloadAction } from '@reduxjs/toolkit';",
+      "",
+      "type ${1:State} {",
+      "",
+      "}",
+      "",
+      "const initialState: ${1:State} = {",
+      "};",
+      "",
+      "const ${2:sliceName}Slice = createSlice({",
+      "  name: '${2:sliceName}',",
+      "  initialState,",
+      "  reducers: {",
+      "    set${3:Property}(state, action: PayloadAction<${3:type}>) {",
+      "      state.${2:property} = action.payload;",
+      "    },",
+      "  },",
+      "});",
+      "",
+      "export const { set${6:Property} } = ${5:sliceName}Slice.actions;",
+      "",
+      "export default ${5:sliceName}Slice.reducer;"
+    ],
+    "description": "Redux slice template for creating a Redux slice with initial state and actions."
+  }
+}

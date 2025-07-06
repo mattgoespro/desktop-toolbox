@@ -30,7 +30,8 @@ export const FlexBox = createStyled(Box, {
       justifyContent: justify,
       alignItems: align,
       gap: theme.spacing(gap),
-      flexWrap: wrap ? "wrap" : undefined
+      flexWrap: wrap ? "wrap" : undefined,
+      width: "100%"
     };
   }
 );

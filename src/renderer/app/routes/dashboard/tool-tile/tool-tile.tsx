@@ -41,12 +41,12 @@ export function ToolTile({ name, description, route }: ToolTileProps) {
         <Link
           component={ReactRouterLink}
           to={route}
-          underline="always"
+          underline="none"
           color="primary"
           relative="route"
           onClick={onOpenTool}
         >
-          <Typography variant="button" color="secondary">
+          <Typography variant="button" color="primary">
             Open Tool
           </Typography>
         </Link>

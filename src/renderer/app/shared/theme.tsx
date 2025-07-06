@@ -11,7 +11,7 @@ export const theme = createTheme({
       white: "#f0f0f0"
     },
     primary: {
-      main: "#1976d2"
+      main: "#4fa7ff"
     },
     secondary: {
       main: "#e7457e"
@@ -69,7 +69,7 @@ export const theme = createTheme({
     },
     body1: {
       fontFamily: "Roboto, sans-serif",
-      fontSize: "1.125em",
+      fontSize: "1em",
       fontWeight: "normal",
       color: palette.text.primary
     },
@@ -158,6 +158,17 @@ export const theme = createTheme({
           })
         }
       ]
+    },
+    MuiPaper: {
+      defaultProps: {
+        variant: "outlined"
+      },
+      styleOverrides: {
+        root: ({ theme }) => ({
+          width: "100%",
+          backgroundColor: theme.palette.background.paper
+        })
+      }
     }
   },
   spacing: createSpacing((value: number | string) => {
@@ -169,6 +180,37 @@ export const theme = createTheme({
   }),
   shape: {
     borderRadius: 4
+  },
+  transitions: {
+    duration: {
+      shortest: 150,
+      shorter: 200,
+      short: 250,
+      standard: 300,
+      complex: 375,
+      enteringScreen: 225,
+      leavingScreen: 195
+    },
+    easing: {
+      easeInOut: "cubic-bezier(0.4, 0, 0.2, 1)",
+      easeOut: "cubic-bezier(0.0, 0, 0.2, 1)",
+      easeIn: "cubic-bezier(0.4, 0, 1, 1)",
+      sharp: "cubic-bezier(0.4, 0, 0.6, 1)"
+    },
+    create: (props, options) => {
+      const duration = options?.duration ?? "standard";
+      const easing = options?.easing ?? "easeInOut";
+      const delay = options?.delay ? `, ${options.delay}` : "";
+
+      if (Array.isArray(props)) {
+        return `transition: ${props.join(", ")} ${duration}ms ${easing}${delay};`;
+      }
+
+      return `transition: ${props} ${duration}ms ${easing}${delay};`;
+    },
+    getAutoHeightDuration: (height) => {
+      return Math.round(height / 36) * 150; // 150ms per line
+    }
   }
 });
 

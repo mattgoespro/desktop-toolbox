@@ -15,7 +15,7 @@ export function AlertPopup({ message, severity, onClose }: AlertPopupProps) {
   const [open, setOpen] = React.useState(true);
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ position: "absolute", top: 5, left: 5, zIndex: 1000 }}>
       <Collapse in={open}>
         <Alert
           severity={severity}
