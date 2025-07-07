@@ -47,7 +47,7 @@ const config: ForgeConfig = {
       devContentSecurityPolicy: `default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-eval'; connect-src 'self' ws://localhost:9222; img-src 'self' data:;`
     }),
     /**
-     * Enable/disable various Electron functionality at package time
+     * Enable/disable various Electron functionality for packaged applications.
      */
     new FusesPlugin({
       version: FuseVersion.V1,

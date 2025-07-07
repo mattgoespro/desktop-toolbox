@@ -1,9 +1,9 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 import IconButton from "@mui/material/IconButton";
-import Collapse from "@mui/material/Collapse";
+import Slide from "@mui/material/Slide";
 import CloseIcon from "@mui/icons-material/Close";
+import { useEffect, useState } from "react";
 
 type AlertPopupProps = {
   message: string;
@@ -12,11 +12,24 @@ type AlertPopupProps = {
 };
 
 export function AlertPopup({ message, severity, onClose }: AlertPopupProps) {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    // Start the open animation immediately after mount
+    setOpen(true);
+
+    // Automatically close the alert after 5 seconds
+    const timer = setTimeout(() => {
+      setOpen(false);
+      onClose();
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [onClose]);
 
   return (
-    <Box sx={{ position: "absolute", top: 5, left: 5, zIndex: 1000 }}>
-      <Collapse in={open}>
+    <Box sx={{ position: "absolute", bottom: 0, right: 0, zIndex: 1000, m: 2 }}>
+      <Slide in={open} easing="ease-out" timeout={2000}>
         <Alert
           severity={severity}
           action={
@@ -32,11 +45,10 @@ export function AlertPopup({ message, severity, onClose }: AlertPopupProps) {
               <CloseIcon fontSize="inherit" />
             </IconButton>
           }
-          sx={{ mb: 2 }}
         >
           {message}
         </Alert>
-      </Collapse>
+      </Slide>
     </Box>
   );
 }

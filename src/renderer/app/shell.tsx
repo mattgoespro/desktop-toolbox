@@ -9,20 +9,30 @@ import { headingChanged } from "./store/slices/heading.slice";
 import Box from "@mui/material/Box";
 import { useMemo } from "react";
 import { AlertPopup } from "./shared/components/alert-popup";
+import { store } from "./store/store";
+import { savePersistedState } from "./store/utils/persistence";
 
 export default function Shell() {
   const dispatch = useAppDispatch();
   const heading = useAppSelector((state) => state.headingReducer.heading);
-
   const location = useLocation();
 
-  const pageAlerts = useAppSelector((state) => {
-    if (["/", "/tools/iconsmith"].includes(location.pathname)) {
-      return state.alertsReducer["iconsmith"];
-    }
-  });
+  const pageAlerts =
+    useAppSelector((state) => {
+      if (["/tools/iconsmith"].includes(location.pathname)) {
+        return state.alertsReducer["iconsmith"];
+      }
+    }) ?? [];
 
   console.log("Current location in shell:", location.pathname);
+
+  // Subscribe to store changes and persist heading state
+  store.subscribe(() => {
+    const state = store.getState();
+    savePersistedState({
+      heading: { heading: state.headingReducer.heading }
+    });
+  });
 
   function onNavigateBack() {
     dispatch(headingChanged(undefined));

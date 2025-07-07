@@ -2,7 +2,7 @@ import { Outlet } from "react-router";
 import Typography from "@mui/material/Typography";
 import { ToolTile } from "./tool-tile/tool-tile";
 import { FlexBox } from "../../shared/components/flex-box";
-import { routes } from "../../shared/routes";
+import { routes } from "../../app-router";
 
 export default function Dashboard() {
   return (

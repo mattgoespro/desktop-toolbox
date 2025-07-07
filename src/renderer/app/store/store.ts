@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import iconSmithReducer from "./slices/iconsmith.slice";
 import headingReducer from "./slices/heading.slice";
 import alertsReducer from "./slices/alerts.slice";
+import { savePersistedState } from "./utils/persistence";
 
 export const store = configureStore({
   reducer: {
@@ -18,8 +19,7 @@ export const store = configureStore({
       ? {
           name: "Desktop Toolbox DevTools",
           trace: true,
-          traceLimit: 25,
-          shouldHotReload: true
+          traceLimit: 25
         }
       : false
 });

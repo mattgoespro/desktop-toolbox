@@ -45,6 +45,7 @@ export function ToolTile({ name, description, route }: ToolTileProps) {
           color="primary"
           relative="route"
           onClick={onOpenTool}
+          viewTransition
         >
           <Typography variant="button" color="primary">
             Open Tool

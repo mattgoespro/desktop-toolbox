@@ -1,18 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { loadPersistedState } from "../utils/persistence";
 
 export type HeadingState = {
   heading?: string;
 };
 
+// Load persisted state
+const persistedState = loadPersistedState();
+
 const initialState: HeadingState = {
-  heading: undefined
+  heading: persistedState?.heading?.heading || undefined
 };
 
 const headingSlice = createSlice({
   name: "heading",
   initialState,
   reducers: {
-    headingChanged: (state, action: PayloadAction<string, "headingChanged">) => {
+    headingChanged: (state, action: PayloadAction<string | undefined, "headingChanged">) => {
       state.heading = action.payload;
     }
   }
