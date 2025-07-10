@@ -6,5 +6,6 @@ import { commonConfig } from "./webpack.common.config";
 export const mainConfig: Configuration = merge(commonConfig, {
   entry: "./src/main/index.ts",
   plugins,
-  resolve: resolve(".js", ".ts", ".jsx", ".tsx", ".css", ".json")
+  resolve: resolve(".js", ".ts", ".jsx", ".tsx", ".css", ".json"),
+  externals: "commonjs sharp"
 });

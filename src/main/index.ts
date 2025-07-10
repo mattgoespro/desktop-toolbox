@@ -5,6 +5,11 @@ import { app } from "electron";
 import { DesktopToolsWindow } from "./app/window";
 import path from "path";
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+if (require("electron-squirrel-startup")) app.quit();
+
+app.setAppUserModelId("com.squirrel.DesktopToolbox.DesktopToolbox");
+
 async function createApplicationWindow() {
   const window = new DesktopToolsWindow({
     windowEvents: {

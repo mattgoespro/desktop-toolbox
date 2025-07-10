@@ -25,6 +25,33 @@
         }
       ],
       "isBackground": true
+    },
+    {
+      "type": "npm",
+      "label": "package",
+      "script": "package",
+      "problemMatcher": [
+        {
+          "owner": "electron-forge",
+          "fileLocation": ["relative", "${workspaceFolder}"],
+          "severity": "info",
+          "source": "electron-forge",
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "^✔ Checking your system$",
+            "endsPattern": "^✔ Packaging application$"
+          },
+          "pattern": {
+            "regexp": "^✔ (.*)$",
+            "file": 1,
+            "message": 0
+          }
+        }
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
     }
   ]
 }

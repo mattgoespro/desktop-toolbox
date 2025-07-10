@@ -54,7 +54,8 @@
     "args": ["-l"],
     "color": "terminal.ansiMagenta",
     "env": {
-      "PATH": "${workspaceFolder}\\node_modules\\.bin;${env:PATH}"
+      "PATH": "${workspaceFolder}\\node_modules\\.bin;${env:PATH}",
+      "DEBUG": "electron-windows-installer*"
     },
     "icon": "terminal-bash",
     "overrideName": true,
@@ -66,7 +67,8 @@
       "args": ["-l"],
       "color": "terminal.ansiCyan",
       "env": {
-        "PATH": "${workspaceFolder}\\node_modules\\.bin;${env:PATH}"
+        "PATH": "${workspaceFolder}\\node_modules\\.bin;${env:PATH}",
+        "DEBUG": "electron-windows-installer*"
       },
       "icon": "terminal-bash",
       "overrideName": true,

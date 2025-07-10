@@ -1,27 +1,20 @@
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import TsConfigPathsWebpackPlugin from "tsconfig-paths-webpack-plugin";
-import { DefinePlugin } from "webpack";
+import { Configuration } from "webpack";
 
 export const plugins = [
   new ForkTsCheckerWebpackPlugin({
-    logger: "webpack-infrastructure",
-    async: true,
-    typescript: {
-      memoryLimit: 4096, // Increase memory limit
-      diagnosticOptions: {
-        semantic: true,
-        syntactic: false
-      }
-    }
-  }),
-  new DefinePlugin({
-    "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || "development")
+    logger: "webpack-infrastructure"
   })
 ];
 
-export function resolve(...extensions: string[]) {
+export function resolve(...extensions: string[]): Configuration["resolve"] {
   return {
     extensions,
-    plugins: [new TsConfigPathsWebpackPlugin()]
+    plugins: [new TsConfigPathsWebpackPlugin()],
+    fallback: {
+      path: false,
+      fs: false
+    }
   };
 }

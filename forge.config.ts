@@ -6,19 +6,19 @@ import { FusesPlugin } from "@electron-forge/plugin-fuses";
 import { FuseV1Options, FuseVersion } from "@electron/fuses";
 import { mainConfig } from "./webpack.main.config";
 import { rendererConfig } from "./webpack.renderer.config";
-import packageJson from "./package.json";
+import { createLogger } from "logsculpt";
+import ForgeExternalsPlugin from "@timfish/forge-externals-plugin";
+
+const log = createLogger("[forge.config]");
+log.info(`Using Electron Forge configuration: ${module.id}`);
 
 const config: ForgeConfig = {
   packagerConfig: {
-    asar: true,
-    icon: "./src/assets/icon.ico",
-    executableName: "DesktopToolbox",
-    win32metadata: {
-      CompanyName: packageJson.author,
-      ProductName: packageJson.displayName,
-      FileDescription: packageJson.description
+    asar: {
+      unpack: "**/node_modules/{sharp,@img}/**/*"
     }
   },
+  rebuildConfig: {},
   makers: [
     new MakerSquirrel({
       usePackageJson: true
@@ -45,6 +45,10 @@ const config: ForgeConfig = {
       },
       port: 9222,
       devContentSecurityPolicy: `default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-eval'; connect-src 'self' ws://localhost:9222; img-src 'self' data:;`
+    }),
+    new ForgeExternalsPlugin({
+      externals: ["sharp"],
+      includeDeps: true
     }),
     /**
      * Enable/disable various Electron functionality for packaged applications.
