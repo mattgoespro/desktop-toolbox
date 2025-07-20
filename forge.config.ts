@@ -6,11 +6,9 @@ import { FusesPlugin } from "@electron-forge/plugin-fuses";
 import { FuseV1Options, FuseVersion } from "@electron/fuses";
 import { mainConfig } from "./webpack.main.config";
 import { rendererConfig } from "./webpack.renderer.config";
-import { createLogger } from "logsculpt";
 import ForgeExternalsPlugin from "@timfish/forge-externals-plugin";
 
-const log = createLogger("[forge.config]");
-log.info(`Using Electron Forge configuration: ${module.id}`);
+console.log(`Loading Electron Forge configuration...`);
 
 const config: ForgeConfig = {
   packagerConfig: {
@@ -19,11 +17,7 @@ const config: ForgeConfig = {
     }
   },
   rebuildConfig: {},
-  makers: [
-    new MakerSquirrel({
-      usePackageJson: true
-    })
-  ],
+  makers: [new MakerSquirrel({})],
   plugins: [
     new AutoUnpackNativesPlugin({}),
     new WebpackPlugin({
@@ -33,10 +27,9 @@ const config: ForgeConfig = {
         entryPoints: [
           {
             html: "./src/renderer/index.html",
-            js: `./src/renderer/${
-              process.env.NODE_ENV === "development" ? "index.dev.tsx" : "index.tsx"
-            }`,
+            js: "./src/renderer/index.tsx",
             name: "main_window",
+            nodeIntegration: true,
             preload: {
               js: "./src/shared/framework/preload.ts"
             }
@@ -47,8 +40,7 @@ const config: ForgeConfig = {
       devContentSecurityPolicy: `default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-eval'; connect-src 'self' ws://localhost:9222; img-src 'self' data:;`
     }),
     new ForgeExternalsPlugin({
-      externals: ["sharp"],
-      includeDeps: true
+      externals: ["sharp"]
     }),
     /**
      * Enable/disable various Electron functionality for packaged applications.

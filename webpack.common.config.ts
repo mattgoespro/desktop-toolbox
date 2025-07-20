@@ -1,11 +1,10 @@
 import { Configuration } from "webpack";
 
-const mode = process.env.NODE_ENV ?? "production";
-
 export const commonConfig: Configuration = {
-  // output: {
-  //   clean: mode === "production"
-  // },
+  devtool: process.env.NODE_ENV === "development" ? "source-map" : false,
+  output: {
+    clean: true
+  },
   module: {
     rules: [
       {
@@ -27,22 +26,12 @@ export const commonConfig: Configuration = {
         }
       },
       {
-        test: /\.tsx?$/,
+        test: /\.(ts|tsx)$/,
         loader: "ts-loader",
-        exclude: /(node_modules|\.webpack)/,
         options: {
           transpileOnly: true
         }
       }
-      // {
-      //   test: /\.tsx?$/,
-      //   loader: "esbuild-loader",
-      //   exclude: /(node_modules|\.webpack)/,
-      //   options: {
-      //     loader: "tsx",
-      //     target: "es2020"
-      //   }
-      // }
     ]
   },
   cache: {

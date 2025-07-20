@@ -1,5 +1,4 @@
 import { Typography, Button } from "@mui/material";
-import { windowEventEmitter } from "@shared/framework/window-event-emitter";
 import { IconSmithChannel } from "@shared/ipc/channels";
 import { SelectFileActionEvent } from "@shared/ipc/events/common-events";
 import { ConvertImageToIconActionEvent } from "@shared/ipc/events/image-to-icon/main-events";
@@ -13,6 +12,7 @@ import { FlexBox } from "src/renderer/app/shared/components/flex-box";
 import { useAppDispatch } from "src/renderer/app/store/hooks";
 import { fileSelected } from "src/renderer/app/store/slices/iconsmith.slice";
 import Paper from "@mui/material/Paper";
+import { windowEventEmitter } from "../../../shared/window-event-emitter";
 
 export default function IconSmith() {
   const [selectedImagePath, setSelectedImagePath] = useState<string | null>(null);

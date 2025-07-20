@@ -7,12 +7,10 @@
   "version": "0.0.1",
   "main": ".webpack/main",
   "scripts": {
-    "start": "electron-forge start -i",
-    "prestart": "npm run check",
-    "check": "tsc --noEmit",
+    "start": "electron-forge start -l -i",
     "package": "electron-forge package",
-    "prepackage": "npm run check",
     "make": "electron-forge make",
+    "inspect": "npx asar list 'out/Desktop Toolbox-win32-x64/resources/app.asar'",
     "publish": "electron-forge publish",
     "lint": "eslint"
   },
@@ -62,7 +60,6 @@
     "eslint-plugin-react": "^7.37.5",
     "fork-ts-checker-webpack-plugin": "^9.1.0",
     "globals": "^16.2.0",
-    "logsculpt": "^0.0.3",
     "node-loader": "^2.1.0",
     "style-loader": "^4.0.0",
     "ts-loader": "^9.5.2",

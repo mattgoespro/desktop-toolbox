@@ -3,7 +3,7 @@ import { merge } from "webpack-merge";
 import { plugins, resolve } from "./webpack.plugins";
 import { commonConfig } from "./webpack.common.config";
 
-export const rendererConfig: Configuration = merge(commonConfig, {
+export const rendererConfig = merge<Configuration>(commonConfig, {
   output: {
     clean: true
   },
