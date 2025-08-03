@@ -14,8 +14,9 @@ import fs from "fs";
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-if (require("electron-squirrel-startup")) app.quit();
+if (require("electron-squirrel-startup")) {
+  app.quit();
+}
 
 app.setAppUserModelId("com.squirrel.DesktopToolbox.DesktopToolbox");
 
@@ -27,12 +28,12 @@ async function createApplicationWindow() {
     "sharp"
   );
 
-  // Only do this if it looks like the real package is missing
-  if (!fs.existsSync(path.join(__dirname, "node_modules/sharp"))) {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
+  /**
+   * Resolve the `sharp` module in packaged applications.
+   */
+  if (!fs.existsSync(path.join(__dirname, "node_modules", "sharp"))) {
     require("module").globalPaths.push(localSharpPath);
-    console.log(`Adding \`sharp\` from '${localSharpPath}' to global paths.`);
-    console.log();
+    console.log(`Added \`sharp\` module to global paths.`);
   }
 
   const window = new DesktopToolsWindow({

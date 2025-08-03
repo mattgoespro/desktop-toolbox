@@ -31,14 +31,14 @@ export class DesktopToolsWindow {
       height: 1600,
       show: false,
       webPreferences: {
-        preload: config.windowPreloadEntry,
-        nodeIntegration: true
+        preload: config.windowPreloadEntry
+        // nodeIntegration: true
       },
       darkTheme: true,
       backgroundColor: "#1e1e1e"
     });
 
-    this.window.on("ready-to-show", () => {
+    this.window.on("ready-to-show", async () => {
       config.windowEvents.onReady(this.window);
     });
 
@@ -50,11 +50,8 @@ export class DesktopToolsWindow {
   }
 
   public async init() {
-    await this.installDevToolExtensions();
-
-    await this.window.loadURL(this.config.windowEntry);
-
     if (inDevMode()) {
+      await this.installDevToolExtensions();
       this.addWindowDevMenu();
       this.window.webContents.openDevTools({
         mode: "right",
@@ -62,6 +59,8 @@ export class DesktopToolsWindow {
         title: "Main Window DevTools"
       });
     }
+
+    await this.window.loadURL(this.config.windowEntry);
   }
 
   private attachToMainProcess(attachHandler: (ipcMain: Electron.IpcMain) => void) {
