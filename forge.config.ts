@@ -13,7 +13,7 @@ console.log(`Loading Electron Forge configuration...`);
 const config: ForgeConfig = {
   packagerConfig: {
     asar: {
-      unpack: "**/node_modules/{sharp,@img}/**/*"
+      unpack: "**/node_modules/@img/**/*"
     }
   },
   rebuildConfig: {},
@@ -29,7 +29,6 @@ const config: ForgeConfig = {
             html: "./src/renderer/index.html",
             js: "./src/renderer/index.tsx",
             name: "main_window",
-            nodeIntegration: true,
             preload: {
               js: "./src/shared/framework/preload.ts"
             }
@@ -40,7 +39,8 @@ const config: ForgeConfig = {
       devContentSecurityPolicy: `default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-eval'; connect-src 'self' ws://localhost:9222; img-src 'self' data:;`
     }),
     new ForgeExternalsPlugin({
-      externals: ["sharp"]
+      externals: ["sharp"],
+      includeDeps: true
     }),
     /**
      * Enable/disable various Electron functionality for packaged applications.

@@ -8,12 +8,15 @@
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start -l -i",
+    "prestart": "npm run kill",
+    "kill": "powershell -c 'taskkill /IM node.exe /F'",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "inspect": "npx asar list 'out/Desktop Toolbox-win32-x64/resources/app.asar'",
     "publish": "electron-forge publish",
     "lint": "eslint",
-    "install": "npm install --os=win32 --arch=x64 sharp"
+    "uninstall": "npm run kill && rm -rf node_modules && rm -f package-lock.json && rm -rf ~/AppData/Local/npm-cache && npm cache clean --force",
+    "install": "npm install --os=win32 --arch=x64 --include=optional sharp"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -69,6 +72,9 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.38.0",
     "webpack-merge": "^6.0.1"
+  },
+  "optionalDependencies": {
+    "@img/sharp-win32-x64": "0.34.3"
   },
   "forge": {
     "path": "./forge.config.ts"

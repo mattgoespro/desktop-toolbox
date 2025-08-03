@@ -33,15 +33,15 @@
   },
   "files.exclude": {
     "**/.git/**": true,
-    "node_modules/**": true
+    "**/node_modules/**": true
   },
   "files.watcherExclude": {
     "**/.git/**": true,
     "**/.vscode/**": true,
     "**/.webpack/**": true,
+    "**/node_modules/**": true,
     "**/out/**": true,
-    "**/package-lock.json": true,
-    "node_modules/**": true
+    "**/package-lock.json": true
   },
   "npm-intellisense.recursivePackageJsonLookup": false,
   "npm-outdated.majorUpdateProtection": false,
@@ -76,7 +76,7 @@
       "path": "${env:PROGRAMFILES}\\Git\\bin\\bash.exe"
     }
   },
-  "typescript.preferences.importModuleSpecifier": "shortest",
+  "typescript.preferences.importModuleSpecifier": "project-relative",
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "vscode-color-picker.languages": ["typescript", "typescriptreact"],

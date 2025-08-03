@@ -6,9 +6,10 @@ import installDevToolExtension, {
 import { inDevMode } from "../utils";
 import packageJson from "../../../package.json";
 import { iconSmithEventHandler } from "./ipc/iconsmith";
-import { MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY, MAIN_WINDOW_WEBPACK_ENTRY } from "..";
 
 type DesktopToolsWindowConfig = {
+  windowEntry: string;
+  windowPreloadEntry: string;
   windowEvents: {
     onReady: (window: BrowserWindow) => void;
     onClose: () => void;
@@ -19,32 +20,30 @@ type DesktopToolsWindowConfig = {
 export class DesktopToolsWindow {
   private window: BrowserWindow;
 
-  constructor({ windowEvents, icon }: DesktopToolsWindowConfig) {
-    console.log("Main window webpack entry:", MAIN_WINDOW_WEBPACK_ENTRY);
-    console.log("Main window preload webpack entry:", MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY);
+  constructor(private config: DesktopToolsWindowConfig) {
+    console.log("Main window webpack entry:", config.windowEntry);
+    console.log("Main window preload webpack entry:", config.windowPreloadEntry);
 
     this.window = new BrowserWindow({
       title: packageJson.displayName,
-      icon,
+      icon: config.icon,
       width: 1200,
       height: 1600,
       show: false,
       webPreferences: {
-        preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
-        nodeIntegration: true,
-        contextIsolation: true,
-        nodeIntegrationInWorker: true
+        preload: config.windowPreloadEntry,
+        nodeIntegration: true
       },
       darkTheme: true,
       backgroundColor: "#1e1e1e"
     });
 
     this.window.on("ready-to-show", () => {
-      windowEvents.onReady(this.window);
+      config.windowEvents.onReady(this.window);
     });
 
     this.window.on("close", () => {
-      windowEvents.onClose();
+      config.windowEvents.onClose();
     });
 
     this.attachToMainProcess(iconSmithEventHandler);
@@ -53,11 +52,15 @@ export class DesktopToolsWindow {
   public async init() {
     await this.installDevToolExtensions();
 
-    await this.window.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+    await this.window.loadURL(this.config.windowEntry);
 
     if (inDevMode()) {
       this.addWindowDevMenu();
-      this.window.webContents.openDevTools();
+      this.window.webContents.openDevTools({
+        mode: "right",
+        activate: true,
+        title: "Main Window DevTools"
+      });
     }
   }
 

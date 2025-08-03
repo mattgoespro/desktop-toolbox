@@ -1,11 +1,15 @@
 import type { Configuration } from "webpack";
-import { plugins, resolve } from "./webpack.plugins";
+import { inDevMode, plugins, resolve } from "./webpack.plugins";
 import { merge } from "webpack-merge";
 import { commonConfig } from "./webpack.common.config";
 
 export const mainConfig: Configuration = merge<Configuration>(commonConfig, {
   entry: "./src/main/index.ts",
+  devtool: inDevMode() ? "source-map" : false,
   plugins,
   resolve: resolve(".js", ".ts", ".jsx", ".tsx", ".css", ".json"),
-  externals: "commonjs sharp"
+  externals: {
+    sharp: "commonjs2 sharp",
+    "@img/sharp-win32-x64": "commonjs2 @img/sharp-win32-x64"
+  }
 });

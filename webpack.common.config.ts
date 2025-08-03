@@ -1,7 +1,9 @@
 import { Configuration } from "webpack";
+import path from "path";
+import { inDevMode } from "./webpack.plugins";
 
 export const commonConfig: Configuration = {
-  devtool: process.env.NODE_ENV === "development" ? "source-map" : false,
+  devtool: inDevMode() ? "source-map" : false,
   output: {
     clean: true
   },
@@ -35,6 +37,7 @@ export const commonConfig: Configuration = {
     ]
   },
   cache: {
-    type: "filesystem"
+    type: "filesystem",
+    cacheDirectory: path.join(__dirname, ".webpack_cache")
   }
 };

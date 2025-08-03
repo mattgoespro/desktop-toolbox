@@ -1,5 +1,8 @@
-# Compiled binary addons (https://nodejs.org/api/addons.html)
-build/Release
+# Build output
+.webpack/
+
+# Build cache
+.webpack_cache/
 
 # Dependency directories
 node_modules/
@@ -14,13 +17,8 @@ node_modules/
 # FuseBox cache
 .fusebox/
 
-# Webpack
-.webpack/
 
 # Electron-Forge
 out/
-
-# react-router generated types
-src/renderer/.react-router/
 
 desktop.ini
