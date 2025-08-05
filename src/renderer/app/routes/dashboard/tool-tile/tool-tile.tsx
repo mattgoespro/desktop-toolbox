@@ -28,9 +28,9 @@ export function ToolTile({ name, description, route }: ToolTileProps) {
         slotProps={{
           title: {
             variant: "h3",
-            fontWeight: "400",
+            fontWeight: "500",
             textTransform: "uppercase",
-            color: "secondary"
+            color: "primary"
           }
         }}
       ></CardHeader>
@@ -42,14 +42,11 @@ export function ToolTile({ name, description, route }: ToolTileProps) {
           component={ReactRouterLink}
           to={route}
           underline="none"
-          color="primary"
           relative="route"
           onClick={onOpenTool}
           viewTransition
         >
-          <Typography variant="button" color="primary">
-            Open Tool
-          </Typography>
+          <Typography variant="button">Open Tool</Typography>
         </Link>
       </CardActions>
     </Card>

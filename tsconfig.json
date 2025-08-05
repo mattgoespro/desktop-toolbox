@@ -1,7 +1,7 @@
 {
   "include": ["src/**/*", "webpack.*.config.ts"],
   "files": ["forge.config.ts"],
-  "exclude": ["node_modules", ".webpack", "out"],
+  "exclude": ["node_modules", ".webpack", ".webpack_cache", "out"],
   "compilerOptions": {
     "module": "es2022",
     "target": "es2020",
@@ -13,7 +13,6 @@
     "jsx": "react-jsx",
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "skipDefaultLibCheck": true,
     "paths": {
       "@main/*": ["src/main/*"],
       "@shared/*": ["src/shared/*"]

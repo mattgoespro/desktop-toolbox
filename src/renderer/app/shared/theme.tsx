@@ -139,34 +139,22 @@ export const theme = createTheme({
         raised: true,
         variant: "elevation",
         elevation: 3
-      },
+      }
+    },
+    MuiCardActions: {
       styleOverrides: {
         root: ({ theme }) => ({
-          backgroundColor: theme.palette.background.paper,
-          color: theme.palette.text.primary,
-          borderRadius: theme.shape.borderRadius,
-          boxShadow: theme.shadows[3],
-          margin: "0.5rem"
+          padding: theme.spacing(1)
         })
-      },
-      variants: [
-        {
-          props: { variant: "outlined", elevation: 3 },
-          style: ({ theme }) => ({
-            border: `1px solid ${theme.palette.divider}`,
-            backgroundColor: theme.palette.background.paper
-          })
-        }
-      ]
+      }
     },
     MuiPaper: {
       defaultProps: {
         variant: "outlined"
       },
       styleOverrides: {
-        root: ({ theme }) => ({
-          width: "100%",
-          backgroundColor: theme.palette.background.paper
+        root: () => ({
+          width: "100%"
         })
       }
     }

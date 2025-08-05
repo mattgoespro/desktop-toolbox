@@ -1,3 +1,3 @@
-import { WindowEventEmitter } from "../../../shared/framework/preload";
+import { WindowEventEmitter } from "../../preload";
 
 export const windowEventEmitter: WindowEventEmitter = window.electron.windowEventEmitter;

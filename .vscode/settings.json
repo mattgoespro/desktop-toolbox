@@ -33,16 +33,20 @@
   },
   "files.exclude": {
     "**/.git/**": true,
+    "**/.webpack_cache/**": true,
     "**/node_modules/**": true
   },
   "files.watcherExclude": {
     "**/.git/**": true,
     "**/.vscode/**": true,
     "**/.webpack/**": true,
+    "**/.webpack_cache/**": true,
     "**/node_modules/**": true,
     "**/out/**": true,
-    "**/package-lock.json": true
+    "**/package-lock.json": true,
+    "**/resources/**": true
   },
+  "javascript.updateImportsOnFileMove.enabled": "always",
   "npm-intellisense.recursivePackageJsonLookup": false,
   "npm-outdated.majorUpdateProtection": false,
   "search.exclude": {
@@ -55,7 +59,6 @@
     "args": ["-l"],
     "color": "terminal.ansiMagenta",
     "env": {
-      // "DEBUG": "electron-windows-installer*",
       "PATH": "${workspaceFolder}\\node_modules\\.bin;${env:PATH}"
     },
     "icon": "terminal-bash",
@@ -68,7 +71,6 @@
       "args": ["-l"],
       "color": "terminal.ansiCyan",
       "env": {
-        // "DEBUG": "electron-windows-installer*",
         "PATH": "${workspaceFolder}\\node_modules\\.bin;${env:PATH}"
       },
       "icon": "terminal-bash",

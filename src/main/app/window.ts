@@ -32,7 +32,6 @@ export class DesktopToolsWindow {
       show: false,
       webPreferences: {
         preload: config.windowPreloadEntry
-        // nodeIntegration: true
       },
       darkTheme: true,
       backgroundColor: "#1e1e1e"
