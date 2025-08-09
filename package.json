@@ -37,7 +37,8 @@
     "react-router": "^7.6.2",
     "sharp": "^0.34.3",
     "styled-components": "^6.1.19",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.8.1",
@@ -70,8 +71,7 @@
     "ts-node": "^10.9.2",
     "tsconfig-paths-webpack-plugin": "^4.2.0",
     "typescript": "~5.8.3",
-    "typescript-eslint": "^8.38.0",
-    "webpack-merge": "^6.0.1"
+    "typescript-eslint": "^8.38.0"
   },
   "optionalDependencies": {
     "@img/sharp-win32-x64": "0.34.3"

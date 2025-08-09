@@ -6,6 +6,7 @@ import installDevToolExtension, {
 import { inDevMode } from "../utils";
 import packageJson from "../../../package.json";
 import { iconSmithEventHandler } from "./ipc/iconsmith";
+import { ApplicationLogger } from "./logger";
 
 type DesktopToolsWindowConfig = {
   windowEntry: string;
@@ -19,11 +20,9 @@ type DesktopToolsWindowConfig = {
 
 export class DesktopToolsWindow {
   private window: BrowserWindow;
+  private logger = ApplicationLogger.getInstance();
 
   constructor(private config: DesktopToolsWindowConfig) {
-    console.log("Main window webpack entry:", config.windowEntry);
-    console.log("Main window preload webpack entry:", config.windowPreloadEntry);
-
     this.window = new BrowserWindow({
       title: packageJson.displayName,
       icon: config.icon,
@@ -38,11 +37,18 @@ export class DesktopToolsWindow {
     });
 
     this.window.on("ready-to-show", async () => {
+      this.logger.info("Window is ready to show.");
       config.windowEvents.onReady(this.window);
     });
 
     this.window.on("close", () => {
       config.windowEvents.onClose();
+      this.logger.info("Window closed.");
+    });
+
+    this.window.on("session-end", (event) => {
+      this.logger.info(`The session has ended. Reason: ${event.reasons.join(", ")}`);
+      this.window.close();
     });
 
     this.attachToMainProcess(iconSmithEventHandler);
@@ -51,7 +57,9 @@ export class DesktopToolsWindow {
   public async init() {
     if (inDevMode()) {
       await this.installDevToolExtensions();
-      this.addWindowDevMenu();
+
+      this.setApplicationMenu();
+
       this.window.webContents.openDevTools({
         mode: "right",
         activate: true,
@@ -90,7 +98,7 @@ export class DesktopToolsWindow {
           }
         });
 
-        console.log(
+        this.logger.info(
           `Installed DevTools extension: ${supportedExtension.name} (${extensionReference.id})`
         );
       } catch (error) {
@@ -107,7 +115,7 @@ export class DesktopToolsWindow {
     return this;
   }
 
-  private addWindowDevMenu() {
+  private setApplicationMenu() {
     const menu = Menu.buildFromTemplate([
       {
         label: "File",

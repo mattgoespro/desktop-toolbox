@@ -28,7 +28,7 @@ export const commonConfig: Configuration = {
         }
       },
       {
-        test: /\.(ts|tsx)$/,
+        test: /\.ts$/,
         loader: "ts-loader",
         options: {
           transpileOnly: true
