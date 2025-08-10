@@ -1,50 +1,41 @@
 import type { ForgeConfig } from "@electron-forge/shared-types";
 import { MakerSquirrel } from "@electron-forge/maker-squirrel";
-import { AutoUnpackNativesPlugin } from "@electron-forge/plugin-auto-unpack-natives";
-import { WebpackPlugin } from "@electron-forge/plugin-webpack";
+import { VitePlugin } from "@electron-forge/plugin-vite";
 import { FusesPlugin } from "@electron-forge/plugin-fuses";
 import { FuseV1Options, FuseVersion } from "@electron/fuses";
-import { mainConfig } from "./webpack.main.config";
-import { rendererConfig } from "./webpack.renderer.config";
-import ForgeExternalsPlugin from "@timfish/forge-externals-plugin";
-
-console.log(`Loading Electron Forge configuration...`);
 
 const config: ForgeConfig = {
   packagerConfig: {
-    asar: {
-      unpack: "**/node_modules/@img/**/*"
-    }
+    asar: true
   },
   rebuildConfig: {},
   makers: [new MakerSquirrel({})],
   plugins: [
-    new AutoUnpackNativesPlugin({}),
-    new WebpackPlugin({
-      mainConfig,
-      renderer: {
-        config: rendererConfig,
-        entryPoints: [
-          {
-            html: "./src/renderer/index.html",
-            js: "./src/renderer/index.tsx",
-            name: "main_window",
-            preload: {
-              js: "./src/renderer/preload.ts"
-            }
-          }
-        ]
-      },
-      port: 9222,
-      devContentSecurityPolicy: `default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-eval'; connect-src 'self' ws://localhost:9222; img-src 'self' data:;`
+    new VitePlugin({
+      // `build` can specify multiple entry builds, which can be Main process, Preload scripts, Worker process, etc.
+      // If you are familiar with Vite configuration, it will look really familiar.
+      build: [
+        {
+          // `entry` is just an alias for `build.lib.entry` in the corresponding file of `config`.
+          target: "main",
+          entry: "src/main/index.ts",
+          config: "vite.main.config.mts"
+        },
+        {
+          target: "preload",
+          entry: "src/renderer/preload.ts",
+          config: "vite.preload.config.mts"
+        }
+      ],
+      renderer: [
+        {
+          name: "main_window",
+          config: "vite.renderer.config.mts"
+        }
+      ]
     }),
-    new ForgeExternalsPlugin({
-      externals: ["sharp"],
-      includeDeps: true
-    }),
-    /**
-     * Enable/disable various Electron functionality for packaged applications.
-     */
+    // Fuses are used to enable/disable various Electron functionality
+    // at package time, before code signing the application
     new FusesPlugin({
       version: FuseVersion.V1,
       [FuseV1Options.RunAsNode]: false,
