@@ -141,6 +141,13 @@ export const theme = createTheme({
         elevation: 3
       }
     },
+    MuiCardHeader: {
+      styleOverrides: {
+        title: ({ _theme }) => ({
+          margin: 0
+        })
+      }
+    },
     MuiCardActions: {
       styleOverrides: {
         root: ({ theme }) => ({
