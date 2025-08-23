@@ -7,10 +7,9 @@ import { inDevMode } from "../utils";
 import packageJson from "../../../package.json";
 import { iconSmithEventHandler } from "./ipc/iconsmith";
 import { ApplicationLogger } from "./logger";
+import path from "path";
 
 type DesktopToolsWindowConfig = {
-  windowEntry: string;
-  windowPreloadEntry: string;
   windowEvents: {
     onReady: (window: BrowserWindow) => void;
     onClose: () => void;
@@ -30,7 +29,7 @@ export class DesktopToolsWindow {
       height: 1600,
       show: false,
       webPreferences: {
-        preload: config.windowPreloadEntry
+        preload: path.join(__dirname, "preload.js")
       },
       darkTheme: true,
       backgroundColor: "#1e1e1e"
@@ -67,7 +66,16 @@ export class DesktopToolsWindow {
       });
     }
 
-    await this.window.loadURL(this.config.windowEntry);
+    // and load the index.html of the app.
+    if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
+      console.log(MAIN_WINDOW_VITE_DEV_SERVER_URL);
+      await this.window.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
+    } else {
+      await this.window.loadFile(
+        path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`)
+      );
+    }
+    // await this.window.loadURL(this.config.windowEntry);
   }
 
   private attachToMainProcess(attachHandler: (ipcMain: Electron.IpcMain) => void) {

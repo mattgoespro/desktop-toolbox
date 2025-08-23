@@ -12,8 +12,8 @@ import { ApplicationLogger } from "./app/logger";
  * plugin, which tells the Electron app where to look for the Webpack-bundled app code (depending on
  * whether the app is running in development or production).
  */
-declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
-declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
+// declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
+// declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
 if (require("electron-squirrel-startup")) {
   app.quit();
@@ -38,8 +38,6 @@ async function createApplicationWindow() {
   }
 
   const window = new DesktopToolsWindow({
-    windowEntry: MAIN_WINDOW_WEBPACK_ENTRY,
-    windowPreloadEntry: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     windowEvents: {
       onReady: (window) => {
         window.show();

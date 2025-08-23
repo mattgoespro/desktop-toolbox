@@ -6,7 +6,7 @@ import pluginReact from "eslint-plugin-react";
 export default tseslint.config([
   tseslint.configs.recommended,
   {
-    ignores: ["**/node_modules/**", "**/.webpack/**", "**/.webpack_cache"]
+    ignores: ["**/node_modules/**", "**/.webpack/**", "**/.vite"]
   },
   {
     rules: {
