@@ -37,6 +37,7 @@
     "react-router": "^7.8.0",
     "sharp": "^0.34.3",
     "styled-components": "^6.1.19",
+    "unzipper": "^0.12.3",
     "uuid": "^11.1.0",
     "winston": "^3.17.0"
   },
@@ -56,6 +57,7 @@
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^24.2.1",
     "@types/react-dom": "^19.1.7",
+    "@types/unzipper": "^0.10.11",
     "electron": "37.2.6",
     "electron-devtools-installer": "^4.0.0",
     "eslint": "^9.33.0",

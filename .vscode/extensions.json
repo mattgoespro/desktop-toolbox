@@ -19,7 +19,6 @@
     "helgardrichard.helium-icon-theme",
     "ibm.output-colorizer",
     "meganrogge.template-string-converter",
-    "amodio.tsl-problem-matcher",
-    "antiantisepticeye.vscode-color-picker"
+    "amodio.tsl-problem-matcher"
   ]
 }

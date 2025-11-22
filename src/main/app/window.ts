@@ -1,4 +1,4 @@
-import electron, { Menu, BrowserWindow } from "electron";
+import electron, { Menu, BrowserWindow, session } from "electron";
 import installDevToolExtension, {
   REDUX_DEVTOOLS,
   REACT_DEVELOPER_TOOLS
@@ -21,7 +21,7 @@ export class DesktopToolsWindow {
   private window: BrowserWindow;
   private logger = ApplicationLogger.getInstance();
 
-  constructor(private config: DesktopToolsWindowConfig) {
+  constructor(config: DesktopToolsWindowConfig) {
     this.window = new BrowserWindow({
       title: packageJson.displayName,
       icon: config.icon,
@@ -121,6 +121,24 @@ export class DesktopToolsWindow {
     }
 
     return this;
+  }
+
+  private waitForExtension(name: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const extension = session.defaultSession.extensions.getExtension(name);
+      if (extension) {
+        resolve();
+      } else {
+        const listener = () => {
+          const ext = session.defaultSession.extensions.getExtension(name);
+          if (ext) {
+            session.defaultSession.removeListener("extension-ready", listener);
+            resolve();
+          }
+        };
+        session.defaultSession.on("extension-ready", listener);
+      }
+    });
   }
 
   private setApplicationMenu() {
