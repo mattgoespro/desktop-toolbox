@@ -124,7 +124,7 @@ export class DesktopToolsWindow {
   }
 
   private waitForExtension(name: string): Promise<void> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, _reject) => {
       const extension = session.defaultSession.extensions.getExtension(name);
       if (extension) {
         resolve();
