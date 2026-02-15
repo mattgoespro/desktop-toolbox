@@ -19,6 +19,7 @@
     "helgardrichard.helium-icon-theme",
     "ibm.output-colorizer",
     "meganrogge.template-string-converter",
-    "amodio.tsl-problem-matcher"
+    "amodio.tsl-problem-matcher",
+    "solnurkarim.html-to-css-autocompletion"
   ]
 }
