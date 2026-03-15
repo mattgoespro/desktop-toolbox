@@ -8,9 +8,7 @@ import { routes } from "../../app-router";
 export default function Dashboard() {
   return (
     <FlexBox direction="column" justify="start" align="center" sx={{ padding: "2.5rem 1rem" }}>
-      <Typography variant="h1">
-        Desktop Toolbox
-      </Typography>
+      <Typography variant="h1">Desktop Toolbox</Typography>
       <Typography variant="h2" sx={{ mb: "1.5rem" }}>
         Select from a library of useful desktop utility applications.
       </Typography>

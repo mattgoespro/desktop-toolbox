@@ -86,7 +86,10 @@ export default function Shell() {
           <Outlet />
         </FlexBox>
       </Box>
-      <Box id="alerts" sx={{ position: "fixed", bottom: 0, right: 0, padding: "1.5rem", zIndex: 2000 }}>
+      <Box
+        id="alerts"
+        sx={{ position: "fixed", bottom: 0, right: 0, padding: "1.5rem", zIndex: 2000 }}
+      >
         {pageAlerts.map((alert, index) => (
           <AlertPopup
             message={alert.message}
