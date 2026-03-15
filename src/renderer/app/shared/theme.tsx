@@ -3,86 +3,118 @@ import TextField from "@mui/material/TextField";
 import { createSpacing } from "@mui/system";
 import MuiCreateStyled from "@mui/system/createStyled";
 
+// ─── Carbon Fiber Palette ────────────────────────────────────────────
+const carbon = {
+  black: "#111113",
+  base: "#161619",
+  surface: "#1e1e22",
+  surfaceHover: "#252529",
+  border: "#2a2a2f",
+  borderLight: "#35353b",
+  cyan: "#00d4ff",
+  cyanMuted: "#00a3c6",
+  cyanDim: "#007a94",
+  white: "#eaeaec",
+  grey200: "#c4c4c8",
+  grey400: "#8e8e95",
+  grey600: "#55555c",
+  red: "#ef4444",
+  green: "#22c55e",
+  blue: "#3b82f6",
+  divider: "rgba(255, 255, 255, 0.06)"
+} as const;
+
 export const theme = createTheme({
   palette: {
     mode: "dark",
     common: {
-      black: "#1f1f1f",
-      white: "#f0f0f0"
+      black: carbon.black,
+      white: carbon.white
     },
     primary: {
-      main: "#4fa7ff"
+      main: carbon.cyan,
+      light: carbon.cyan,
+      dark: carbon.cyanMuted
     },
     secondary: {
-      main: "#e7457e"
+      main: carbon.grey400
     },
     error: {
-      main: "#ff5151"
+      main: carbon.red
     },
     info: {
-      main: "#2196f3"
+      main: carbon.blue
     },
     success: {
-      main: "#4caf50"
+      main: carbon.green
     },
     text: {
-      primary: "#cccccc",
-      secondary: "#96a4b3",
-      disabled: "#838383"
+      primary: carbon.white,
+      secondary: carbon.grey200,
+      disabled: carbon.grey600
     },
     background: {
-      default: "#101010",
-      paper: "#1f1f1f"
-    }
+      default: carbon.base,
+      paper: carbon.surface
+    },
+    divider: carbon.divider
   },
   typography: (palette) => ({
-    fontFamily: "Roboto, sans-serif",
+    fontFamily: "'Geist', sans-serif",
     fontSize: 14,
     h1: {
-      fontFamily: "Nunito, sans-serif",
-      fontSize: "3em",
-      fontWeight: 500,
-      lineHeight: 1,
+      fontFamily: "'Geist', sans-serif",
+      fontSize: "2.25em",
+      fontWeight: 600,
+      lineHeight: 1.15,
+      letterSpacing: "-0.02em",
       color: palette.text.primary,
-      margin: "1rem 0.875rem 0.5rem"
+      margin: "1.5rem 1rem 0.5rem"
     },
     h2: {
-      fontFamily: "Inter, sans-serif",
-      fontSize: "1.5em",
+      fontFamily: "'Geist', sans-serif",
+      fontSize: "1.1em",
       fontWeight: 300,
+      letterSpacing: "0.01em",
       color: palette.text.secondary,
-      margin: "0.25rem 0.875rem"
+      margin: "0.25rem 1rem"
     },
     h3: {
-      fontFamily: "Inter, sans-serif",
-      fontSize: "1em",
-      fontWeight: 300,
+      fontFamily: "'Geist', sans-serif",
+      fontSize: "0.85em",
+      fontWeight: 500,
+      letterSpacing: "0.06em",
+      textTransform: "uppercase" as const,
       color: palette.text.secondary,
       margin: "0.5rem"
     },
     button: {
-      fontFamily: "Nunito Sans, sans-serif",
-      fontSize: "0.875em",
-      fontWeight: "normal",
+      fontFamily: "'Geist', sans-serif",
+      fontSize: "0.8em",
+      fontWeight: 500,
+      letterSpacing: "0.06em",
       color: palette.common.white,
-      textTransform: "uppercase"
+      textTransform: "uppercase" as const
     },
     body1: {
-      fontFamily: "Roboto, sans-serif",
-      fontSize: "1em",
-      fontWeight: "normal",
-      color: palette.text.primary
+      fontFamily: "'Geist', sans-serif",
+      fontSize: "0.95em",
+      fontWeight: 400,
+      color: palette.text.primary,
+      lineHeight: 1.5
     },
     body2: {
-      fontFamily: "Roboto, sans-serif",
-      fontSize: "1em",
-      fontWeight: "300",
+      fontFamily: "'Geist', sans-serif",
+      fontSize: "0.9em",
+      fontWeight: 300,
+      lineHeight: 1.6,
       color: palette.text.secondary
     },
     caption: {
-      fontFamily: "Inter, sans-serif",
-      fontSize: "1em",
-      fontWeight: "normal",
+      fontFamily: "'Geist', sans-serif",
+      fontSize: "0.8em",
+      fontWeight: 400,
+      letterSpacing: "0.02em",
       color: palette.text.secondary
     }
   }),
@@ -91,11 +123,38 @@ export const theme = createTheme({
       defaultProps: {
         variant: "contained",
         color: "primary",
-        size: "small"
+        size: "small",
+        disableElevation: true
       },
       styleOverrides: {
         root: {
-          margin: "0.5rem"
+          margin: "0.5rem",
+          borderRadius: 2,
+          padding: "0.45rem 1.1rem",
+          transition: "all 200ms cubic-bezier(0.4, 0, 0.2, 1)"
+        },
+        contained: {
+          backgroundColor: carbon.cyan,
+          color: carbon.black,
+          fontWeight: 600,
+          "&:hover": {
+            backgroundColor: "#33ddff",
+            boxShadow: `0 0 12px rgba(0, 212, 255, 0.25)`
+          }
+        },
+        outlined: {
+          borderColor: carbon.border,
+          color: carbon.white,
+          "&:hover": {
+            borderColor: carbon.cyan,
+            backgroundColor: "rgba(0, 212, 255, 0.04)"
+          }
+        },
+        text: {
+          color: carbon.cyan,
+          "&:hover": {
+            backgroundColor: "rgba(0, 212, 255, 0.06)"
+          }
         }
       }
     },
@@ -107,9 +166,26 @@ export const theme = createTheme({
       styleOverrides: {
         root: ({ theme }) => ({
           ...theme.typography.caption,
-          fontWeight: 300,
-          minWidth: "16rem"
+          fontWeight: 400,
+          minWidth: "16rem",
+          borderRadius: 2
         })
+      }
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          "& .MuiOutlinedInput-notchedOutline": {
+            borderColor: carbon.border
+          },
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: carbon.borderLight
+          },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: carbon.cyan,
+            borderWidth: 1
+          }
+        }
       }
     },
     MuiAutocomplete: {
@@ -130,20 +206,37 @@ export const theme = createTheme({
       styleOverrides: {
         root: ({ theme }) => ({
           backgroundColor: theme.palette.background.paper,
-          borderBottom: `1px solid ${theme.palette.divider}`
-        })
+          borderBottom: `1px solid ${carbon.border}`
+        }),
+        indicator: {
+          backgroundColor: carbon.cyan,
+          height: 2
+        }
       }
     },
     MuiCard: {
       defaultProps: {
-        raised: true,
-        variant: "elevation",
-        elevation: 3
+        raised: false,
+        variant: "outlined",
+        elevation: 0
+      },
+      styleOverrides: {
+        root: {
+          backgroundColor: carbon.surface,
+          borderColor: carbon.border,
+          borderWidth: 1,
+          borderRadius: 4,
+          transition: "all 200ms cubic-bezier(0.4, 0, 0.2, 1)",
+          "&:hover": {
+            borderColor: carbon.borderLight,
+            backgroundColor: carbon.surfaceHover
+          }
+        }
       }
     },
     MuiCardHeader: {
       styleOverrides: {
-        title: ({ _theme }) => ({
+        title: () => ({
           margin: 0
         })
       }
@@ -151,7 +244,8 @@ export const theme = createTheme({
     MuiCardActions: {
       styleOverrides: {
         root: ({ theme }) => ({
-          padding: theme.spacing(1)
+          padding: theme.spacing(1),
+          borderTop: `1px solid ${carbon.border}`
         })
       }
     },
@@ -161,8 +255,43 @@ export const theme = createTheme({
       },
       styleOverrides: {
         root: () => ({
-          width: "100%"
+          width: "100%",
+          backgroundColor: carbon.surface,
+          borderColor: carbon.border,
+          borderRadius: 4
         })
+      }
+    },
+    MuiAlert: {
+      styleOverrides: {
+        root: {
+          borderRadius: 4,
+          border: `1px solid ${carbon.border}`,
+          backdropFilter: "blur(12px)"
+        },
+        standardSuccess: {
+          backgroundColor: "rgba(34, 197, 94, 0.1)",
+          color: carbon.green
+        },
+        standardError: {
+          backgroundColor: "rgba(239, 68, 68, 0.1)",
+          color: carbon.red
+        },
+        standardInfo: {
+          backgroundColor: "rgba(59, 130, 246, 0.1)",
+          color: carbon.blue
+        }
+      }
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          color: carbon.cyan,
+          transition: "color 150ms ease",
+          "&:hover": {
+            color: "#33ddff"
+          }
+        }
       }
     }
   },
@@ -204,7 +333,7 @@ export const theme = createTheme({
       return `transition: ${props} ${duration}ms ${easing}${delay};`;
     },
     getAutoHeightDuration: (height) => {
-      return Math.round(height / 36) * 150; // 150ms per line
+      return Math.round(height / 36) * 150;
     }
   }
 });

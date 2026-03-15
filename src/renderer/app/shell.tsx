@@ -47,9 +47,17 @@ export default function Shell() {
         to="/"
         underline="none"
         onClick={onNavigateBack}
-        sx={{ position: "absolute", top: 16, left: 16, zIndex: 1000 }}
+        sx={{
+          position: "absolute",
+          top: 20,
+          left: 20,
+          zIndex: 1000,
+          color: "#8e8e95",
+          transition: "color 150ms ease, transform 150ms ease",
+          "&:hover": { color: "#00d4ff", transform: "translateX(-2px)" }
+        }}
       >
-        <ArrowBack />
+        <ArrowBack sx={{ fontSize: "1.1rem" }} />
       </Link>
     ),
     [onNavigateBack]
@@ -57,7 +65,7 @@ export default function Shell() {
 
   const Header = useMemo(() => {
     return (
-      <Typography variant="h1" sx={{ margin: "1rem 0.875rem 0.5rem" }}>
+      <Typography variant="h1" sx={{ margin: "1.5rem 1rem 0.5rem" }}>
         {heading}
       </Typography>
     );
@@ -65,14 +73,20 @@ export default function Shell() {
 
   return (
     <>
-      <Box width="100%">
+      <Box
+        width="100%"
+        sx={{
+          minHeight: "100vh",
+          padding: "1.5rem"
+        }}
+      >
         {location.pathname !== "/" && BackNavLink}
         <FlexBox direction="column" align="center">
           {Header}
           <Outlet />
         </FlexBox>
       </Box>
-      <Box id="alerts" sx={{ position: "absolute", bottom: 0, right: 0, padding: "1rem" }}>
+      <Box id="alerts" sx={{ position: "fixed", bottom: 0, right: 0, padding: "1.5rem", zIndex: 2000 }}>
         {pageAlerts.map((alert, index) => (
           <AlertPopup
             message={alert.message}

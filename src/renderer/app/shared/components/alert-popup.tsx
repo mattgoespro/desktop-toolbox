@@ -29,9 +29,16 @@ export function AlertPopup({ message, severity, onClose }: AlertPopupProps) {
 
   return (
     <Box sx={{ position: "absolute", bottom: 0, right: 0, zIndex: 1000, m: 2 }}>
-      <Slide in={open} easing="ease-out" timeout={2000}>
+      <Slide in={open} easing="ease-out" timeout={600}>
         <Alert
           severity={severity}
+          sx={{
+            backdropFilter: "blur(12px)",
+            backgroundColor: "rgba(30, 30, 34, 0.9)",
+            border: "1px solid #2a2a2f",
+            borderRadius: "4px",
+            "& .MuiAlert-icon": { opacity: 0.85 }
+          }}
           action={
             <IconButton
               aria-label="close"
